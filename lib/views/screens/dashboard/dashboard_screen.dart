@@ -109,6 +109,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
               // const BookingScreen(),
               // const WalletScreen(),
               const MainCardScreen(),
+              const JobScreen(),
+
               const ProfileScreen(),
             ][controller.dashPage];
           },
