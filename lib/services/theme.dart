@@ -4,13 +4,12 @@ import 'package:google_fonts/google_fonts.dart';
 
 const Color primaryColor = const Color(0xFF0052D9);
 
-Color primaryColorLight =  Color(0XFF6541A7).withValues(alpha: 0.20);
+Color primaryColorLight = Color(0XFF6541A7).withValues(alpha: 0.20);
 const Color whiteAntiFlash = Color(0xFFF1F5F9);
 
 Color secondaryColor = const Color(0xFF0D9488);
 Color backgroundDark = const Color(0xff231F20);
 Color backgroundLight = const Color(0xFFFCF8F8);
-
 
 const Color black = Colors.black;
 
@@ -19,8 +18,6 @@ Color white = Colors.white;
 Color whiteSmoke = const Color(0xFFF5ECED);
 const Color white2 = Color(0xFFF5F7FA);
 const Color whiteAppbar = Color(0xFFF8F6F6);
-
-
 
 //* Blue Colors
 Color blueDark = const Color(0xFF00338F);
@@ -51,7 +48,6 @@ Color greyDart = const Color(0xFF73777F);
 Color greyDart2 = const Color(0xFF434654);
 Color greyLight3 = const Color(0xFFEBE7E7);
 Color greyDark = const Color(0xFFA1A1A1);
-
 
 //* pink color
 Color pinLight = const Color(0xFFFBF1F2);
