@@ -1,6 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:vlr/main.dart';
 import 'package:vlr/services/route_helper.dart';
@@ -28,13 +29,13 @@ class PriceConverter {
 
 Widget sizedBoxHeight({required double height}) {
   return SizedBox(
-    height: height,
+    height: height.h,
   );
 }
 
 Widget sizedBoxWidth({required double width}) {
   return SizedBox(
-    width: width,
+    width: width.w,
   );
 }
 

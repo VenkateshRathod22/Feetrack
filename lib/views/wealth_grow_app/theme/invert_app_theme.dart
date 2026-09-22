@@ -96,7 +96,7 @@ const LinearGradient cardDarkGradient = LinearGradient(
   end: Alignment.bottomRight,
 );
 
-class CustomTheme {
+class InvestmentTheme {
   static ThemeData dark = ThemeData(
     brightness: Brightness.dark,
     useMaterial3: true,
@@ -128,17 +128,14 @@ class CustomTheme {
       elevation: 0,
       centerTitle: false,
       iconTheme: IconThemeData(
-        color: textPrimary,
         size: 24.r,
       ),
       actionsIconTheme: IconThemeData(
-        color: textPrimary,
         size: 22.r,
       ),
       titleTextStyle: GoogleFonts.plusJakartaSans(
         fontSize: 20.sp,
         fontWeight: FontWeight.w700,
-        color: textPrimary,
       ),
       systemOverlayStyle: const SystemUiOverlayStyle(
         statusBarColor: backgroundDark,
@@ -254,13 +251,13 @@ class CustomTheme {
         fontWeight: FontWeight.w600,
       ),
       bodyLarge: GoogleFonts.plusJakartaSans(
-        fontSize: 16.sp,
+        fontWeight: FontWeight.w600,
       ),
       bodyMedium: GoogleFonts.plusJakartaSans(
-        fontSize: 14.sp,
+        fontWeight: FontWeight.w500,
       ),
       bodySmall: GoogleFonts.plusJakartaSans(
-        fontSize: 12.sp,
+        fontWeight: FontWeight.w400,
       ),
     ),
   );

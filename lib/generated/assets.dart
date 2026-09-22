@@ -14,6 +14,10 @@ class Assets {
   /// assets/images/banner-1.jpg
   static const String imagesBanner1 = "assets/images/banner-1.jpg";
 
+  /// Assets for imagesBlueWave
+  /// assets/images/blue-wave.png
+  static const String imagesBlueWave = "assets/images/blue-wave.png";
+
   /// Assets for imagesCardBack
   /// assets/images/card-back.png
   static const String imagesCardBack = "assets/images/card-back.png";
@@ -37,6 +41,10 @@ class Assets {
   /// Assets for imagesFeetrackLogo
   /// assets/images/feetrack_logo.jpg
   static const String imagesFeetrackLogo = "assets/images/feetrack_logo.jpg";
+
+  /// Assets for imagesGrowText
+  /// assets/images/grow-text.png
+  static const String imagesGrowText = "assets/images/grow-text.png";
 
   /// Assets for imagesGym
   /// assets/images/gym.png
@@ -77,6 +85,14 @@ class Assets {
   /// Assets for imagesHostel
   /// assets/images/hostel.PNG
   static const String imagesHostel = "assets/images/hostel.PNG";
+
+  /// Assets for imagesInvestmentLogo
+  /// assets/images/investment-logo.png
+  static const String imagesInvestmentLogo = "assets/images/investment-logo.png";
+
+  /// Assets for imagesLoginScreenBg
+  /// assets/images/login-screen-bg.png
+  static const String imagesLoginScreenBg = "assets/images/login-screen-bg.png";
 
   /// Assets for imagesLogo
   /// assets/images/logo.png
@@ -170,6 +186,10 @@ class Assets {
   /// assets/images/shimmer.gif
   static const String imagesShimmer = "assets/images/shimmer.gif";
 
+  /// Assets for imagesSplachScreenBg
+  /// assets/images/splach-screen_bg.png
+  static const String imagesSplachScreenBg = "assets/images/splach-screen_bg.png";
+
   /// Assets for imagesStartCirlce
   /// assets/images/start_cirlce.png
   static const String imagesStartCirlce = "assets/images/start_cirlce.png";
@@ -197,6 +217,10 @@ class Assets {
   /// Assets for imagesVisitSuccess
   /// assets/images/visit_success.png
   static const String imagesVisitSuccess = "assets/images/visit_success.png";
+
+  /// Assets for imagesWeathText 
+  /// assets/images/weath-text .png
+  static const String imagesWeathText  = "assets/images/weath-text .png";
 
   /// Assets for imagesWeightTraning
   /// assets/images/weight-traning.png
