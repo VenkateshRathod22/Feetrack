@@ -86,6 +86,10 @@ class Assets {
   /// assets/images/hostel.PNG
   static const String imagesHostel = "assets/images/hostel.PNG";
 
+  /// Assets for imagesIndiaFlag
+  /// assets/images/india-flag.png
+  static const String imagesIndiaFlag = "assets/images/india-flag.png";
+
   /// Assets for imagesInvestmentLogo
   /// assets/images/investment-logo.png
   static const String imagesInvestmentLogo = "assets/images/investment-logo.png";

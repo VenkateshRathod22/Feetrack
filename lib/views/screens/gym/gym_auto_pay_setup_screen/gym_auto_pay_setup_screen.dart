@@ -22,7 +22,7 @@ class GymAutoPaySetupScreen extends StatelessWidget {
               ),
         ),
       ),
-      body: const SingleChildScrollView(
+      body:  SingleChildScrollView(
         padding: AppConstants.screenPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

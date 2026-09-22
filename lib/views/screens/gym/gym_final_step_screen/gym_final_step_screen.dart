@@ -4,7 +4,6 @@ import 'package:vlr/services/theme.dart';
 import 'package:vlr/views/screens/gym/gym_final_step_screen/widget/gym_final_mid_section/gym_final_cash_payment_section.dart';
 import 'package:vlr/views/screens/gym/gym_final_step_screen/widget/gym_final_mid_section/gym_final_month_autopay_section.dart';
 import 'package:vlr/views/screens/gym/gym_final_step_screen/widget/gym_final_mid_section/gym_final_one_time_payment_container.dart';
-import 'package:vlr/views/screens/gym/gym_final_step_screen/widget/gym_final_top_section.dart';
 
 class GymFinalStepScreen extends StatelessWidget {
   const GymFinalStepScreen({super.key});
@@ -24,9 +23,9 @@ class GymFinalStepScreen extends StatelessWidget {
               ),
         ),
       ),
-      body: const SingleChildScrollView(
+      body:  SingleChildScrollView(
         padding: AppConstants.screenPadding,
-        child: Column(
+        child: const Column(
           children: [
             // GYMFinalTopSection(),
             GYMFinalMonthlyAutoPaySection(),

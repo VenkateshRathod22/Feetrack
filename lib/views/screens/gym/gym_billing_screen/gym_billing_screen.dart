@@ -107,7 +107,7 @@ class _GymBillingScreenState extends State<GymBillingScreen> {
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(
+        padding:  EdgeInsets.symmetric(
           horizontal: AppConstants.horizontalPadding,
           vertical: 24,
         ),

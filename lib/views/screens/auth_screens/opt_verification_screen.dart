@@ -328,7 +328,7 @@ class _OTPVerificationState extends State<OTPVerification> {
       ),
       bottomNavigationBar: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
+          padding:  EdgeInsets.symmetric(
               horizontal: AppConstants.horizontalPadding, vertical: 15),
           child: SizedBox(
             height: 50,

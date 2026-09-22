@@ -6,8 +6,8 @@ import 'package:vlr/controllers/auth_controller.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/custom_image.dart';
-import 'package:vlr/views/screens/auth_screens/login/login_screen.dart';
-import 'package:vlr/views/screens/dashboard/dashboard_screen.dart';
+
+import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class SplashScreenInvert extends StatefulWidget {
@@ -23,9 +23,9 @@ class _SplashScreenInvertState extends State<SplashScreenInvert>
   void initState() {
     super.initState();
 
-    // Timer(const Duration(seconds: 3), () {
-    //   checkAuth();
-    // });
+    Timer(const Duration(seconds: 3), () {
+      checkAuth();
+    });
   }
 
   @override
@@ -41,29 +41,29 @@ class _SplashScreenInvertState extends State<SplashScreenInvert>
     if (token.isNotEmpty) {
       final response = await authController.fetchProfile();
 
-      if (response.isSuccess) {
-        if (mounted) {
+      // if (response.isSuccess) {
+      //   if (mounted) {
+      //     Navigator.pushReplacement(
+      //       context,
+      //       MaterialPageRoute(builder: (_) => const DashboardScreen()),
+      //     );
+      //   }
+      // } else {
+      //   if (mounted) {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (_) => const DashboardScreen()),
+            MaterialPageRoute(builder: (_) => const LoginScreenInvest()),
           );
         }
-      } else {
-        if (mounted) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => const LoginScreen()),
-          );
-        }
-      }
-    } else {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const LoginScreen()),
-        );
-      }
-    }
+      // }
+    // } else {
+    //   if (mounted) {
+    //     Navigator.pushReplacement(
+    //       context,
+    //       MaterialPageRoute(builder: (_) => const LoginScreen()),
+    //     );
+    //   }
+    // }
   }
 
   @override

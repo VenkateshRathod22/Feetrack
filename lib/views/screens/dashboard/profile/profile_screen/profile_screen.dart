@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:vlr/controllers/auth_controller.dart';
 import 'package:vlr/controllers/kyc_controller.dart';
 import 'package:vlr/services/constants.dart';
@@ -429,9 +430,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       icon: Icons.trending_up,
                       title: "Investment",
                       onTap: () {
-                        navigate(
-                          context: context,
-                          page: const SplashScreenInvert(),
+                        Navigator.of(context).push(
+                          PageRouteBuilder(
+                            transitionDuration: const Duration(
+                              milliseconds: 650,
+                            ),
+                            reverseTransitionDuration: const Duration(
+                              milliseconds: 450,
+                            ),
+                            pageBuilder: (
+                              context,
+                              animation,
+                              secondaryAnimation,
+                            ) =>
+                                const SplashScreenInvert(),
+                            transitionsBuilder: (
+                              context,
+                              animation,
+                              secondaryAnimation,
+                              child,
+                            ) {
+                              final fadeAnimation = CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.easeInOutCubic,
+                              );
+
+                              final scaleAnimation = Tween<double>(
+                                begin: 0.96,
+                                end: 1.0,
+                              ).animate(
+                                CurvedAnimation(
+                                  parent: animation,
+                                  curve: Curves.easeOutCubic,
+                                ),
+                              );
+
+                              return FadeTransition(
+                                opacity: fadeAnimation,
+                                child: ScaleTransition(
+                                  scale: scaleAnimation,
+                                  child: child,
+                                ),
+                              );
+                            },
+                          ),
                         );
                       },
                     ),

@@ -42,6 +42,7 @@ const Color textMuted = Color(0xFF64748B);
 const Color textDarkPrimary = Color(0xFF0F172A);
 const Color textDarkSecondary = Color(0xFF475569);
 const Color textDarkMuted = Color(0xFF94A3B8);
+const Color textGray = Color(0xFF8B9CB0);
 
 // ============================================================
 // STATUS COLORS
@@ -239,15 +240,12 @@ class InvestmentTheme {
         fontWeight: FontWeight.w700,
       ),
       titleLarge: GoogleFonts.plusJakartaSans(
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w800,
       ),
       titleMedium: GoogleFonts.plusJakartaSans(
-        fontSize: 16.sp,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
       ),
       titleSmall: GoogleFonts.plusJakartaSans(
-        fontSize: 14.sp,
         fontWeight: FontWeight.w600,
       ),
       bodyLarge: GoogleFonts.plusJakartaSans(
