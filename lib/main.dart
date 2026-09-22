@@ -1,8 +1,5 @@
 import 'dart:developer';
 
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -23,8 +20,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Init().initialize();
   await Firebase.initializeApp(
-
-
     name:
         'primaryApp', // Optional: use a name if initializing multiple simultaneously
     options: primary_env.PrimaryFirebaseOptions.currentPlatform,
@@ -91,8 +86,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    // log("Height : ${MediaQuery.of(context).size.height}");
-    // log("weight : ${MediaQuery.of(context).size.width}");
+
     return ToastificationWrapper(
       child: ScreenUtilInit(
         designSize: Size(432.0, 960.0),
@@ -102,13 +96,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         child: GetMaterialApp(
           title: AppConstants.appName,
           navigatorKey: navigatorKey,
-          themeMode: ThemeMode.light, 
+          themeMode: ThemeMode.light,
           theme: CustomTheme.light,
           debugShowCheckedModeBanner: false,
           home: const SplashScreen(),
-          // home: const DashboardScreen(),
-          // home: const CouponCodeScreen(),
-          // home: const AutoPaySetupSuccessfullyScreen(),
         ),
       ),
     );

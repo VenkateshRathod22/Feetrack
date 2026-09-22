@@ -110,7 +110,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
               // const WalletScreen(),
               const MainCardScreen(),
               const JobScreen(),
-
               const ProfileScreen(),
             ][controller.dashPage];
           },
