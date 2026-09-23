@@ -11,6 +11,8 @@ const Color primaryColor = Color(0xFFF5BA42);
 const Color primaryColorDark = Color(0xFFE5A93C);
 const Color primaryColorLight = Color(0xFFFFD56B);
 
+const Color neutralColor = Color(0xFF040D21);
+
 const Color goldSurface = Color(0xFFFEF3D6);
 
 // ============================================================
@@ -48,7 +50,7 @@ const Color textGray = Color(0xFF8B9CB0);
 // STATUS COLORS
 // ============================================================
 
-const Color green = Color(0xFF10B981);
+const Color green = Color(0xFF34D399);
 const Color greenLight = Color(0xFFD1FAE5);
 
 const Color red = Color(0xFFEF4444);
@@ -92,6 +94,15 @@ const LinearGradient cardDarkGradient = LinearGradient(
   colors: [
     Color(0xFF0D2040),
     Color(0xFF091327),
+  ],
+  begin: Alignment.topLeft,
+  end: Alignment.bottomRight,
+);
+
+const LinearGradient totalPortfolioValueSectionDarkGradient = LinearGradient(
+  colors: [
+    Color(0xFF0E213D),
+    Color(0xFF0A182D),
   ],
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
@@ -239,6 +250,8 @@ class InvestmentTheme {
         fontSize: 18.sp,
         fontWeight: FontWeight.w700,
       ),
+
+      //* main
       titleLarge: GoogleFonts.plusJakartaSans(
         fontWeight: FontWeight.w800,
       ),

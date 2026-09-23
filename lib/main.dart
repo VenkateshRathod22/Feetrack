@@ -105,3 +105,21 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     );
   }
 }
+
+
+
+// | Property              | Use         |
+// | --------------------- | ----------- |
+// | Width                 | `100.w`     |
+// | Height                | `50.h`      |
+// | Font Size             | `14.sp`     |
+// | Border Radius         | `12.r`      |
+// | Icon Size             | `24.sp`     |
+// | Border Width          | `1` (fixed) |
+// | Divider Thickness     | `1` (fixed) |
+// | Horizontal Padding    | `16.w`      |
+// | Vertical Padding      | `12.h`      |
+// | Margin Left/Right     | `16.w`      |
+// | Margin Top/Bottom     | `12.h`      |
+// | Square Padding/Margin | `12.w`      |
+

@@ -5,6 +5,7 @@ import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/custom_image.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/home/widget/home_screen_invest_appbar.dart';
+import 'package:vlr/views/wealth_grow_app/screen/dashboard/home/widget/total_protfolio_value_section.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class HomeScreenInvest extends StatelessWidget {
@@ -17,6 +18,11 @@ class HomeScreenInvest extends StatelessWidget {
         appBar: HomeScreenInvestAppbar(),
         body: SingleChildScrollView(
           padding: AppConstants.screenPadding,
+          child: Column(
+            children: [
+              TotalPortfolioValueSection(),
+            ],
+          ),
         ),
       ),
     );
