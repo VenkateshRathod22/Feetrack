@@ -37,4 +37,15 @@ class DashBoardController extends GetxController implements GetxService {
 
     selectHomeService(homeServices[index]);
   }
+
+//* For investment app
+
+  int _dashPageInvest = 0;
+
+  int get dashPageInvest => _dashPageInvest;
+
+  set dashPageInvest(int page) {
+    _dashPageInvest = page;
+    update();
+  }
 }

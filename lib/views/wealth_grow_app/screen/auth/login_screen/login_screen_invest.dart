@@ -6,6 +6,7 @@ import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
 import 'package:vlr/views/base/custom_image.dart';
+import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 import 'package:vlr/views/widget/text_box/app_text_box.dart';
 
@@ -98,7 +99,9 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
                   ),
                   sizedBoxHeight(height: 16.h),
                   CustomButton(
-                    onTap: () {},
+                    onTap: () {
+                      navigate(context: context, page: DashboardScreenInvert());
+                    },
                     gradient: goldGradient,
                     gradientBegin: Alignment.topCenter,
                     gradientEnd: Alignment.bottomCenter,

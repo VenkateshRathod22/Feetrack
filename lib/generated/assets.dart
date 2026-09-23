@@ -366,6 +366,10 @@ class Assets {
   /// assets/svgs/Institution.svg
   static const String svgsInstitution = "assets/svgs/Institution.svg";
 
+  /// Assets for svgsInvestment
+  /// assets/svgs/investment.svg
+  static const String svgsInvestment = "assets/svgs/investment.svg";
+
   /// Assets for svgsLaws
   /// assets/svgs/laws.svg
   static const String svgsLaws = "assets/svgs/laws.svg";
@@ -422,6 +426,14 @@ class Assets {
   /// assets/svgs/privacy-policy.svg
   static const String svgsPrivacyPolicy = "assets/svgs/privacy-policy.svg";
 
+  /// Assets for svgsProfile
+  /// assets/svgs/profile.svg
+  static const String svgsProfile = "assets/svgs/profile.svg";
+
+  /// Assets for svgsReferral
+  /// assets/svgs/Referral.svg
+  static const String svgsReferral = "assets/svgs/Referral.svg";
+
   /// Assets for svgsRoom
   /// assets/svgs/room.svg
   static const String svgsRoom = "assets/svgs/room.svg";
@@ -457,6 +469,10 @@ class Assets {
   /// Assets for svgsStudy
   /// assets/svgs/study.svg
   static const String svgsStudy = "assets/svgs/study.svg";
+
+  /// Assets for svgsWallet
+  /// assets/svgs/wallet.svg
+  static const String svgsWallet = "assets/svgs/wallet.svg";
 
   /// Assets for svgsWatch
   /// assets/svgs/watch.svg
