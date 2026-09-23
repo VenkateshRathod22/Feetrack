@@ -40,6 +40,7 @@ const Color cardWhiteSubtle = Color(0xFFF8FAFC);
 const Color textPrimary = Color(0xFFF8FAFC);
 const Color textSecondary = Color(0xFF94A3B8);
 const Color textMuted = Color(0xFF64748B);
+const Color textSecondaryLight = Color(0xFFCBD5E1);
 
 const Color textDarkPrimary = Color(0xFF0F172A);
 const Color textDarkSecondary = Color(0xFF475569);
