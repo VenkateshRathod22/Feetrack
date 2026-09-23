@@ -31,7 +31,7 @@ class DashBoardController extends GetxController
       );
 
   set dashPage(int page) {
-    if (page < 0 || page >= 4) {
+    if (page < 0 || page >= 6) {
       return;
     }
 

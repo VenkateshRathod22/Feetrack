@@ -39,41 +39,41 @@ class _SplashScreenInvertState extends State<SplashScreenInvert> {
   }
 
   Future<void> checkAuth() async {
-  final authController = Get.find<AuthController>();
+  // final authController = Get.find<AuthController>();
 
-  final String token = authController.getUserToken();
+  // final String token = authController.getUserToken();
 
-  if (token.isEmpty) {
-    if (!mounted) return;
-
-    Navigator.of(context).pushReplacementNamed(
-      InvestmentApp.login,
-    );
-
-    return;
-  }
-
-  try {
-    final response = await authController.fetchProfile();
-
-    if (!mounted) return;
-
-    if (response.isSuccess) {
-      Navigator.of(context).pushReplacementNamed(
-        InvestmentApp.dashboard,
-      );
-    } else {
-      Navigator.of(context).pushReplacementNamed(
-        InvestmentApp.login,
-      );
-    }
-  } catch (e) {
-    if (!mounted) return;
+  // if (token.isEmpty) {
+  //   if (!mounted) return;
 
     Navigator.of(context).pushReplacementNamed(
       InvestmentApp.login,
     );
-  }
+
+  //   return;
+  // }
+
+  // try {
+  //   final response = await authController.fetchProfile();
+
+  //   if (!mounted) return;
+
+  //   if (response.isSuccess) {
+  //     Navigator.of(context).pushReplacementNamed(
+  //       InvestmentApp.dashboard,
+  //     );
+  //   } else {
+  //     Navigator.of(context).pushReplacementNamed(
+  //       InvestmentApp.login,
+  //     );
+  //   }
+  // } catch (e) {
+  //   if (!mounted) return;
+
+  //   Navigator.of(context).pushReplacementNamed(
+  //     InvestmentApp.login,
+  //   );
+  // }
 }
   @override
   Widget build(BuildContext context) {

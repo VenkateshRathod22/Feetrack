@@ -8,7 +8,7 @@ import 'package:toastification/toastification.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/theme.dart';
 import 'package:vlr/views/screens/splash_screen/splash_screen.dart';
-
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'firebase/get_fcm_token.dart';
 import 'services/init.dart';
 
@@ -86,7 +86,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-
     return ToastificationWrapper(
       child: ScreenUtilInit(
         designSize: Size(432.0, 960.0),
@@ -99,7 +98,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           themeMode: ThemeMode.light,
           theme: CustomTheme.light,
           debugShowCheckedModeBanner: false,
-          home: const SplashScreen(),
+          // home: const SplashScreen(),
+          home: const InvestmentApp(),
         ),
       ),
     );

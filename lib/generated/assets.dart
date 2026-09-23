@@ -410,6 +410,10 @@ class Assets {
   /// assets/svgs/metabolic.svg
   static const String svgsMetabolic = "assets/svgs/metabolic.svg";
 
+  /// Assets for svgsNotification
+  /// assets/svgs/notification.svg
+  static const String svgsNotification = "assets/svgs/notification.svg";
+
   /// Assets for svgsPerson
   /// assets/svgs/person.svg
   static const String svgsPerson = "assets/svgs/person.svg";
