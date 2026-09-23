@@ -38,6 +38,10 @@ class Assets {
   /// assets/images/cash-cirlce.png
   static const String imagesCashCirlce = "assets/images/cash-cirlce.png";
 
+  /// Assets for imagesDailyReturn
+  /// assets/images/daily-return.svg
+  static const String imagesDailyReturn = "assets/images/daily-return.svg";
+
   /// Assets for imagesFeetrackLogo
   /// assets/images/feetrack_logo.jpg
   static const String imagesFeetrackLogo = "assets/images/feetrack_logo.jpg";
@@ -101,6 +105,10 @@ class Assets {
   /// Assets for imagesLogo
   /// assets/images/logo.png
   static const String imagesLogo = "assets/images/logo.png";
+
+  /// Assets for imagesMonthlyReturns
+  /// assets/images/Monthly-Returns.svg
+  static const String imagesMonthlyReturns = "assets/images/Monthly-Returns.svg";
 
   /// Assets for imagesNoCard
   /// assets/images/no-card.png
@@ -190,6 +198,10 @@ class Assets {
   /// assets/images/shimmer.gif
   static const String imagesShimmer = "assets/images/shimmer.gif";
 
+  /// Assets for imagesSmallInvestmentsBanner
+  /// assets/images/small-investments-banner.png
+  static const String imagesSmallInvestmentsBanner = "assets/images/small-investments-banner.png";
+
   /// Assets for imagesSplachScreenBg
   /// assets/images/splach-screen_bg.png
   static const String imagesSplachScreenBg = "assets/images/splach-screen_bg.png";
@@ -234,9 +246,17 @@ class Assets {
   /// assets/images/whatsapp-logo.png
   static const String imagesWhatsappLogo = "assets/images/whatsapp-logo.png";
 
+  /// Assets for imagesYearlyReturns
+  /// assets/images/Yearly-Returns.svg
+  static const String imagesYearlyReturns = "assets/images/Yearly-Returns.svg";
+
   /// Assets for svgsAddBalance
   /// assets/svgs/add-balance.svg
   static const String svgsAddBalance = "assets/svgs/add-balance.svg";
+
+  /// Assets for svgsAddMoney
+  /// assets/svgs/Add-Money.svg
+  static const String svgsAddMoney = "assets/svgs/Add-Money.svg";
 
   /// Assets for svgsArrowForward
   /// assets/svgs/arrow_forward.svg
@@ -366,6 +386,10 @@ class Assets {
   /// assets/svgs/Institution.svg
   static const String svgsInstitution = "assets/svgs/Institution.svg";
 
+  /// Assets for svgsInvest
+  /// assets/svgs/Invest.svg
+  static const String svgsInvest = "assets/svgs/Invest.svg";
+
   /// Assets for svgsInvestment
   /// assets/svgs/investment.svg
   static const String svgsInvestment = "assets/svgs/investment.svg";
@@ -466,6 +490,10 @@ class Assets {
   /// assets/svgs/sport-stare.svg
   static const String svgsSportStare = "assets/svgs/sport-stare.svg";
 
+  /// Assets for svgsStatement
+  /// assets/svgs/Statement.svg
+  static const String svgsStatement = "assets/svgs/Statement.svg";
+
   /// Assets for svgsStrength
   /// assets/svgs/strength.svg
   static const String svgsStrength = "assets/svgs/strength.svg";
@@ -493,5 +521,9 @@ class Assets {
   /// Assets for svgsWifi
   /// assets/svgs/wifi.svg
   static const String svgsWifi = "assets/svgs/wifi.svg";
+
+  /// Assets for svgsWithdraw
+  /// assets/svgs/Withdraw.svg
+  static const String svgsWithdraw = "assets/svgs/Withdraw.svg";
 }
 
