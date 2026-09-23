@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:vlr/controllers/auth_controller.dart';
 import 'package:vlr/controllers/kyc_controller.dart';
 import 'package:vlr/services/constants.dart';

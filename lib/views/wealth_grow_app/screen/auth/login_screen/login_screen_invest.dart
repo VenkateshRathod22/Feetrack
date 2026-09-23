@@ -107,7 +107,7 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
                     radius: 12.r,
                     child: CustomText(
                       "Login",
-                      style: Helper(context).textTheme.bodyLarge?.copyWith(
+                      style: Helper(context).textTheme.titleMedium?.copyWith(
                             fontSize: 16.sp,
                             color: black,
                           ),
