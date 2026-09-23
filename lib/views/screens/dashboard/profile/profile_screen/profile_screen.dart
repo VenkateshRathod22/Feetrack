@@ -9,6 +9,7 @@ import 'package:vlr/views/screens/auth_screens/login/login_screen.dart';
 import 'package:vlr/views/screens/bookings/booking_screen.dart';
 import 'package:vlr/views/screens/dashboard/profile/profile_edit_screen/profile_edit_screen.dart';
 import 'package:vlr/views/screens/gym/attendance/attendance_checkin_checkout_screen.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
 
 import '../../../../base/custom_image.dart';
@@ -441,8 +442,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               context,
                               animation,
                               secondaryAnimation,
-                            ) =>
-                                const SplashScreenInvert(),
+                            ) {
+                              return const InvestmentApp();
+                            },
                             transitionsBuilder: (
                               context,
                               animation,
