@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
-import 'package:vlr/firebase_options_primary.dart';
 import 'package:vlr/main.dart';
+import 'package:vlr/firebase/primary_firebase_options.dart';
 import 'package:vlr/views/screens/dashboard/wallet_screen/add_money_screen/add_money_screen.dart';
 import 'package:vlr/views/screens/gym/gym_book_visit_success/gym_book_visit_success_screen.dart';
 
@@ -96,7 +96,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   
   if (Firebase.apps.isEmpty) {
     await Firebase.initializeApp(
-      options: PrimaryFirebaseOptions.currentPlatform,
+      options: DefaultFirebaseOptions.currentPlatform,
     );
   }
 

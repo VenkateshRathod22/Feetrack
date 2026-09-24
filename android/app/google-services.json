@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "271741735160",
-    "project_id": "feetrack-bb7af",
-    "storage_bucket": "feetrack-bb7af.firebasestorage.app"
+    "project_number": "304281412537",
+    "project_id": "feetrack-d7036",
+    "storage_bucket": "feetrack-d7036.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:271741735160:android:b7b349f59c28e8c3f62b0d",
+        "mobilesdk_app_id": "1:304281412537:android:1d84e37f86eeeb27fc0c68",
         "android_client_info": {
-          "package_name": "com.tpipay.feetrack_student_parent"
+          "package_name": "com.myfoozzybusiness"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAIVDe3olvCo6xVk24NxZ8AXXPceqvhARk"
+          "current_key": "AIzaSyAMjhpB-JaqlSuC8qckmm2PPAi1hg3Mtkg"
         }
       ],
       "services": {

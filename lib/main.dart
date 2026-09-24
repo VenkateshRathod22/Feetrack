@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:toastification/toastification.dart';
+import 'package:vlr/firebase/primary_firebase_options.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/theme.dart';
 import 'package:vlr/views/screens/splash_screen/splash_screen.dart';
@@ -12,7 +13,6 @@ import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'firebase/get_fcm_token.dart';
 import 'services/init.dart';
 
-import 'firebase_options_primary.dart' as primary_env;
 
 import 'package:firebase_core/firebase_core.dart';
 
@@ -20,10 +20,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Init().initialize();
   await Firebase.initializeApp(
-    name:
-        'primaryApp', // Optional: use a name if initializing multiple simultaneously
-    options: primary_env.PrimaryFirebaseOptions.currentPlatform,
-  );
+    options: DefaultFirebaseOptions.currentPlatform,
+);
 
   await NotificationServices.initialize();
   runApp(const MyApp());
@@ -98,8 +96,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           themeMode: ThemeMode.light,
           theme: CustomTheme.light,
           debugShowCheckedModeBanner: false,
-          // home: const SplashScreen(),
-          home: const InvestmentApp(),
+          home: const SplashScreen(),
+          // home: const InvestmentApp(),
         ),
       ),
     );
