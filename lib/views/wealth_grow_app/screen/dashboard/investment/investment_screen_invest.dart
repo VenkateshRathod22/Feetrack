@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/widget/all_daily_monthly_select_row/all_daily_monthly_select_row.dart';
+import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/widget/all_daily_monthly_select_row/investment_return_plan_section/investment_return_plan_section.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class InvestmentScreenInvest extends StatelessWidget {
@@ -33,12 +34,14 @@ class InvestmentScreenInvest extends StatelessWidget {
           ],
         ),
       ),
-      body: SingleChildScrollView(
+      body: Padding(
         padding: AppConstants.screenPadding,
         child: Column(
           children: [
             sizedBoxHeight(height: 12.h),
-            FilterSelectionSection(),
+            const FilterSelectionSection(),
+            sizedBoxHeight(height: 20.h),
+            InvestmentReturnPlanSection()
           ],
         ),
       ),

@@ -174,6 +174,10 @@ class Assets {
   /// assets/images/protection.png
   static const String imagesProtection = "assets/images/protection.png";
 
+  /// Assets for imagesReturnPlan
+  /// assets/images/Return-Plan.png
+  static const String imagesReturnPlan = "assets/images/Return-Plan.png";
+
   /// Assets for imagesReview1
   /// assets/images/review-1.jpg
   static const String imagesReview1 = "assets/images/review-1.jpg";
