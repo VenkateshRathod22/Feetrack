@@ -309,6 +309,7 @@ class AppConstants {
   //! Investment app Api
 
   static const String loginInvest = '/login.php';
+  static const String getUserProfileInvest = '/getUser.php';
 
   //
   static double horizontalPadding = 16.w;

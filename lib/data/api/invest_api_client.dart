@@ -15,14 +15,19 @@ class InvestApiClient extends GetConnect implements GetxService {
 
   Map<String, String> _mainHeaders = {};
 
+  Map<String, String> getSponsorHeaders() {
+    return {
+      'Accept': 'application/json',
+      'Sponsor': token,
+    };
+  }
+
   InvestApiClient({
     required this.appBaseUrl,
     required this.sharedPreferences,
   }) {
     try {
-      baseUrl = appBaseUrl.endsWith('/')
-          ? appBaseUrl
-          : '$appBaseUrl/';
+      baseUrl = appBaseUrl.endsWith('/') ? appBaseUrl : '$appBaseUrl/';
 
       timeout = const Duration(seconds: 30);
 
@@ -69,9 +74,7 @@ class InvestApiClient extends GetConnect implements GetxService {
 
     if (kDebugMode) {
       log(
-        token.isEmpty
-            ? 'Investment token cleared'
-            : 'Investment token updated',
+        token.isEmpty ? 'Investment token cleared' : 'Investment token updated',
         name: 'INVEST_API',
       );
     }
@@ -381,12 +384,9 @@ class InvestApiClient extends GetConnect implements GetxService {
   Response handleResponse(Response response) {
     Response result = response;
 
-    if (result.hasError &&
-        result.body != null &&
-        result.body is! String) {
+    if (result.hasError && result.body != null && result.body is! String) {
       if (result.body.toString().startsWith('{errors: [{code:')) {
-        final ErrorResponse errorResponse =
-            ErrorResponse.fromJson(result.body);
+        final ErrorResponse errorResponse = ErrorResponse.fromJson(result.body);
 
         result = Response(
           statusCode: result.statusCode,

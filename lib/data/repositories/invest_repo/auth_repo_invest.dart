@@ -24,6 +24,16 @@ class AuthRepoInvest {
     );
   }
 
+  Future<Response> fetchProfileInvest() async {
+    return await investApiClient.getData(
+      AppConstants.getUserProfileInvest,
+      "fetchProfileInvest",
+      contentType: 'application/json',
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
+
   String getUserToken() {
     return sharedPreferences.getString(
           AppConstants.tokenInvest,

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vlr/data/models/invest_model/user_model_invest.dart';
 import 'package:vlr/data/models/response/response_model.dart';
 import 'package:vlr/data/repositories/invest_repo/auth_repo_invest.dart';
 import 'package:vlr/services/constants.dart';
@@ -147,6 +148,71 @@ class AuthControllerInvest extends GetxController implements GetxService {
       return ResponseModel(
         false,
         "Something went wrong. Please try again.",
+      );
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
+  UserModelInvest? userModelInvest;
+
+  Future<ResponseModel> fetchProfileInvest() async {
+    log('----------- fetchProfileInvest Called ----------');
+
+    isLoading = true;
+    update();
+
+    try {
+      final Response response = await authRepoInvest.fetchProfileInvest();
+
+      log('Status Code: ${response.statusCode}');
+
+      if (response.statusCode == 200 && response.body is Map) {
+        final Map<String, dynamic> body =
+            Map<String, dynamic>.from(response.body);
+
+        final String status = body['status']?.toString() ?? '';
+
+        if (status == '1') {
+          userModelInvest = UserModelInvest.fromJson(body);
+
+          log(
+            'Profile loaded: ${userModelInvest?.name}',
+          );
+
+          return ResponseModel(
+            true,
+            'Profile fetched successfully',
+            userModelInvest,
+          );
+        }
+
+        return ResponseModel(
+          false,
+          body['message']?.toString() ?? 'Unable to fetch profile',
+        );
+      }
+
+      String message = 'Unable to fetch profile';
+
+      if (response.body is Map && response.body['message'] != null) {
+        message = response.body['message'].toString();
+      }
+
+      return ResponseModel(
+        false,
+        message,
+      );
+    } catch (e, stackTrace) {
+      log(
+        'ERROR AT fetchProfileInvest(): $e',
+        stackTrace: stackTrace,
+      );
+
+      return ResponseModel(
+        false,
+        'Error while fetching profile',
       );
     } finally {
       isLoading = false;
