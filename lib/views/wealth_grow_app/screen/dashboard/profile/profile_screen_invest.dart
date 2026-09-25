@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vlr/services/custom_text.dart';
+import 'package:vlr/views/base/common_button.dart';
 
 class ProfileScreenInvest extends StatelessWidget {
   const ProfileScreenInvest({super.key});
@@ -8,7 +9,9 @@ class ProfileScreenInvest extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CustomText("Profile Screen"),
+        child: CustomButton(onTap: (){
+          
+        }, title: "Logout",),
       ),
     );
   }

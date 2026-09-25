@@ -19,9 +19,6 @@ class LoginScreenInvest extends StatefulWidget {
 }
 
 class _LoginScreenInvestState extends State<LoginScreenInvest> {
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,7 +106,24 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
                     return null;
                   },
                 ),
-                sizedBoxHeight(height: 16.h),
+                sizedBoxHeight(height: 8.h),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CustomButton(
+                      type: ButtonType.tertiary,
+                      onTap: () {},
+                      child: CustomText(
+                        "Forgot Password?",
+                        style: Helper(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontSize: 12.sp, color: primaryColor),
+                      ),
+                    )
+                  ],
+                ),
+                sizedBoxHeight(height: 8.h),
                 CustomButton(
                   onTap: () {
                     authControllerInvest.loginInvest().then((value) {
