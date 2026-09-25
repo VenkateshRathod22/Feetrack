@@ -154,6 +154,7 @@ class AppConstants {
 
   //TODO: Change Base Url
   static String baseUrl = 'https://app.feetrack.in/api/';
+  static String baseUrlInvestApp = 'https://investor.feetrack.in/api';
 
   static String baseUrlForPrepaidCard = 'https://partner.tpipay.net/';
 
@@ -305,15 +306,20 @@ class AppConstants {
   static const String postDistrictByState =
       'api/collect-payment/v1/getDistricByState';
 
+  //! Investment app Api
+
+  static const String loginInvest = '/login.php';
+
   //
-  static  double horizontalPadding = 16.w;
-  static  double verticalPadding = 20.h;
-  static  EdgeInsets screenPadding = EdgeInsets.symmetric(
+  static double horizontalPadding = 16.w;
+  static double verticalPadding = 20.h;
+  static EdgeInsets screenPadding = EdgeInsets.symmetric(
       horizontal: AppConstants.horizontalPadding,
       vertical: AppConstants.verticalPadding);
 
   // Shared Key
   static const String token = 'user_app_token';
+  static const String tokenInvest = 'user_app_token_invest';
   static const String userId = 'user_app_id';
   static const String razorpayKey = 'razorpay_key';
   static const String recentOrders = 'recent_orders';

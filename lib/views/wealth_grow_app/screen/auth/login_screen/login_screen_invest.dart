@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:vlr/controllers/auth_controller.dart';
+import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
@@ -18,15 +19,8 @@ class LoginScreenInvest extends StatefulWidget {
 }
 
 class _LoginScreenInvestState extends State<LoginScreenInvest> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPersistentFrameCallback((_) {
-      final authController = Get.find<AuthController>();
-      authController.mobileNoController.clear();
-      authController.update();
-    });
-  }
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +37,8 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
         ),
         child: Padding(
           padding: AppConstants.screenPadding,
-          child: GetBuilder<AuthController>(builder: (authController) {
+          child:
+              GetBuilder<AuthControllerInvest>(builder: (authControllerInvest) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,41 +60,70 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
                 ),
                 sizedBoxHeight(height: 36.h),
                 AppTextFieldWithHeading(
-                  controller: authController.mobileNoController,
+                  controller: authControllerInvest.userIdController,
                   preFixWidget: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        CustomImage(
-                          path: Assets.imagesIndiaFlag,
-                          width: 28.w,
-                          height: 18.h,
-                          fit: BoxFit.cover,
-                        ),
-                        sizedBoxWidth(width: 10.w),
-                        CustomText(
-                          "+91",
-                          style: Helper(context).textTheme.bodyMedium?.copyWith(
-                                fontSize: 14.sp,
-                                color: white,
-                              ),
-                        ),
-                      ],
+                    child: SvgPicture.asset(
+                      Assets.svgsPerson,
+                      height: 20.h,
+                      width: 20.w,
+                      colorFilter:
+                          const ColorFilter.mode(textGray, BlendMode.srcIn),
                     ),
                   ),
                   hintStyle: Helper(context)
                       .textTheme
                       .bodySmall
                       ?.copyWith(fontSize: 14.sp, color: textSecondary),
-                  hindText: "Mobile Number",
+                  hindText: "User ID",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter use id";
+                    }
+                    return null;
+                  },
+                ),
+                sizedBoxHeight(height: 16.h),
+                AppTextFieldWithHeading(
+                  controller: authControllerInvest.passwordController,
+                  preFixWidget: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                    ),
+                    child: Icon(
+                      Icons.lock_outline,
+                      color: textGray,
+                      size: 20.sp,
+                    ),
+                  ),
+                  hintStyle: Helper(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(fontSize: 14.sp, color: textSecondary),
+                  hindText: "Enter Password",
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Please enter password";
+                    }
+                    return null;
+                  },
                 ),
                 sizedBoxHeight(height: 16.h),
                 CustomButton(
                   onTap: () {
-                    Navigator.of(context).pushReplacementNamed(
-                      InvestmentApp.dashboard,
-                    );
+                    authControllerInvest.loginInvest().then((value) {
+                      if (value.isSuccess) {
+                        Navigator.of(context).pushReplacementNamed(
+                          InvestmentApp.dashboard,
+                        );
+                        showToast(
+                            message: value.message, typeCheck: value.isSuccess);
+                      } else {
+                        showToast(
+                            message: value.message, typeCheck: value.isSuccess);
+                      }
+                    });
                   },
                   gradient: goldGradient,
                   gradientBegin: Alignment.topCenter,

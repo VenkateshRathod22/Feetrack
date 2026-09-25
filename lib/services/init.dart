@@ -7,6 +7,7 @@ import 'package:vlr/controllers/card_controller.dart';
 import 'package:vlr/controllers/common_controller.dart';
 import 'package:vlr/controllers/coupons_controller.dart';
 import 'package:vlr/controllers/dashboard_controller.dart';
+import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/controllers/notification_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vlr/controllers/gym_controller.dart';
@@ -17,6 +18,7 @@ import 'package:vlr/controllers/school_controller.dart';
 import 'package:vlr/controllers/subscription_controller.dart';
 import 'package:vlr/controllers/transaction_controller.dart';
 import 'package:vlr/controllers/wallet_controller.dart';
+import 'package:vlr/data/api/invest_api_client.dart';
 import 'package:vlr/data/repositories/attendance_repo.dart';
 import 'package:vlr/data/repositories/book_appoint_repo.dart';
 import 'package:vlr/data/repositories/card_repo.dart';
@@ -24,6 +26,7 @@ import 'package:vlr/data/repositories/common_repo.dart';
 import 'package:vlr/data/repositories/coupons_repo.dart';
 import 'package:vlr/data/repositories/gym_repo.dart';
 import 'package:vlr/data/repositories/home_repo.dart';
+import 'package:vlr/data/repositories/invest_repo/auth_repo_invest.dart';
 import 'package:vlr/data/repositories/notification_repo.dart';
 import 'package:vlr/data/repositories/kyc_repo.dart';
 import 'package:vlr/data/repositories/room_repo.dart';
@@ -50,6 +53,12 @@ class Init {
       Get.lazyPut(() => ApiClient(
           appBaseUrl: AppConstants.baseUrl,
           sharedPreferences: sharedPreferences));
+
+      Get.lazyPut(() => InvestApiClient(
+          appBaseUrl: AppConstants.baseUrlInvestApp, // invest api
+          sharedPreferences: sharedPreferences));
+
+      
       Get.lazyPut(() =>
           KycRepo(apiClient: Get.find(), sharedPreferences: sharedPreferences));
       Get.lazyPut(() => WalletRepo(
@@ -61,7 +70,12 @@ class Init {
       // Get Repo's...
       Get.lazyPut(
           () => AuthRepo(sharedPreferences: Get.find(), apiClient: Get.find()));
-      Get.lazyPut(() => BasicRepo(apiClient: Get.find(),sharedPreferences: Get.find(),),);
+      Get.lazyPut(
+        () => BasicRepo(
+          apiClient: Get.find(),
+          sharedPreferences: Get.find(),
+        ),
+      );
       Get.lazyPut(() => GymRepo(apiClient: Get.find()));
       Get.lazyPut(() => TransactionRepo(apiClient: Get.find()));
       Get.lazyPut(() => BookAppointRepo(apiClient: Get.find()));
@@ -76,6 +90,11 @@ class Init {
       Get.lazyPut(() => NotificationRepo(apiClient: Get.find()));
       Get.lazyPut(
           () => CardRepo(apiClient: Get.find(), prepaidClient: Get.find()));
+      //* Invest repo
+      Get.lazyPut(() => AuthRepoInvest(
+            sharedPreferences: Get.find(),
+            investApiClient: Get.find(),
+          ));
 
       // Get Controller's...
       Get.lazyPut(() => DashBoardController());
@@ -99,6 +118,9 @@ class Init {
           cardRepo: Get.find(),
           authRepo: Get.find(),
           sharedPreferences: Get.find()));
+      //* Invest controller
+
+      Get.lazyPut(() => AuthControllerInvest(authRepoInvest: Get.find()));
     } catch (e) {
       log('---- ${e.toString()} ----', name: "ERROR AT initialize()");
     }

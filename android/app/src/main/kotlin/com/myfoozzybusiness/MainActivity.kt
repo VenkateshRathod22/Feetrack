@@ -1,6 +1,4 @@
-//package com.feetrack.gym.room.tpipay
-
-package com.tpipay.feetrack_student_parent
+package com.myfoozzybusiness
 
 import io.flutter.embedding.android.FlutterActivity
 

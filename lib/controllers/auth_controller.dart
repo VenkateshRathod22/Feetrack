@@ -33,12 +33,12 @@ class AuthController extends GetxController implements GetxService {
   bool updateProfileLoading = false;
 
   TextEditingController fullNameController =
-      TextEditingController(text: "Ajit");
+      TextEditingController();
   TextEditingController dobController = TextEditingController();
   TextEditingController emailController =
-      TextEditingController(text: "a@gmail.com");
+      TextEditingController();
   TextEditingController mobileNoController =
-      TextEditingController(text: "8926600736");
+      TextEditingController();
   String? gender;
   List<String> genderList = ["Male", "Female", "Other"];
 
@@ -643,6 +643,9 @@ class AuthController extends GetxController implements GetxService {
     return responseModel;
   }
 
+
+
+
   Future<void> saveFMCToken(String fcmToken) async {
     final saveFCMToken = await authRepo.saveFCMToken(fcmToken: fcmToken);
     log('loginUser: saved FCM token: $saveFCMToken');
@@ -664,4 +667,11 @@ class AuthController extends GetxController implements GetxService {
   String getUserToken() {
     return authRepo.getUserToken();
   }
+
+
+
+  
+
+
+
 }
