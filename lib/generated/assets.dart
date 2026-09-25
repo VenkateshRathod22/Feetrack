@@ -98,6 +98,10 @@ class Assets {
   /// assets/images/investment-logo.png
   static const String imagesInvestmentLogo = "assets/images/investment-logo.png";
 
+  /// Assets for imagesLockoBg
+  /// assets/images/locko-bg.png
+  static const String imagesLockoBg = "assets/images/locko-bg.png";
+
   /// Assets for imagesLoginScreenBg
   /// assets/images/login-screen-bg.png
   static const String imagesLoginScreenBg = "assets/images/login-screen-bg.png";

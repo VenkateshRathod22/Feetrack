@@ -19,6 +19,8 @@ class LoginScreenInvest extends StatefulWidget {
 }
 
 class _LoginScreenInvestState extends State<LoginScreenInvest> {
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,124 +38,135 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
           padding: AppConstants.screenPadding,
           child:
               GetBuilder<AuthControllerInvest>(builder: (authControllerInvest) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                CustomText(
-                  "Welcome Back",
-                  style: Helper(context)
-                      .textTheme
-                      .titleMedium
-                      ?.copyWith(fontSize: 32.sp, color: white),
-                ),
-                sizedBoxHeight(height: 8.h),
-                CustomText(
-                  "Login to your account",
-                  style: Helper(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(fontSize: 16.sp, color: textGray),
-                ),
-                sizedBoxHeight(height: 36.h),
-                AppTextFieldWithHeading(
-                  controller: authControllerInvest.userIdController,
-                  preFixWidget: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 12.w),
-                    child: SvgPicture.asset(
-                      Assets.svgsPerson,
-                      height: 20.h,
-                      width: 20.w,
-                      colorFilter:
-                          const ColorFilter.mode(textGray, BlendMode.srcIn),
-                    ),
+            return Form(
+              key: _formKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomText(
+                    "Welcome Back",
+                    style: Helper(context)
+                        .textTheme
+                        .titleMedium
+                        ?.copyWith(fontSize: 32.sp, color: white),
                   ),
-                  hintStyle: Helper(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(fontSize: 14.sp, color: textSecondary),
-                  hindText: "User ID",
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter use id";
-                    }
-                    return null;
-                  },
-                ),
-                sizedBoxHeight(height: 16.h),
-                AppTextFieldWithHeading(
-                  controller: authControllerInvest.passwordController,
-                  preFixWidget: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 12.w,
-                    ),
-                    child: Icon(
-                      Icons.lock_outline,
-                      color: textGray,
-                      size: 20.sp,
-                    ),
+                  sizedBoxHeight(height: 8.h),
+                  CustomText(
+                    "Login to your account",
+                    style: Helper(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(fontSize: 16.sp, color: textGray),
                   ),
-                  hintStyle: Helper(context)
-                      .textTheme
-                      .bodySmall
-                      ?.copyWith(fontSize: 14.sp, color: textSecondary),
-                  hindText: "Enter Password",
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return "Please enter password";
-                    }
-                    return null;
-                  },
-                ),
-                sizedBoxHeight(height: 8.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    CustomButton(
-                      type: ButtonType.tertiary,
-                      onTap: () {},
-                      child: CustomText(
-                        "Forgot Password?",
-                        style: Helper(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.copyWith(fontSize: 12.sp, color: primaryColor),
+                  sizedBoxHeight(height: 36.h),
+                  AppTextFieldWithHeading(
+                    controller: authControllerInvest.userIdController,
+                    preFixWidget: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 12.w),
+                      child: SvgPicture.asset(
+                        Assets.svgsPerson,
+                        height: 20.h,
+                        width: 20.w,
+                        colorFilter:
+                            const ColorFilter.mode(textGray, BlendMode.srcIn),
                       ),
-                    )
-                  ],
-                ),
-                sizedBoxHeight(height: 8.h),
-                CustomButton(
-                  onTap: () {
-                    authControllerInvest.loginInvest().then((value) {
-                      if (value.isSuccess) {
-                        Navigator.of(context).pushReplacementNamed(
-                          InvestmentApp.dashboard,
-                        );
-                        showToast(
-                            message: value.message, typeCheck: value.isSuccess);
-                      } else {
-                        showToast(
-                            message: value.message, typeCheck: value.isSuccess);
+                    ),
+                    hintStyle: Helper(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(fontSize: 14.sp, color: textSecondary),
+                    hindText: "User ID",
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter use id";
                       }
-                    });
-                  },
-                  gradient: goldGradient,
-                  gradientBegin: Alignment.topCenter,
-                  gradientEnd: Alignment.bottomCenter,
-                  borderColor: null,
-                  height: 60.h,
-                  radius: 12.r,
-                  child: CustomText(
-                    "Login",
-                    style: Helper(context).textTheme.titleMedium?.copyWith(
-                          fontSize: 16.sp,
-                          color: black,
-                        ),
+                      return null;
+                    },
                   ),
-                )
-              ],
+                  sizedBoxHeight(height: 16.h),
+                  AppTextFieldWithHeading(
+                    controller: authControllerInvest.passwordController,
+                    preFixWidget: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12.w,
+                      ),
+                      child: Icon(
+                        Icons.lock_outline,
+                        color: textGray,
+                        size: 20.sp,
+                      ),
+                    ),
+                    hintStyle: Helper(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(fontSize: 14.sp, color: textSecondary),
+                    hindText: "Enter Password",
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter password";
+                      }
+                      return null;
+                    },
+                  ),
+                  sizedBoxHeight(height: 8.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      CustomButton(
+                        type: ButtonType.tertiary,
+                        onTap: () {
+                          Navigator.of(context).pushReplacementNamed(
+                            InvestmentApp.forgetPassword,
+                          );
+                        },
+                        child: CustomText(
+                          "Forgot Password?",
+                          style: Helper(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.copyWith(fontSize: 12.sp, color: primaryColor),
+                        ),
+                      )
+                    ],
+                  ),
+                  sizedBoxHeight(height: 8.h),
+                  CustomButton(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        authControllerInvest.loginInvest().then((value) {
+                          if (value.isSuccess) {
+                            Navigator.of(context).pushReplacementNamed(
+                              InvestmentApp.dashboard,
+                            );
+                            showToast(
+                                message: value.message,
+                                typeCheck: value.isSuccess);
+                          } else {
+                            showToast(
+                                message: value.message,
+                                typeCheck: value.isSuccess);
+                          }
+                        });
+                      }
+                    },
+                    gradient: goldGradient,
+                    gradientBegin: Alignment.topCenter,
+                    gradientEnd: Alignment.bottomCenter,
+                    borderColor: null,
+                    height: 60.h,
+                    radius: 12.r,
+                    child: CustomText(
+                      "Login",
+                      style: Helper(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 16.sp,
+                            color: black,
+                          ),
+                    ),
+                  )
+                ],
+              ),
             );
           }),
         ),

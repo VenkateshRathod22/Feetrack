@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password/forget_password_screen.dart';
 
 import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
@@ -11,6 +12,7 @@ class InvestmentApp extends StatelessWidget {
   static const String splash = '/splash_invest';
   static const String login = '/login_invest';
   static const String dashboard = '/dashboard_invest';
+  static const String forgetPassword = '/forget_password';
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,12 @@ class InvestmentApp extends StatelessWidget {
             case login:
               return MaterialPageRoute(
                 builder: (_) => const LoginScreenInvest(),
+                settings: settings,
+              );
+
+            case forgetPassword:
+              return MaterialPageRoute(
+                builder: (_) => const ForgetPasswordScreen(),
                 settings: settings,
               );
 
