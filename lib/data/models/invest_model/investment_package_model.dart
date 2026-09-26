@@ -48,6 +48,6 @@ class InvestmentPackageModel {
   String get minFormat => PriceConverter.convertToNumberFormat(
       double.tryParse(min ?? "0.0") ?? 0.0);
 
-  String get manFormat => PriceConverter.convertToNumberFormat(
+  String get maxFormat => PriceConverter.convertToNumberFormat(
       double.tryParse(max ?? "0.0") ?? 0.0);
 }

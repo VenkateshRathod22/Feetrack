@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vlr/data/models/invest_model/investment_package_model.dart';
 import 'package:vlr/data/models/response/response_model.dart';
@@ -92,9 +93,89 @@ class InvestmentControllerInvest extends GetxController implements GetxService {
 
   InvestmentPackageModel? selectInvestmentPackageModel;
 
-  void updateInvestmentPackageModel(
-      {required InvestmentPackageModel investmentPackageModel}) {
+  void updateInvestmentPackageModel({
+    required InvestmentPackageModel investmentPackageModel,
+  }) {
     selectInvestmentPackageModel = investmentPackageModel;
+
+    // Set default calculation to daily
+    updateReturnCalculation(
+      period: "daily",
+      notify: false,
+    );
+
     update();
+  }
+
+  TextEditingController amountController = TextEditingController();
+
+  String selectedReturnPeriod = "daily";
+  String selectedReturnPeriodPer = "";
+
+  /// Select Daily / Monthly / Yearly
+  /// and calculate return amount.
+  void updateReturnCalculation({
+    required String period,
+    bool notify = true,
+  }) {
+    selectedReturnPeriod = period.trim().toLowerCase();
+
+    final package = selectInvestmentPackageModel;
+
+    if (package == null) {
+      selectedReturnPeriodPer = "";
+
+      if (notify) {
+        update();
+      }
+
+      return;
+    }
+
+    // Get percentage based on selected period
+    switch (selectedReturnPeriod) {
+      case "daily":
+        selectedReturnPeriodPer = package.dailyPercent ?? "";
+        break;
+
+      case "monthly":
+        selectedReturnPeriodPer = package.monthlyPercent ?? "";
+        break;
+
+      case "yearly":
+        selectedReturnPeriodPer = package.yearlyPercent ?? "";
+        break;
+
+      default:
+        selectedReturnPeriodPer = "";
+    }
+
+    // Get entered investment amount
+    final double? investmentAmount =
+        double.tryParse(amountController.text.trim());
+
+    // Get selected percentage
+
+    log('Return Calculation -> '
+        'Period: $selectedReturnPeriod, '
+        'Percentage: $selectedReturnPeriodPer, '
+        'Investment: $investmentAmount, ');
+
+    if (notify) {
+      update();
+    }
+  }
+
+  /// Recalculate return when investment amount changes.
+  void updateInvestmentAmount(String value) {
+    updateReturnCalculation(
+      period: selectedReturnPeriod,
+    );
+  }
+
+  @override
+  void onClose() {
+    amountController.dispose();
+    super.onClose();
   }
 }

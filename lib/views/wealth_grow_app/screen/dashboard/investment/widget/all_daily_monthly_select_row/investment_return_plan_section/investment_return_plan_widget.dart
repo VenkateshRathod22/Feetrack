@@ -53,7 +53,7 @@ class InvestmentReturnPlanWidget extends StatelessWidget {
                     ),
                     sizedBoxHeight(height: 2),
                     CustomText(
-                      "${investmentPackageModel.minFormat} - ${investmentPackageModel.manFormat} ",
+                      "${investmentPackageModel.minFormat} - ${investmentPackageModel.maxFormat} ",
                       style: Helper(context)
                           .textTheme
                           .bodyMedium
