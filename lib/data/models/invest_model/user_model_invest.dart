@@ -1,3 +1,6 @@
+import 'package:vlr/generated/assets.dart';
+import 'package:vlr/services/constants.dart';
+
 class UserModelInvest {
   final String? signupId;
   final String? isBlock;
@@ -95,49 +98,37 @@ class UserModelInvest {
       sponsorCode: json["sponsor_code"]?.toString(),
       status: json["status"]?.toString(),
       rank: json["rank"]?.toString(),
-
       rankDate: _parseDate(json["rank_date"]),
       rankExDate: _parseDate(json["rank_ex_date"]),
-
       email: json["email"]?.toString(),
       walletAmount: json["wallet_amount"]?.toString(),
       amount: json["amount"]?.toString(),
       packageStatus: json["package_status"]?.toString(),
       package: json["package"]?.toString(),
       type: json["type"]?.toString(),
-
       sponsorid: json["sponsorid"]?.toString(),
       sponsorname: json["sponsorname"]?.toString(),
       myLevel: json["my_level"]?.toString(),
       boosterStatus: json["booster_status"]?.toString(),
-
       activeDate: _parseDate(json["active_date"]),
       activeTime: json["active_time"]?.toString(),
-
       createdDate: _parseDate(json["created_date"]),
       createdTime: json["created_time"]?.toString(),
-
       pinused: json["pinused"],
       autopoolLevel: json["autopool_level"]?.toString(),
       kyc: json["kyc"]?.toString(),
       autopool1Level: json["autopool1_level"]?.toString(),
       autopool2Level: json["autopool2_level"],
-
       idRegTime: json["id_reg_time"]?.toString(),
       fIdActStatus: json["f_id_act_status"],
       totalInc: json["total_inc"],
-
-      boosterIncomeWallet:
-          json["booster_income_wallet"]?.toString(),
-
+      boosterIncomeWallet: json["booster_income_wallet"]?.toString(),
       image: json["image"]?.toString(),
       otpVerify: json["otp_verify"]?.toString(),
       city: json["city"]?.toString(),
       country: json["country"]?.toString(),
       address: json["address"]?.toString(),
-
-      rechargeUpgradePackage:
-          json["recharge_upgrade_package"]?.toString(),
+      rechargeUpgradePackage: json["recharge_upgrade_package"]?.toString(),
     );
   }
 
@@ -149,5 +140,17 @@ class UserModelInvest {
     if (date.isEmpty) return null;
 
     return DateTime.tryParse(date);
+  }
+
+  String get profileImage {
+    if (image == null || image!.trim().isEmpty) {
+      return Assets.imagesNoProfile;
+    }
+
+    final cleanImagePath = image!
+        .replaceFirst(RegExp(r'^(\.\./)+'), '')
+        .replaceFirst(RegExp(r'^/+'), '');
+
+    return '${AppConstants.baseImageUrlInvestApp}$cleanImagePath';
   }
 }

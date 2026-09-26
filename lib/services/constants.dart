@@ -160,6 +160,9 @@ class AppConstants {
 
   static String baseImageUrl = 'https://app.feetrack.in/';
 
+  static const String baseImageUrlInvestApp =
+    'https://investor.feetrack.in/';
+
   //TODO: Change Base Url
 
   static String appName = 'FeeTrack';
