@@ -10,6 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 const Color primaryColor = Color(0xFFF5BA42);
 const Color primaryColorDark = Color(0xFFE5A93C);
 const Color primaryColorLight = Color(0xFFFFD56B);
+const Color primaryColorLight2 = Color(0xFF8B6B00);
 
 const Color neutralColor = Color(0xFF040D21);
 
@@ -76,6 +77,11 @@ const Color borderLight = Color(0xFFE2E8F0);
 
 const Color black = Colors.black;
 const Color white = Colors.white;
+
+// ============================================================
+// DIVIDER
+// ============================================================
+const Color whiteDivider = Color(0xFFF1F5F9);
 
 // ============================================================
 // GRADIENTS

@@ -316,6 +316,11 @@ class AppConstants {
   static const String appSettingInvest = '/Setting.php';
   static const String homeInvest = '/Home.php';
 
+  //* investment
+
+    static const String getPackageInvest = '/allPackage.php';
+
+
   //
   static double horizontalPadding = 16.w;
   static double verticalPadding = 20.h;
