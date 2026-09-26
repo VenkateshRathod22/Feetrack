@@ -5,6 +5,7 @@ import 'package:vlr/controllers/invest_controller/investment_controller_invest.d
 import 'package:vlr/data/models/invest_model/investment_package_model.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/views/base/shimmer.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/widget/all_daily_monthly_select_row/investment_return_plan_section/investment_return_plan_widget.dart';
 
 class InvestmentReturnPlanSection extends StatelessWidget {
@@ -23,8 +24,17 @@ class InvestmentReturnPlanSection extends StatelessWidget {
               : investmentControllerInvest.investmentPackageModelList[index];
           return CustomShimmer(
               isLoading: investmentControllerInvest.isLoading,
-              child: InvestmentReturnPlanWidget(
-                investmentPackageModel: investmentPackageModel,
+              child: GestureDetector(
+                onTap: () {
+                  investmentControllerInvest.updateInvestmentPackageModel(
+                      investmentPackageModel: investmentPackageModel);
+                  Navigator.of(context).pushNamed(
+                    InvestmentApp.investmentPlanDetailScreenInvest,
+                  );
+                },
+                child: InvestmentReturnPlanWidget(
+                  investmentPackageModel: investmentPackageModel,
+                ),
               ));
         },
         separatorBuilder: (_, __) => sizedBoxHeight(height: 14.h),

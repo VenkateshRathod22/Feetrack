@@ -5,8 +5,7 @@ import 'package:vlr/data/models/invest_model/investment_package_model.dart';
 import 'package:vlr/data/models/response/response_model.dart';
 import 'package:vlr/data/repositories/invest_repo/investment_repo_invest.dart';
 
-class InvestmentControllerInvest extends GetxController
-    implements GetxService {
+class InvestmentControllerInvest extends GetxController implements GetxService {
   final InvestmentRepoInvest investmentRepoInvest;
 
   InvestmentControllerInvest({
@@ -65,8 +64,7 @@ class InvestmentControllerInvest extends GetxController
 
       String errorMessage = "Unable to fetch investment packages";
 
-      if (response.body is Map &&
-          response.body['message'] != null) {
+      if (response.body is Map && response.body['message'] != null) {
         errorMessage = response.body['message'].toString();
       }
 
@@ -90,5 +88,13 @@ class InvestmentControllerInvest extends GetxController
       isLoading = false;
       update();
     }
+  }
+
+  InvestmentPackageModel? selectInvestmentPackageModel;
+
+  void updateInvestmentPackageModel(
+      {required InvestmentPackageModel investmentPackageModel}) {
+    selectInvestmentPackageModel = investmentPackageModel;
+    update();
   }
 }

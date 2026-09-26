@@ -198,6 +198,10 @@ class Assets {
   /// assets/images/room-refer.png
   static const String imagesRoomRefer = "assets/images/room-refer.png";
 
+  /// Assets for imagesRupeeBg
+  /// assets/images/rupee-bg.png
+  static const String imagesRupeeBg = "assets/images/rupee-bg.png";
+
   /// Assets for imagesSchoolLogo
   /// assets/images/school-logo.png
   static const String imagesSchoolLogo = "assets/images/school-logo.png";
