@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
+import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/home/widget/investment_plans_section/Investment_plans_section.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/home/widget/home_screen_invest_appbar.dart';
@@ -22,7 +23,9 @@ class _HomeScreenInvestState extends State<HomeScreenInvest> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final authControllerInvest = Get.find<AuthControllerInvest>();
+      final basicControllerInvest = Get.find<BasicControllerInvest>();
       authControllerInvest.fetchProfileInvest();
+      basicControllerInvest.fetchHomeInvest();
     });
   }
 

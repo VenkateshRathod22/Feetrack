@@ -19,4 +19,14 @@ class BasicRepoInvest {
       headers: investApiClient.getSponsorHeaders(),
     );
   }
+
+  Future<Response> fetchHomeInvest() async {
+    return await investApiClient.getData(
+      AppConstants.homeInvest,
+      "fetchHomeInvest",
+      contentType: 'application/json',
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
 }

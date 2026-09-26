@@ -311,6 +311,7 @@ class AppConstants {
   static const String loginInvest = '/login.php';
   static const String getUserProfileInvest = '/getUser.php';
   static const String appSettingInvest = '/Setting.php';
+  static const String homeInvest = '/Home.php';
 
   //
   static double horizontalPadding = 16.w;
