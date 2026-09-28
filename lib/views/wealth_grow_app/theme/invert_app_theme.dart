@@ -37,6 +37,13 @@ const Color cardWhite = Color(0xFFFFFFFF);
 const Color cardWhiteSubtle = Color(0xFFF8FAFC);
 
 // ============================================================
+// Dart CARD COLORS
+// ============================================================
+
+const Color cardDartBg = Color(0xFF121C32);
+const Color cardDartBorderColor = Color(0xFF22304E);
+
+// ============================================================
 // TEXT COLORS
 // ============================================================
 

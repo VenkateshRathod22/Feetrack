@@ -6,6 +6,7 @@ import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
 import 'package:vlr/views/base/shimmer.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/wallet/wallet_portfolio_section/wallet_portfolio_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
@@ -84,7 +85,13 @@ class WalletPortfolioSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               WalletPortfolioWidget(
-                  icon: Icons.trending_up, title: "Invest", onTap: () {}),
+                  icon: Icons.trending_up,
+                  title: "Invest",
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.myInvestmentsScreenInvest,
+                    );
+                  }),
               WalletPortfolioWidget(
                   icon: Icons.file_upload_outlined,
                   title: "Withdraw",

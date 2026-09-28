@@ -5,7 +5,7 @@ import 'package:vlr/data/models/invest_model/investment_package_model.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/custom_image.dart';
-import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/widget/all_daily_monthly_select_row/investment_return_plan_section/return_widget.dart';
+import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/widget/investment_return_plan_section/return_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class InvestmentReturnPlanWidget extends StatelessWidget {

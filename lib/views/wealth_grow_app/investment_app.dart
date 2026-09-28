@@ -4,8 +4,10 @@ import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password/forget_pas
 import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
+
 class InvestmentApp extends StatefulWidget {
   const InvestmentApp({super.key});
 
@@ -16,14 +18,15 @@ class InvestmentApp extends StatefulWidget {
 
   static const String investmentPlanDetailScreenInvest =
       '/investment_plan_detail_screen_invest';
+  static const String myInvestmentsScreenInvest =
+      '/my_investments_screen_invest';
 
   @override
   State<InvestmentApp> createState() => _InvestmentAppState();
 }
 
 class _InvestmentAppState extends State<InvestmentApp> {
-  final GlobalKey<NavigatorState> navigatorKey =
-      GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +61,19 @@ class _InvestmentAppState extends State<InvestmentApp> {
 
               case InvestmentApp.investmentPlanDetailScreenInvest:
                 return MaterialPageRoute(
-                  builder: (_) =>
-                      const InvestmentPlanDetailScreenInvest(),
+                  builder: (_) => const InvestmentPlanDetailScreenInvest(),
                   settings: settings,
                 );
 
               case InvestmentApp.dashboard:
                 return MaterialPageRoute(
                   builder: (_) => const DashboardScreenInvert(),
+                  settings: settings,
+                );
+
+              case InvestmentApp.myInvestmentsScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const MyInvestmentsScreenInvest(),
                   settings: settings,
                 );
 
@@ -81,3 +89,8 @@ class _InvestmentAppState extends State<InvestmentApp> {
     );
   }
 }
+
+
+                  // Navigator.of(context).pushNamed(
+                  //   InvestmentApp.investmentPlanDetailScreenInvest,
+                  // );

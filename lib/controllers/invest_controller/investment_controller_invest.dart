@@ -325,6 +325,83 @@ class InvestmentControllerInvest extends GetxController implements GetxService {
     }
   }
 
+  List<ActivationHistoryModelInvest> historyInvestmentModelInvestList = [];
+  Future<ResponseModel> fetchHistoryInvestmentInvest() async {
+    log(
+      '----------- fetchHistoryInvestmentInvest Called ----------',
+    );
+
+    isLoading = true;
+    update();
+
+    try {
+      final Response response =
+          await investmentRepoInvest.fetchHistoryInvestmentInvest();
+
+      log(
+        "Status Code: ${response.statusCode}",
+      );
+
+      if (response.statusCode != 200) {
+        String errorMessage = "Unable to fetch completed investments";
+
+        if (response.body is Map && response.body['message'] != null) {
+          errorMessage = response.body['message'].toString();
+        }
+
+        return ResponseModel(
+          false,
+          errorMessage,
+        );
+      }
+
+      final dynamic body = response.body;
+
+      List<dynamic> responseList = [];
+
+      if (body is Map && body['data'] is List) {
+        responseList = body['data'];
+      } else if (body is List) {
+        responseList = body;
+      }
+
+      historyInvestmentModelInvestList = responseList
+          .whereType<Map>()
+          .map(
+            (e) => ActivationHistoryModelInvest.fromJson(
+              Map<String, dynamic>.from(e),
+            ),
+          )
+          .toList();
+
+      log(
+        "Completed investments loaded: "
+        "${historyInvestmentModelInvestList.length}",
+      );
+
+      return ResponseModel(
+        true,
+        "Completed investments fetched successfully",
+        historyInvestmentModelInvestList,
+      );
+    } catch (e, stackTrace) {
+      log(
+        'ERROR AT fetchHistoryInvestmentInvest(): $e',
+        stackTrace: stackTrace,
+      );
+
+      historyInvestmentModelInvestList = [];
+
+      return ResponseModel(
+        false,
+        "Error while fetching completed investments",
+      );
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
   @override
   void onClose() {
     amountController.dispose();

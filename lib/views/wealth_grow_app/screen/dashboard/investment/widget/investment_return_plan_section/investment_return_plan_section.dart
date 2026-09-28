@@ -6,7 +6,7 @@ import 'package:vlr/data/models/invest_model/investment_package_model.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/views/base/shimmer.dart';
 import 'package:vlr/views/wealth_grow_app/investment_app.dart';
-import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/widget/all_daily_monthly_select_row/investment_return_plan_section/investment_return_plan_widget.dart';
+import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/widget/investment_return_plan_section/investment_return_plan_widget.dart';
 
 class InvestmentReturnPlanSection extends StatelessWidget {
   const InvestmentReturnPlanSection({

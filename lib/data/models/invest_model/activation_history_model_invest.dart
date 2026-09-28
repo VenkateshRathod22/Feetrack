@@ -1,3 +1,7 @@
+import 'package:intl/intl.dart';
+import 'package:vlr/services/constants.dart';
+import 'package:vlr/services/date_formatters_and_converters.dart';
+
 class ActivationHistoryModelInvest {
   final String? uniqueId;
   final String? userId;
@@ -43,4 +47,50 @@ class ActivationHistoryModelInvest {
       withdrawStatus: json['withdraw_status']?.toString(),
     );
   }
+
+  String get packageFormat => PriceConverter.convertToNumberFormat(
+      double.tryParse(package ?? "0.0") ?? 0.0);
+
+  /// 30 May 2025
+  String get packageDateFormat {
+    if (packageDate == null || packageDate!.trim().isEmpty) {
+      return "";
+    }
+
+    try {
+      final date = DateTime.parse(packageDate!);
+
+      return DateFormatters().dMonthYear.format(date);
+    } catch (e) {
+      return packageDate ?? "";
+    }
+  }
+
+  /// 05:49 PM
+  String get packageTimeFormat {
+    if (packageTime == null || packageTime!.trim().isEmpty) {
+      return "";
+    }
+
+    try {
+      final time = DateFormat("hh:mm a").parse(
+        packageTime!.toUpperCase(),
+      );
+
+      return DateFormat("hh:mm a").format(time);
+    } catch (e) {
+      return packageTime ?? "";
+    }
+  }
+
+  /// 2.00%
+  String get perFormat {
+    if (per == null || per!.trim().isEmpty) {
+      return "";
+    }
+
+    return "$per%";
+  }
+
+  bool get withdrawStatusFormat => withdrawStatus == "1" ? true : false;
 }

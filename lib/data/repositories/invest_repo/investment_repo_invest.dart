@@ -29,4 +29,14 @@ class InvestmentRepoInvest {
       headers: investApiClient.getSponsorHeaders(),
     );
   }
+
+  Future<Response> fetchHistoryInvestmentInvest() async {
+    return await investApiClient.getData(
+      AppConstants.getHistoryInvestmentInvest,
+      "fetchAllPackageInvest",
+      contentType: 'application/json',
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
 }

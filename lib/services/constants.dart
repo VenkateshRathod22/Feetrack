@@ -317,8 +317,8 @@ class AppConstants {
 
   //* investment
   static const String getPackageInvest = '/allPackage.php';
-  static const String getActivateInvestmentInvest =
-      '/activationHistory.php';
+  static const String getActivateInvestmentInvest = '/activationHistory.php';
+  static const String getHistoryInvestmentInvest = '/myHistory.php';
 
   //
   static double horizontalPadding = 16.w;
