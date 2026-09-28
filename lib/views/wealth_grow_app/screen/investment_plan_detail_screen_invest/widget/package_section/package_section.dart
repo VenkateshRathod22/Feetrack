@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:vlr/controllers/invest_controller/investment_controller_invest.dart';
-import 'package:vlr/services/constants.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/widget/package_section/package_info_row.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 

@@ -14,6 +14,7 @@ const Color primaryColorLight2 = Color(0xFF8B6B00);
 
 const Color neutralColor = Color(0xFF040D21);
 const Color neutralColor2 = Color(0xFF09152B);
+const Color neutralBorder = Color(0xFF162A4D);
 
 const Color goldSurface = Color(0xFFFEF3D6);
 
@@ -63,8 +64,7 @@ const Color blue = Color(0xFF3B82F6);
 const Color blueLight = Color(0xFFDBEAFE);
 
 const Color yellow = Color(0xFFF59E0B);
-const Color yellowLight = Color(0xFFFFF4E5)
-;
+const Color yellowLight = Color(0xFFFFF4E5);
 const Color grayLight = Color(0xFFF3F6FA);
 
 // ============================================================

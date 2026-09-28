@@ -13,7 +13,6 @@ import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'firebase/get_fcm_token.dart';
 import 'services/init.dart';
 
-
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
@@ -21,7 +20,7 @@ void main() async {
   await Init().initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
 
   await NotificationServices.initialize();
   runApp(const MyApp());
@@ -96,8 +95,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           themeMode: ThemeMode.light,
           theme: CustomTheme.light,
           debugShowCheckedModeBanner: false,
-          home: const SplashScreen(),
-          // home: const InvestmentApp(),
+          // home: const SplashScreen(),
+          home: const InvestmentApp(),
         ),
       ),
     );
