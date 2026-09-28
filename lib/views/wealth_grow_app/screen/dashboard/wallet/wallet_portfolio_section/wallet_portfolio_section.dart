@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
+import 'package:vlr/views/base/shimmer.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/wallet/wallet_portfolio_section/wallet_portfolio_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
@@ -22,48 +25,55 @@ class WalletPortfolioSection extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomText(
-                      "Available Balance",
-                      style: Helper(context).textTheme.bodyMedium?.copyWith(
-                            fontSize: 13.sp,
-                            color: textSecondary,
-                          ),
-                    ),
-                    sizedBoxHeight(height: 2),
-                    CustomText(
-                      "8000",
-                      style: Helper(context).textTheme.titleLarge?.copyWith(
-                            fontSize: 30.sp,
-                            color: white,
-                          ),
-                    ),
-                  ],
-                ),
-              ),
-              CustomButton(
-                onTap: () {},
-                gradient: goldGradient,
-                radius: 12.r,
-                borderColor: primaryColor,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: CustomText(
-                    "Add Money",
-                    style: Helper(context).textTheme.titleMedium?.copyWith(
-                          fontSize: 14.sp,
-                          color: textDarkPrimary,
+          GetBuilder<AuthControllerInvest>(builder: (authControllerInvest) {
+            return Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      CustomText(
+                        "Available Balance",
+                        style: Helper(context).textTheme.bodyMedium?.copyWith(
+                              fontSize: 13.sp,
+                              color: textSecondary,
+                            ),
+                      ),
+                      sizedBoxHeight(height: 2),
+                      CustomShimmer(
+                        isLoading: authControllerInvest.isLoading,
+                        child: CustomText(
+                          authControllerInvest
+                                  .userModelInvest?.walletBalanceFormat ??
+                              "0.0",
+                          style: Helper(context).textTheme.titleLarge?.copyWith(
+                                fontSize: 30.sp,
+                                color: white,
+                              ),
                         ),
+                      ),
+                    ],
                   ),
                 ),
-              ),
-            ],
-          ),
+                CustomButton(
+                  onTap: () {},
+                  gradient: goldGradient,
+                  radius: 12.r,
+                  borderColor: primaryColor,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.w),
+                    child: CustomText(
+                      "Add Money",
+                      style: Helper(context).textTheme.titleMedium?.copyWith(
+                            fontSize: 14.sp,
+                            color: textDarkPrimary,
+                          ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 16.h),
             child: Divider(
