@@ -99,7 +99,13 @@ class WalletPortfolioSection extends StatelessWidget {
               WalletPortfolioWidget(
                   icon: Icons.description, title: "Transaction", onTap: () {}),
               WalletPortfolioWidget(
-                  icon: Icons.account_balance, title: "Bank", onTap: () {}),
+                  icon: Icons.account_balance,
+                  title: "Bank",
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.bankListScreenInvest,
+                    );
+                  }),
             ],
           ),
         ],

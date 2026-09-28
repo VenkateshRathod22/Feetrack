@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password/forget_password_screen.dart';
 
 import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/bank_list_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
@@ -20,6 +21,7 @@ class InvestmentApp extends StatefulWidget {
       '/investment_plan_detail_screen_invest';
   static const String myInvestmentsScreenInvest =
       '/my_investments_screen_invest';
+  static const String bankListScreenInvest = '/bank_list_screen_invest';
 
   @override
   State<InvestmentApp> createState() => _InvestmentAppState();
@@ -74,6 +76,12 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.myInvestmentsScreenInvest:
                 return MaterialPageRoute(
                   builder: (_) => const MyInvestmentsScreenInvest(),
+                  settings: settings,
+                );
+
+              case InvestmentApp.bankListScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const BankListScreenInvest(),
                   settings: settings,
                 );
 

@@ -6,6 +6,10 @@ class Assets {
   /// assets/images/aadhaar.png
   static const String imagesAadhaar = "assets/images/aadhaar.png";
 
+  /// Assets for imagesBankBg
+  /// assets/images/bank-bg.png
+  static const String imagesBankBg = "assets/images/bank-bg.png";
+
   /// Assets for imagesBanner
   /// assets/images/banner.png
   static const String imagesBanner = "assets/images/banner.png";

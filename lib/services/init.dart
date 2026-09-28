@@ -8,6 +8,7 @@ import 'package:vlr/controllers/common_controller.dart';
 import 'package:vlr/controllers/coupons_controller.dart';
 import 'package:vlr/controllers/dashboard_controller.dart';
 import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
+import 'package:vlr/controllers/invest_controller/bank_controller_invest.dart';
 import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/controllers/invest_controller/investment_controller_invest.dart';
 import 'package:vlr/controllers/notification_controller.dart';
@@ -29,6 +30,7 @@ import 'package:vlr/data/repositories/coupons_repo.dart';
 import 'package:vlr/data/repositories/gym_repo.dart';
 import 'package:vlr/data/repositories/home_repo.dart';
 import 'package:vlr/data/repositories/invest_repo/auth_repo_invest.dart';
+import 'package:vlr/data/repositories/invest_repo/bank_repo_invest.dart';
 import 'package:vlr/data/repositories/invest_repo/basic_repo_invest.dart';
 import 'package:vlr/data/repositories/invest_repo/investment_repo_invest.dart';
 import 'package:vlr/data/repositories/notification_repo.dart';
@@ -105,6 +107,7 @@ class Init {
       Get.lazyPut(() => InvestmentRepoInvest(
             investApiClient: Get.find(),
           ));
+      Get.lazyPut(() => BankRepoInvest(investApiClient: Get.find()));
 
       // Get Controller's...
       Get.lazyPut(() => DashBoardController());
@@ -132,7 +135,9 @@ class Init {
 
       Get.lazyPut(() => AuthControllerInvest(authRepoInvest: Get.find()));
       Get.lazyPut(() => BasicControllerInvest(basicRepoInvest: Get.find()));
-      Get.lazyPut(() => InvestmentControllerInvest(investmentRepoInvest: Get.find()));
+      Get.lazyPut(
+          () => InvestmentControllerInvest(investmentRepoInvest: Get.find()));
+      Get.lazyPut(() => BankControllerInvest(bankRepoInvest: Get.find()));
     } catch (e) {
       log('---- ${e.toString()} ----', name: "ERROR AT initialize()");
     }

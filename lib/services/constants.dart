@@ -320,6 +320,9 @@ class AppConstants {
   static const String getActivateInvestmentInvest = '/activationHistory.php';
   static const String getHistoryInvestmentInvest = '/myHistory.php';
 
+  //* banking
+  static const String getAllBankInvest = '/allBank.php';
+
   //
   static double horizontalPadding = 16.w;
   static double verticalPadding = 20.h;

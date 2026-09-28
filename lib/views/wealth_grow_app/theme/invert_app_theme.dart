@@ -65,6 +65,7 @@ const Color green = Color(0xFF34D399);
 const Color greenLight = Color(0xFFD1FAE5);
 
 const Color red = Color(0xFFEF4444);
+const Color red1 = Color(0xFFDC2626);
 const Color redLight = Color(0xFFFEE2E2);
 
 const Color blue = Color(0xFF3B82F6);
@@ -264,8 +265,7 @@ class InvestmentTheme {
         fontWeight: FontWeight.w700,
       ),
       headlineSmall: GoogleFonts.plusJakartaSans(
-        fontSize: 18.sp,
-        fontWeight: FontWeight.w700,
+
       ),
 
       //* main

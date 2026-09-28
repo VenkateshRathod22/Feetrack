@@ -332,17 +332,7 @@ class CustomButton extends StatelessWidget {
   Widget _buildPrimaryButton(BuildContext context) {
     final bool hasGradient = gradient != null;
 
-    final Gradient? buttonGradient = isLoading
-        ? null
-        : gradient ??
-            LinearGradient(
-              begin: gradientBegin,
-              end: gradientEnd,
-              colors: [
-                primaryColor,
-                primaryColor.withValues(alpha: 0.75),
-              ],
-            );
+    final Gradient? buttonGradient = isLoading ? null : gradient;
 
     return Material(
       color: Colors.transparent,
