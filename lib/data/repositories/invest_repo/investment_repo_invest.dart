@@ -16,4 +16,17 @@ class InvestmentRepoInvest {
       headers: investApiClient.getSponsorHeaders(),
     );
   }
+
+  Future<Response> fetchActivationHistoryInvest({
+    required int page,
+    required int result,
+  }) async {
+    return await investApiClient.getData(
+      "${AppConstants.getActivateInvestmentInvest}?page=$page&result=$result",
+      "fetchActivationHistory",
+      contentType: "application/json",
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
 }

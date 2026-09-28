@@ -160,8 +160,7 @@ class AppConstants {
 
   static String baseImageUrl = 'https://app.feetrack.in/';
 
-  static const String baseImageUrlInvestApp =
-    'https://investor.feetrack.in/';
+  static const String baseImageUrlInvestApp = 'https://investor.feetrack.in/';
 
   //TODO: Change Base Url
 
@@ -317,9 +316,9 @@ class AppConstants {
   static const String homeInvest = '/Home.php';
 
   //* investment
-
-    static const String getPackageInvest = '/allPackage.php';
-
+  static const String getPackageInvest = '/allPackage.php';
+  static const String getActivateInvestmentInvest =
+      '/activationHistory.php';
 
   //
   static double horizontalPadding = 16.w;
