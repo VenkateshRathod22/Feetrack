@@ -153,4 +153,11 @@ class UserModelInvest {
 
     return '${AppConstants.baseImageUrlInvestApp}$cleanImagePath';
   }
+
+  // amount
+  String get totalInvestFormat => PriceConverter.convertToNumberFormat(
+      double.tryParse(package ?? "0.0") ?? 0.0);
+
+  String get walletBalanceFormat => PriceConverter.convertToNumberFormat(
+      double.tryParse(amount ?? "0.0") ?? 0.0);
 }

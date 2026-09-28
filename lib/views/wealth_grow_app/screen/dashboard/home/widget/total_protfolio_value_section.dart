@@ -3,9 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
+import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/generated/assets.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
+import 'package:vlr/views/base/shimmer.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/home/widget/invest_text_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
@@ -39,8 +41,9 @@ class TotalPortfolioValueSection extends StatelessWidget {
               color: black.withValues(alpha: 0.7),
             ),
           ]),
-      child: GetBuilder<AuthControllerInvest>(
-        builder: (authControllerInvest) {
+      child: GetBuilder<AuthControllerInvest>(builder: (authControllerInvest) {
+        return GetBuilder<BasicControllerInvest>(
+            builder: (basicControllerInvest) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,12 +55,15 @@ class TotalPortfolioValueSection extends StatelessWidget {
                     ?.copyWith(fontSize: 12.sp, color: textSecondary),
               ),
               sizedBoxHeight(height: 4),
-              CustomText(
-                "₹1,25,450",
-                style: Helper(context)
-                    .textTheme
-                    .titleLarge
-                    ?.copyWith(fontSize: 24.sp, color: white),
+              CustomShimmer(
+                isLoading: basicControllerInvest.isLoading,
+                child: CustomText(
+                  basicControllerInvest.totalPortFolioValue,
+                  style: Helper(context)
+                      .textTheme
+                      .titleLarge
+                      ?.copyWith(fontSize: 24.sp, color: white),
+                ),
               ),
               sizedBoxHeight(height: 7.5),
               Row(
@@ -93,26 +99,32 @@ class TotalPortfolioValueSection extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InvestedTextWidget(
-                    title: "₹1,00,000",
+                    title: authControllerInvest
+                            .userModelInvest?.totalInvestFormat ??
+                        "",
                     subTitle: "Total Invested",
                     titleColor: white,
                   ),
                   InvestedTextWidget(
-                    title: "₹25,450",
+                    title: basicControllerInvest
+                            .homeInvestModel?.totalReturnFormat ??
+                        "",
                     subTitle: "Total Returns",
                     titleColor: primaryColor,
                   ),
                   InvestedTextWidget(
-                    title: "₹5,450",
+                    title: authControllerInvest
+                            .userModelInvest?.walletBalanceFormat ??
+                        "",
                     subTitle: "Available Balance",
                     titleColor: white,
                   ),
                 ],
-              )
+              ),
             ],
           );
-        }
-      ),
+        });
+      }),
     );
   }
 }

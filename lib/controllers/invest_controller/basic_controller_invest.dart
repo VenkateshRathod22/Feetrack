@@ -5,6 +5,7 @@ import 'package:vlr/data/models/invest_model/app_model_invest.dart';
 import 'package:vlr/data/models/invest_model/home_model_invest.dart';
 import 'package:vlr/data/models/response/response_model.dart';
 import 'package:vlr/data/repositories/invest_repo/basic_repo_invest.dart';
+import 'package:vlr/services/constants.dart';
 
 class BasicControllerInvest extends GetxController implements GetxService {
   final BasicRepoInvest basicRepoInvest;
@@ -29,30 +30,25 @@ class BasicControllerInvest extends GetxController implements GetxService {
     update();
 
     try {
-      Response response =
-          await basicRepoInvest.fetchAppSettingInvest();
+      Response response = await basicRepoInvest.fetchAppSettingInvest();
 
       log("Response Body: ${response.body}");
 
       if (response.statusCode == 200) {
-        appSettingInvestModel =
-            AppSettingInvestModel.fromJson(response.body);
+        appSettingInvestModel = AppSettingInvestModel.fromJson(response.body);
 
         // Set first frequency as default
-        final frequencyList =
-            appSettingInvestModel?.incomeFrequency;
+        final frequencyList = appSettingInvestModel?.incomeFrequency;
 
         if (frequencyList != null &&
             frequencyList.isNotEmpty &&
             selectedIncomeFrequencyId == null) {
-          selectedIncomeFrequencyId =
-              frequencyList.first.id;
+          selectedIncomeFrequencyId = frequencyList.first.id;
         }
 
         responseModel = ResponseModel(
           true,
-          response.body['message'] ??
-              "Fetch App Setting investment success",
+          response.body['message'] ?? "Fetch App Setting investment success",
         );
       } else {
         responseModel = ResponseModel(
@@ -87,8 +83,7 @@ class BasicControllerInvest extends GetxController implements GetxService {
   }
 
   IncomeFrequency? get selectedIncomeFrequency {
-    final list =
-        appSettingInvestModel?.incomeFrequency;
+    final list = appSettingInvestModel?.incomeFrequency;
 
     if (list == null || list.isEmpty) {
       return null;
@@ -114,23 +109,19 @@ class BasicControllerInvest extends GetxController implements GetxService {
     update();
 
     try {
-      Response response =
-          await basicRepoInvest.fetchHomeInvest();
+      Response response = await basicRepoInvest.fetchHomeInvest();
 
       if (response.statusCode == 200) {
-        homeInvestModel =
-            HomeInvestModel.fromJson(response.body);
+        homeInvestModel = HomeInvestModel.fromJson(response.body);
 
         responseModel = ResponseModel(
           true,
-          response.body['message'] ??
-              "Fetch home investment success",
+          response.body['message'] ?? "Fetch home investment success",
         );
       } else {
         responseModel = ResponseModel(
           false,
-          response.body['message'] ??
-              "Error while fetch home investment",
+          response.body['message'] ?? "Error while fetch home investment",
         );
       }
     } catch (e) {
@@ -147,4 +138,30 @@ class BasicControllerInvest extends GetxController implements GetxService {
 
     return responseModel;
   }
+
+String totalPortFolioValue = "0.0";
+
+Future<void> totalPortFolioValueCal({
+  required double totalInvest,
+  required double walletBalance,
+}) async {
+  final double totalReturns =
+      double.tryParse(homeInvestModel?.roiIncome ?? "0.0") ?? 0.0;
+
+  final double total =
+      totalInvest + walletBalance + totalReturns;
+
+  totalPortFolioValue =
+      PriceConverter.convertToNumberFormat(total);
+
+  log(
+    "Total Portfolio Calculation -> "
+    "Invest: $totalInvest, "
+    "Wallet: $walletBalance, "
+    "Returns: $totalReturns, "
+    "Total: $totalPortFolioValue",
+  );
+
+  update();
+}
 }

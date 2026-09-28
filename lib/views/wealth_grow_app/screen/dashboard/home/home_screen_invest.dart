@@ -21,11 +21,29 @@ class _HomeScreenInvestState extends State<HomeScreenInvest> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       final authControllerInvest = Get.find<AuthControllerInvest>();
+
       final basicControllerInvest = Get.find<BasicControllerInvest>();
-      authControllerInvest.fetchProfileInvest();
-      basicControllerInvest.fetchHomeInvest();
+
+      // First load profile
+      await authControllerInvest.fetchProfileInvest();
+
+      // Then load home data
+      await basicControllerInvest.fetchHomeInvest();
+
+      // Now calculate portfolio value
+      await basicControllerInvest.totalPortFolioValueCal(
+        totalInvest: double.tryParse(
+              authControllerInvest.userModelInvest?.package ?? "0.0",
+            ) ??
+            0.0,
+        walletBalance: double.tryParse(
+              authControllerInvest.userModelInvest?.amount ?? "0.0",
+            ) ??
+            0.0,
+      );
     });
   }
 
