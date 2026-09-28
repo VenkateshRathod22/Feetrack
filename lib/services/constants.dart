@@ -322,6 +322,8 @@ class AppConstants {
 
   //* banking
   static const String getAllBankInvest = '/allBank.php';
+  static const String addBankInvest = '/addBank.php';
+  static const String deleteBankInvest = '/deleteBank.php';
 
   //
   static double horizontalPadding = 16.w;

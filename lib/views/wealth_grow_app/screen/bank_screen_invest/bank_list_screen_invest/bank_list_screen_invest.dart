@@ -8,7 +8,8 @@ import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
 import 'package:vlr/views/base/shimmer.dart';
-import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/widget/bank_account_card_invest.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
+import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/bank_list_screen_invest/widget/bank_account_card_invest.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class BankListScreenInvest extends StatefulWidget {
@@ -57,7 +58,11 @@ class _BankListScreenInvestState extends State<BankListScreenInvest> {
           Padding(
             padding: AppConstants.screenPadding,
             child: CustomButton(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  InvestmentApp.addBankAccountScreenInvest,
+                );
+              },
               color: primaryColor,
               borderColor: primaryColor,
               height: 56.h,

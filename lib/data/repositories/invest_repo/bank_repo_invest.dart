@@ -16,4 +16,29 @@ class BankRepoInvest {
       headers: investApiClient.getSponsorHeaders(),
     );
   }
+
+  Future<Response> addBankInvest({
+    required Map<String, dynamic> body,
+  }) async {
+    return await investApiClient.postData(
+      AppConstants.addBankInvest,
+      "addBankInvest",
+      body,
+      contentType: 'application/json',
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
+
+  Future<Response> deleteBankInvest({
+    required String id,
+  }) async {
+    return await investApiClient.getData(
+      '${AppConstants.deleteBankInvest}?id=$id',
+      'deleteBankInvest',
+      contentType: 'application/json',
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
 }

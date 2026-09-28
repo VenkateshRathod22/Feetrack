@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:vlr/controllers/invest_controller/bank_controller_invest.dart';
 
 import 'package:vlr/data/models/invest_model/bank_model_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
+import 'package:vlr/views/base/common_button.dart';
 import 'package:vlr/views/base/custom_image.dart';
-import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/widget/investment_card_state_widget.dart';
+import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/bank_list_screen_invest/widget/investment_card_state_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class BankAccountCardInvest extends StatefulWidget {
@@ -318,7 +321,7 @@ class _BankAccountCardInvestState extends State<BankAccountCardInvest> {
       children: [
         GestureDetector(
           onTap: () {
-            // _showDeleteMessage(context);
+            _showDeleteBankDialog(context, bank);
           },
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -340,6 +343,143 @@ class _BankAccountCardInvestState extends State<BankAccountCardInvest> {
           ),
         ),
       ],
+    );
+  }
+
+  Future<void> _showDeleteBankDialog(
+    BuildContext context,
+    BankModelInvest bank,
+  ) async {
+    final bool? shouldDelete = await showDialog<bool>(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return AlertDialog(
+          backgroundColor: surfaceNavy,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          titlePadding: EdgeInsets.fromLTRB(
+            20.w,
+            20.h,
+            20.w,
+            0,
+          ),
+          contentPadding: EdgeInsets.fromLTRB(
+            20.w,
+            12.h,
+            20.w,
+            20.h,
+          ),
+          title: CustomText(
+            'Delete Bank Account',
+            style: Helper(context).textTheme.titleMedium?.copyWith(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w700,
+                  color: textPrimary,
+                ),
+          ),
+          content: CustomText(
+            'Do you want to delete your '
+            '"${bank.bankName ?? ''}" bank account?',
+            style: Helper(context).textTheme.bodyMedium?.copyWith(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                  height: 1.5,
+                  color: textSecondary,
+                ),
+          ),
+          actionsPadding: EdgeInsets.fromLTRB(
+            20.w,
+            0,
+            20.w,
+            20.h,
+          ),
+          actions: [
+            Row(
+              children: [
+                Expanded(
+                  child: CustomButton(
+                    onTap: () {
+                      Navigator.pop(
+                        dialogContext,
+                        false,
+                      );
+                    },
+                    type: ButtonType.secondary,
+                    color: Colors.transparent,
+                    borderColor: borderDark,
+                    borderWidth: 1,
+                    height: 46,
+                    radius: 12,
+                    child: CustomText(
+                      'No',
+                      style: Helper(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: textSecondary,
+                          ),
+                    ),
+                  ),
+                ),
+                sizedBoxWidth(width: 10),
+                Expanded(
+                  child: CustomButton(
+                    onTap: () {
+                      Navigator.pop(
+                        dialogContext,
+                        true,
+                      );
+                    },
+                    color: red1,
+                    borderColor: red1,
+                    borderWidth: 1,
+                    height: 46,
+                    radius: 12,
+                    child: CustomText(
+                      'Yes, Delete',
+                      style: Helper(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: white,
+                          ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldDelete != true) {
+      return;
+    }
+
+    final String bankId = bank.id?.toString() ?? '';
+
+    if (bankId.isEmpty) {
+      showToast(
+        message: 'Bank account ID not found.',
+        typeCheck: false,
+      );
+      return;
+    }
+
+    final bankControllerInvest = Get.find<BankControllerInvest>();
+
+    final response = await bankControllerInvest.deleteBankAccountInvest(
+      id: bankId,
+    );
+
+    if (!context.mounted) {
+      return;
+    }
+
+    showToast(
+      message: response.message,
+      typeCheck: response.isBlank,
     );
   }
 }
