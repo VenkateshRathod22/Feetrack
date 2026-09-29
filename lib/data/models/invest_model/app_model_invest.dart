@@ -5,7 +5,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbols.dart';
 import 'package:vlr/services/constants.dart';
 
 AppSettingInvestModel appSettingInvestModelFromJson(String str) =>

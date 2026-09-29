@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/state_manager.dart';
-import 'package:vlr/controllers/basic_controller.dart';
 import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/controllers/invest_controller/investment_controller_invest.dart';
