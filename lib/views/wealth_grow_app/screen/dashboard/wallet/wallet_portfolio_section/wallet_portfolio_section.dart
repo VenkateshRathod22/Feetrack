@@ -95,7 +95,11 @@ class WalletPortfolioSection extends StatelessWidget {
               WalletPortfolioWidget(
                   icon: Icons.file_upload_outlined,
                   title: "Withdraw",
-                  onTap: () {}),
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.withdrawFundsScreenInvest,
+                    );
+                  }),
               WalletPortfolioWidget(
                   icon: Icons.description, title: "Transaction", onTap: () {}),
               WalletPortfolioWidget(

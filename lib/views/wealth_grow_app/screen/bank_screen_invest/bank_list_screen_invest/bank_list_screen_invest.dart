@@ -28,7 +28,11 @@ class _BankListScreenInvestState extends State<BankListScreenInvest> {
       final controller = Get.find<BankControllerInvest>();
 
       if (controller.bankModelInvestList.isEmpty && !controller.isLoading) {
-        controller.fetchGetAllBankInvest();
+        controller.fetchGetAllBankInvest().then((value) {
+          if (!value.isSuccess) {
+            showToast(message: value.message, typeCheck: value.isSuccess);
+          }
+        });
       }
     });
   }
@@ -110,21 +114,83 @@ class _BankListScreenInvestState extends State<BankListScreenInvest> {
                   ),
                   sizedBoxHeight(height: 16.h),
                   Expanded(
-                    child: ListView.separated(
-                      physics: const AlwaysScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        final bank = bankControllerInvest.isLoading
-                            ? BankModelInvest()
-                            : bankControllerInvest.bankModelInvestList[index];
-                        return CustomShimmer(
-                            isLoading: bankControllerInvest.isLoading,
-                            child: BankAccountCardInvest(bank: bank));
-                      },
-                      separatorBuilder: (_, __) => sizedBoxHeight(height: 16.h),
-                      itemCount: bankControllerInvest.isLoading
-                          ? 2
-                          : bankControllerInvest.bankModelInvestList.length,
-                    ),
+                    child: bankControllerInvest.isLoading
+                        ? ListView.separated(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemCount: 2,
+                            separatorBuilder: (_, __) =>
+                                sizedBoxHeight(height: 16),
+                            itemBuilder: (context, index) {
+                              return CustomShimmer(
+                                isLoading: true,
+                                child: BankAccountCardInvest(
+                                  bank: BankModelInvest(),
+                                ),
+                              );
+                            },
+                          )
+                        : bankControllerInvest.bankModelInvestList.isEmpty
+                            ? ListView(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                children: [
+                                  SizedBox(
+                                    height: 180.h,
+                                    child: Center(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.account_balance_outlined,
+                                            size: 42.r,
+                                            color: textMuted,
+                                          ),
+                                          sizedBoxHeight(height: 12),
+                                          CustomText(
+                                            'No bank accounts found',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyLarge
+                                                ?.copyWith(
+                                                  fontSize: 15.sp,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: textPrimary,
+                                                ),
+                                          ),
+                                          sizedBoxHeight(height: 6),
+                                          CustomText(
+                                            'Add a bank account to withdraw funds',
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: textSecondary,
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : ListView.separated(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                itemCount: bankControllerInvest
+                                    .bankModelInvestList.length,
+                                separatorBuilder: (_, __) =>
+                                    sizedBoxHeight(height: 16),
+                                itemBuilder: (context, index) {
+                                  final bank = bankControllerInvest
+                                      .bankModelInvestList[index];
+
+                                  return BankAccountCardInvest(
+                                    bank: bank,
+                                  );
+                                },
+                              ),
                   )
                 ],
               ),

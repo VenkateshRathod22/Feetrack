@@ -160,4 +160,8 @@ class UserModelInvest {
 
   String get walletBalanceFormat => PriceConverter.convertToNumberFormat(
       double.tryParse(amount ?? "0.0") ?? 0.0);
+
+  String get amountAvailableForWithdrawalFormat =>
+      PriceConverter.convertToNumberFormat(
+          double.tryParse(walletAmount ?? "0.0") ?? 0.0);
 }

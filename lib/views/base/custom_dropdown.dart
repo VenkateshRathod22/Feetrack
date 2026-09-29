@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/input_decoration.dart';
 import 'package:vlr/services/theme.dart';
-
+import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart' hide white, textPrimary;
 
 class CustomDropDownList<T> extends StatelessWidget {
   final Widget? headingWidget;
@@ -24,7 +24,9 @@ class CustomDropDownList<T> extends StatelessWidget {
 
   final Color? borderColor;
   final Color? bgColor;
+  final Color? dropdownColor; // ADD
   final double borderRadius;
+  final Widget Function(BuildContext context, T item)? selectedItemBuilder;
 
   const CustomDropDownList({
     super.key,
@@ -43,18 +45,22 @@ class CustomDropDownList<T> extends StatelessWidget {
     this.validator,
     this.borderColor,
     this.bgColor,
+    this.dropdownColor, // ADD
     this.borderRadius = 12,
+    this.selectedItemBuilder,
   });
 
   Color get borderColorLocal => borderColor ?? grey.withValues(alpha: 0.5);
+
   Color get bgColorLocal => bgColor ?? grey.withValues(alpha: 0.1);
 
   @override
   Widget build(BuildContext context) {
     final textStyle = Helper(context).textTheme.bodyMedium?.copyWith(
           fontSize: 14,
-          color: black,
+          color: textPrimary,
         );
+
     final hintStyleLocal = hintStyle ??
         Helper(context).textTheme.bodyMedium?.copyWith(
               fontSize: 13,
@@ -73,17 +79,20 @@ class CustomDropDownList<T> extends StatelessWidget {
                     Text(
                       heading!,
                       overflow: TextOverflow.clip,
-                      style: Helper(context)
-                          .textTheme
-                          .bodyMedium
-                          ?.copyWith(fontSize: 16, fontWeight: FontWeight.w600),
+                      style: Helper(context).textTheme.bodyMedium?.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
               ),
               const SizedBox(width: 4),
               if (isRequired)
                 const Text(
                   "*",
-                  style: TextStyle(fontSize: 16, color: Colors.red),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.red,
+                  ),
                 ),
             ],
           ),
@@ -93,16 +102,29 @@ class CustomDropDownList<T> extends StatelessWidget {
           isExpanded: true,
           initialValue: value,
           style: textStyle,
-          dropdownColor: white,
+          dropdownColor: dropdownColor ?? white,
           elevation: 2,
-          icon: const Icon(Icons.keyboard_arrow_down),
+          icon: Icon(
+            Icons.keyboard_arrow_down,
+            color: textMuted,
+          ),
+          selectedItemBuilder: selectedItemBuilder != null
+              ? (context) {
+                  return items.map((item) {
+                    return selectedItemBuilder!(
+                      context,
+                      item,
+                    );
+                  }).toList();
+                }
+              : null,
           validator: validator ??
               (v) {
-                if (isRequired && v == null) return "This field is required";
+                if (isRequired && v == null) {
+                  return "This field is required";
+                }
                 return null;
               },
-
-          // --- Use SAME decoration as your TextField ---
           decoration: CustomDecoration.inputDecoration(
             hint: hintText ?? "Select",
             bgColor: bgColorLocal,
@@ -113,15 +135,13 @@ class CustomDropDownList<T> extends StatelessWidget {
             prefixStyle: prefixStyle,
             borderRadius: borderRadius,
           ),
-
           items: itemWidget != null
-              ? itemWidget?.asMap().entries.map((entry) {
-                  int index = entry.key;
-                  Widget w = entry.value;
+              ? itemWidget!.asMap().entries.map((entry) {
+                  final int index = entry.key;
 
                   return DropdownMenuItem<T>(
-                    value: items[index], // ✅ ADD THIS LINE
-                    child: w,
+                    value: items[index],
+                    child: entry.value,
                   );
                 }).toList()
               : items.map((e) {
@@ -133,7 +153,6 @@ class CustomDropDownList<T> extends StatelessWidget {
                     ),
                   );
                 }).toList(),
-
           onChanged: onChanged,
         ),
       ],

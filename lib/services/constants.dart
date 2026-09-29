@@ -325,6 +325,9 @@ class AppConstants {
   static const String addBankInvest = '/addBank.php';
   static const String deleteBankInvest = '/deleteBank.php';
 
+  //* withdraw
+  static const String withdrawRequestInvest = '/withdrawRequest.php';
+
   //
   static double horizontalPadding = 16.w;
   static double verticalPadding = 20.h;

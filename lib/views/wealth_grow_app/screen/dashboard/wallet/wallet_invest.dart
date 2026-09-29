@@ -25,6 +25,7 @@ class WalletInvest extends StatelessWidget {
         padding: AppConstants.screenPadding,
         child: Column(
           children: [
+            
             const WalletPortfolioSection(),
             sizedBoxHeight(height: 12),
             CustomImage(
