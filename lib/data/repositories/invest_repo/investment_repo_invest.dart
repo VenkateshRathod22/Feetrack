@@ -55,4 +55,17 @@ class InvestmentRepoInvest {
       headers: investApiClient.getSponsorHeaders(),
     );
   }
+
+  Future<Response> investOnlineInvest({
+    required Map<String, dynamic> body,
+  }) async {
+    return await investApiClient.postData(
+      AppConstants.investOnlineInvest,
+      "investOnlineInvest",
+      body,
+      contentType: 'application/json',
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
 }

@@ -321,6 +321,7 @@ class AppConstants {
   static const String getHistoryInvestmentInvest = '/myHistory.php';
   static const String investActivationInvest = '/activationRequest.php';
   static const String investUpdateInvest = '/upgradeRequest.php';
+  static const String investOnlineInvest = '/onlineFundRequest.php';
 
   //* banking
   static const String getAllBankInvest = '/allBank.php';

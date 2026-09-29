@@ -424,8 +424,6 @@ class InvestmentControllerInvest extends GetxController implements GetxService {
 
       log('Investment Request Body: $body');
 
-      log('isActivationRequest stuts : $isActivationRequest');
-
       // ----------------------------------------------------------
       // API Request
       // ----------------------------------------------------------
@@ -497,6 +495,101 @@ class InvestmentControllerInvest extends GetxController implements GetxService {
 
     return responseModel;
   }
+String? onlinePaymentUrl;
+
+Future<ResponseModel> investOnlineInvest() async {
+  log('----------- investOnlineInvest Called ----------');
+
+  ResponseModel responseModel;
+
+  isLoading = true;
+  update();
+
+  try {
+    final Map<String, dynamic> body = {
+      'amount': amountController.text.trim(),
+      'income_type':
+          Get.find<BasicControllerInvest>()
+              .getIncomeFrequencyId(selectedReturnPeriod),
+      'platform': 'app',
+    };
+
+    log('Investment Request Body: $body');
+
+    final Response response =
+        await investmentRepoInvest.investOnlineInvest(
+      body: body,
+    );
+
+    log(
+      'Investment Status Code: ${response.statusCode}',
+    );
+
+    log(
+      'Investment Response Body: ${response.body}',
+    );
+
+    if (response.statusCode == 200 ||
+        response.statusCode == 201) {
+      String message =
+          'Investment request submitted successfully';
+
+      if (response.body is Map) {
+        final Map<String, dynamic> responseBody =
+            Map<String, dynamic>.from(response.body);
+
+        message = responseBody['message']?.toString() ??
+            message;
+
+        // Get checkout URL
+        onlinePaymentUrl =
+            responseBody['data']?.toString();
+
+        log(
+          'Online Payment URL: $onlinePaymentUrl',
+        );
+      }
+
+      responseModel = ResponseModel(
+        true,
+        message,
+        response.body,
+      );
+    } else {
+      String errorMessage =
+          'Unable to process online investment';
+
+      if (response.body is Map &&
+          response.body['message'] != null) {
+        errorMessage =
+            response.body['message'].toString();
+      } else if (response.statusText != null &&
+          response.statusText!.isNotEmpty) {
+        errorMessage = response.statusText!;
+      }
+
+      responseModel = ResponseModel(
+        false,
+        errorMessage,
+      );
+    }
+  } catch (e, stackTrace) {
+    log(
+      'ERROR AT investOnlineInvest(): $e',
+      stackTrace: stackTrace,
+    );
+
+    responseModel = ResponseModel(
+      false,
+      'Something went wrong while processing online payment',
+    );
+  } finally {
+    isLoading = false;
+    update();
+  }
+
+  return responseModel;
+}
 
   @override
   void onClose() {
