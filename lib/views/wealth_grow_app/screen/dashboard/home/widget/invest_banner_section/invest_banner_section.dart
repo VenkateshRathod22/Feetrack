@@ -47,7 +47,7 @@ class _InvestBannerSectionState extends State<InvestBannerSection> {
                             radius: 12.r,
                             path: commonController.isLoading
                                 ? ""
-                                : bannerList[index] ?? "",
+                                : bannerList[index] ,
                             fit: BoxFit.cover,
                           ),
                         ),

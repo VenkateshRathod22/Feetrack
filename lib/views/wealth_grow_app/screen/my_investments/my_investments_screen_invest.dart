@@ -6,7 +6,6 @@ import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/widget/filter_selection_section/filter_selection_section.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/widget/my_investments_list_section/my_investments_list_section.dart';
-import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class MyInvestmentsScreenInvest extends StatefulWidget {
   const MyInvestmentsScreenInvest({

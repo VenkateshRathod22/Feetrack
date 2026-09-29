@@ -31,7 +31,6 @@ class _WithdrawFundsScreenInvestState extends State<WithdrawFundsScreenInvest> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final basicControllerInvest = Get.find<BasicControllerInvest>();
       Get.find<BankControllerInvest>().fetchGetAllBankInvest();
     });
   }
