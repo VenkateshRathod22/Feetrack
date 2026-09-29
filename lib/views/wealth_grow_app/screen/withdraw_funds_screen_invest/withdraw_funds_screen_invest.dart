@@ -241,7 +241,7 @@ class _WithdrawFundsScreenInvestState extends State<WithdrawFundsScreenInvest> {
                       borderColor: primaryColor,
                       isLoading: bankControllerInvest.isLoading,
                       child: CustomText(
-                        'Withdraw ${walletControllerInvest.netCreditedAmount}',
+                        'Withdraw ${walletControllerInvest.netCreditedAmount ?? ""}',
                         style: Helper(context).textTheme.titleMedium?.copyWith(
                               fontSize: 14.sp,
                               color: black,

@@ -57,7 +57,11 @@ class WalletPortfolioSection extends StatelessWidget {
                   ),
                 ),
                 CustomButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.addFundsScreenInvest,
+                    );
+                  },
                   gradient: goldGradient,
                   radius: 12.r,
                   borderColor: primaryColor,

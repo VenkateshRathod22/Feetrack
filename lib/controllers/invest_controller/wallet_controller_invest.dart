@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -130,10 +131,124 @@ class WalletControllerInvest extends GetxController implements GetxService {
     update();
   }
 
+  final TextEditingController fundAmountController = TextEditingController();
+
+  final TextEditingController transactionIdController = TextEditingController();
+
+  final TextEditingController fundModeController = TextEditingController();
+
+  final TextEditingController fundRemarkController = TextEditingController();
+
+  File? fundScreenshot;
+
+  void setFundScreenshot(File file) {
+    fundScreenshot = file;
+    update();
+  }
+
+  void removeFundScreenshot() {
+    fundScreenshot = null;
+    update();
+  }
+
+  Future<bool> sendRequestForWalletFund() async {
+    isLoading = true;
+    update();
+
+    try {
+      final body = <String, dynamic>{
+        'amount': fundAmountController.text.trim(),
+        'transaction_id': transactionIdController.text.trim(),
+        'mode': fundModeController.text.trim(),
+        'remark': fundRemarkController.text.trim(),
+        'screenshot': MultipartFile(
+          fundScreenshot!.path,
+          filename: fundScreenshot!.path.split(RegExp(r'[/\\]')).last,
+        ),
+      };
+
+      final response = await walletRepoInvest.sendRequestForWalletFund(
+        body: body,
+      );
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        String message = 'Fund request submitted successfully';
+
+        if (response.body is Map) {
+          final responseBody = response.body as Map;
+
+          message = responseBody['message']?.toString() ??
+              responseBody['msg']?.toString() ??
+              message;
+        }
+
+        showToast(
+          message: message,
+          typeCheck: true,
+        );
+
+        clearFundRequestForm();
+
+        return true;
+      }
+
+      // ----------------------------------------------------------
+      // API Error
+      // ----------------------------------------------------------
+
+      String message = 'Unable to submit fund request';
+
+      if (response.body is Map) {
+        final responseBody = response.body as Map;
+
+        message = responseBody['message']?.toString() ??
+            responseBody['msg']?.toString() ??
+            message;
+      }
+
+      showToast(
+        message: message,
+        typeCheck: false,
+      );
+
+      return false;
+    } catch (e) {
+      debugPrint(
+        'sendRequestForWalletFund error: $e',
+      );
+
+      showToast(
+        message: 'Something went wrong. Please try again.',
+        typeCheck: false,
+      );
+
+      return false;
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
+  void clearFundRequestForm() {
+    fundAmountController.clear();
+    transactionIdController.clear();
+    fundModeController.clear();
+    fundRemarkController.clear();
+
+    fundScreenshot = null;
+
+    update();
+  }
+
   @override
   void onClose() {
     withdrawalAmountTimer?.cancel();
     withdrawalAmountTimer = null;
+    fundAmountController.dispose();
+    transactionIdController.dispose();
+    fundModeController.dispose();
+    fundRemarkController.dispose();
+    amountController.dispose();
 
     super.onClose();
   }
