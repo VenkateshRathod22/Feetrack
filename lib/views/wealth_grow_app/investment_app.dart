@@ -7,7 +7,9 @@ import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/add_bank_acc
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/bank_list_screen_invest/bank_list_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/investment_successful_screen_invest/investment_successful_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/select_payment_method_screen_invest/select_payment_method_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
 import 'package:vlr/views/wealth_grow_app/screen/withdraw_funds_screen_invest/withdraw_funds_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
@@ -29,7 +31,14 @@ class InvestmentApp extends StatefulWidget {
       '/add_bank_account_screen_invest';
   static const String withdrawFundsScreenInvest =
       '/withdraw_funds_screen_invest';
-  static const String addFundsScreenInvest = '/addF_funds_screen_invest';
+
+  static const String addFundsScreenInvest = '/add_funds_screen_invest';
+
+  static const String selectPaymentMethodScreenInvest =
+      '/select_payment_method_screen_invest';
+
+  static const String investmentSuccessfulScreenInvest =
+      '/investment_successful_screen_invest';
 
   @override
   State<InvestmentApp> createState() => _InvestmentAppState();
@@ -106,6 +115,17 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.addFundsScreenInvest:
                 return MaterialPageRoute(
                   builder: (_) => AddFundsScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.selectPaymentMethodScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const SelectPaymentMethodScreenInvest(),
+                  settings: settings,
+                );
+
+              case InvestmentApp.investmentSuccessfulScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const InvestmentSuccessfulScreenInvest(),
                   settings: settings,
                 );
 

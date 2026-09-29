@@ -5,6 +5,7 @@ import 'package:vlr/controllers/invest_controller/investment_controller_invest.d
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/widget/heading_widget.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/widget/investment_amount_widget.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/widget/investment_summer_widget.dart';
@@ -44,7 +45,11 @@ class InvestmentPlanDetailScreenInvest extends StatelessWidget {
                   builder: (investmentControllerInvest) {
                 return CustomButton(
                   isLoading: investmentControllerInvest.isLoading,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.selectPaymentMethodScreenInvest,
+                    );
+                  },
                   borderColor: primaryColor,
                   height: 52.h,
                   radius: 16.r,

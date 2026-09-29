@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/data/models/invest_model/activation_history_model_invest.dart';
 import 'package:vlr/data/models/invest_model/investment_package_model.dart';
 import 'package:vlr/data/models/response/response_model.dart';
@@ -114,8 +115,6 @@ class InvestmentControllerInvest extends GetxController implements GetxService {
   String selectedReturnPeriod = "daily";
   String selectedReturnPeriodPer = "";
 
-  /// Select Daily / Monthly / Yearly
-  /// and calculate return amount.
   void updateReturnCalculation({
     required String period,
     bool notify = true,
@@ -400,6 +399,103 @@ class InvestmentControllerInvest extends GetxController implements GetxService {
       isLoading = false;
       update();
     }
+  }
+
+  Future<ResponseModel> investmentInvest({
+    required bool isActivationRequest,
+    required String userSponsorCode,
+    required,
+  }) async {
+    log('----------- investmentInvest Called ----------');
+
+    ResponseModel responseModel;
+
+    isLoading = true;
+    update();
+
+    try {
+      String incomeTypeId = Get.find<BasicControllerInvest>()
+          .getIncomeFrequencyId(selectedReturnPeriod);
+      final Map<String, dynamic> body = {
+        'user_sponsor_code': userSponsorCode,
+        'package': selectInvestmentPackageModel?.id ?? "",
+        'income_type': incomeTypeId,
+      };
+
+      log('Investment Request Body: $body');
+
+      log('isActivationRequest stuts : $isActivationRequest');
+
+      // ----------------------------------------------------------
+      // API Request
+      // ----------------------------------------------------------
+
+      final Response response = await investmentRepoInvest.investmentInvest(
+        body: body,
+        isActivationRequest: isActivationRequest,
+      );
+
+      log(
+        'Investment Status Code: ${response.statusCode}',
+      );
+
+      log(
+        'Investment Response Body: ${response.body}',
+      );
+
+      // ----------------------------------------------------------
+      // Success
+      // ----------------------------------------------------------
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        String message = 'Investment request submitted successfully';
+
+        if (response.body is Map && response.body['message'] != null) {
+          message = response.body['message'].toString();
+        }
+
+        responseModel = ResponseModel(
+          true,
+          message,
+          response.body,
+        );
+      }
+
+      // ----------------------------------------------------------
+      // Error
+      // ----------------------------------------------------------
+
+      else {
+        String errorMessage = 'Unable to process investment request';
+
+        if (response.body is Map && response.body['message'] != null) {
+          errorMessage = response.body['message'].toString();
+        } else if (response.statusText != null &&
+            response.statusText!.isNotEmpty) {
+          errorMessage = response.statusText!;
+        }
+
+        responseModel = ResponseModel(
+          false,
+          errorMessage,
+        );
+      }
+    } catch (e, stackTrace) {
+      log(
+        'ERROR AT investmentInvest(): $e',
+        stackTrace: stackTrace,
+      );
+
+      responseModel = ResponseModel(
+        false,
+        'Something went wrong while processing investment request',
+      );
+    } finally {
+      isLoading = false;
+      update();
+    }
+
+    return responseModel;
   }
 
   @override

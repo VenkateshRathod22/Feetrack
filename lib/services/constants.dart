@@ -319,6 +319,8 @@ class AppConstants {
   static const String getPackageInvest = '/allPackage.php';
   static const String getActivateInvestmentInvest = '/activationHistory.php';
   static const String getHistoryInvestmentInvest = '/myHistory.php';
+  static const String investActivationInvest = '/activationRequest.php';
+  static const String investUpdateInvest = '/upgradeRequest.php';
 
   //* banking
   static const String getAllBankInvest = '/allBank.php';

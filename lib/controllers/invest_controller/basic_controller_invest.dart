@@ -139,29 +139,47 @@ class BasicControllerInvest extends GetxController implements GetxService {
     return responseModel;
   }
 
-String totalPortFolioValue = "0.0";
+  String totalPortFolioValue = "0.0";
 
-Future<void> totalPortFolioValueCal({
-  required double totalInvest,
-  required double walletBalance,
-}) async {
-  final double totalReturns =
-      double.tryParse(homeInvestModel?.roiIncome ?? "0.0") ?? 0.0;
+  Future<void> totalPortFolioValueCal({
+    required double totalInvest,
+    required double walletBalance,
+  }) async {
+    final double totalReturns =
+        double.tryParse(homeInvestModel?.roiIncome ?? "0.0") ?? 0.0;
 
-  final double total =
-      totalInvest + walletBalance + totalReturns;
+    final double total = totalInvest + walletBalance + totalReturns;
 
-  totalPortFolioValue =
-      PriceConverter.convertToNumberFormat(total);
+    totalPortFolioValue = PriceConverter.convertToNumberFormat(total);
 
-  log(
-    "Total Portfolio Calculation -> "
-    "Invest: $totalInvest, "
-    "Wallet: $walletBalance, "
-    "Returns: $totalReturns, "
-    "Total: $totalPortFolioValue",
-  );
+    log(
+      "Total Portfolio Calculation -> "
+      "Invest: $totalInvest, "
+      "Wallet: $walletBalance, "
+      "Returns: $totalReturns, "
+      "Total: $totalPortFolioValue",
+    );
 
-  update();
-}
+    update();
+  }
+
+  String getIncomeFrequencyId(String incomeType) {
+    final incomeFrequency = appSettingInvestModel?.incomeFrequency;
+
+    if (incomeFrequency == null || incomeFrequency.isEmpty) {
+      return "1";
+    }
+
+    final String type = incomeType.trim().toLowerCase();
+
+    for (final item in incomeFrequency) {
+      final String itemType = item.incomeType?.trim().toLowerCase() ?? "";
+
+      if (itemType == type) {
+        return item.id?.toString() ?? "1";
+      }
+    }
+
+    return "1";
+  }
 }

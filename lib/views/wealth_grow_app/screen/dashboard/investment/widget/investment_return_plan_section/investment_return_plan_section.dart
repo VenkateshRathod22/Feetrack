@@ -28,6 +28,7 @@ class InvestmentReturnPlanSection extends StatelessWidget {
                 onTap: () {
                   investmentControllerInvest.updateInvestmentPackageModel(
                       investmentPackageModel: investmentPackageModel);
+                      
                   Navigator.of(context).pushNamed(
                     InvestmentApp.investmentPlanDetailScreenInvest,
                   );

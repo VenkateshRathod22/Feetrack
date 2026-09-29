@@ -164,4 +164,6 @@ class UserModelInvest {
   String get amountAvailableForWithdrawalFormat =>
       PriceConverter.convertToNumberFormat(
           double.tryParse(walletAmount ?? "0.0") ?? 0.0);
+
+  bool get isUserActive => status == "1" ? true : false;
 }
