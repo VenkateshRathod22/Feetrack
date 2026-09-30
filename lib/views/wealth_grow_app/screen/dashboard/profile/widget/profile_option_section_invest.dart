@@ -97,7 +97,7 @@ class ProfileOptionSectionInvest extends StatelessWidget {
 
         separatorBuilder: (context, index) {
           return Divider(
-            color: white.withValues(alpha: 0.6),
+            color: white.withValues(alpha: 0.4),
           );
         },
       ),

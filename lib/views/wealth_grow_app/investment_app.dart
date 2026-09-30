@@ -161,3 +161,8 @@ class _InvestmentAppState extends State<InvestmentApp> {
 }
 
 
+
+
+                  // Navigator.of(context).pushNamed(
+                  //   InvestmentApp.investmentPlanDetailScreenInvest,
+                  // );

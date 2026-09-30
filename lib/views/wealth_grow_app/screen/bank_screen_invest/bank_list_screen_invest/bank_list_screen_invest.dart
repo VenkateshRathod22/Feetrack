@@ -123,6 +123,7 @@ class _BankListScreenInvestState extends State<BankListScreenInvest> {
                             itemBuilder: (context, index) {
                               return CustomShimmer(
                                 isLoading: true,
+                                isDarkMode: true,
                                 child: BankAccountCardInvest(
                                   bank: BankModelInvest(),
                                 ),

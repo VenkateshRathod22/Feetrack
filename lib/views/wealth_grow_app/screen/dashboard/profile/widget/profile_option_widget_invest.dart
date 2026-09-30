@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 
 class ProfileOptionWidgetInvest extends StatelessWidget {
   final ProfileOptionModel profileOptionModel;
@@ -10,29 +11,32 @@ class ProfileOptionWidgetInvest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 12.h),
-      child: Row(
-        children: [
-          Icon(
-            profileOptionModel.icon,
-            size: 20,
-          ),
-          sizedBoxWidth(width: 14.w),
-          Expanded(
-            child: CustomText(
-              profileOptionModel.title,
-              style: Helper(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(fontSize: 14.sp),
+    return GestureDetector(
+      onTap: profileOptionModel.onTap,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 16.h),
+        child: Row(
+          children: [
+            Icon(
+              profileOptionModel.icon,
+              size: 20,
             ),
-          ),
-          Icon(
-            Icons.arrow_forward_ios_rounded,
-            size: 18.sp,
-          )
-        ],
+            sizedBoxWidth(width: 14.w),
+            Expanded(
+              child: CustomText(
+                profileOptionModel.title,
+                style: Helper(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontSize: 14.sp),
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 14.sp,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -53,7 +57,11 @@ List<ProfileOptionModel> profileOptionModelList(
       ProfileOptionModel(
           title: "Bank Accounts",
           icon: Icons.account_balance_outlined,
-          onTap: () {}),
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              InvestmentApp.bankListScreenInvest,
+            );
+          }),
       ProfileOptionModel(
           title: "Help & Support",
           icon: Icons.help_outline_rounded,
