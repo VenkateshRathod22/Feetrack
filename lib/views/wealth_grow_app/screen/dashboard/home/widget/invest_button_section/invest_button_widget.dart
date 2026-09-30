@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:vlr/generated/assets.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class InvestButtonWidget extends StatelessWidget {
@@ -74,11 +75,33 @@ class InvestButtonModel {
       {required this.icon, required this.title, required this.onTap});
 }
 
-List<InvestButtonModel> investButtonModelList = [
-  InvestButtonModel(icon: Assets.svgsInvest, title: "Invest", onTap: () {}),
-  InvestButtonModel(
-      icon: Assets.svgsAddMoney, title: "Add Money", onTap: () {}),
-  InvestButtonModel(icon: Assets.svgsWithdraw, title: "Withdraw", onTap: () {}),
-  InvestButtonModel(
-      icon: Assets.svgsStatement, title: "Statement", onTap: () {}),
-];
+List<InvestButtonModel> investButtonModelList(
+        {required BuildContext context}) =>
+    [
+      InvestButtonModel(
+          icon: Assets.svgsInvest,
+          title: "Invest",
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              InvestmentApp.myInvestmentsScreenInvest,
+            );
+          }),
+      InvestButtonModel(
+          icon: Assets.svgsAddMoney,
+          title: "Add Money",
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              InvestmentApp.addFundsScreenInvest,
+            );
+          }),
+      InvestButtonModel(
+          icon: Assets.svgsWithdraw,
+          title: "Withdraw",
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              InvestmentApp.withdrawFundsScreenInvest,
+            );
+          }),
+      InvestButtonModel(
+          icon: Assets.svgsStatement, title: "Statement", onTap: () {}),
+    ];

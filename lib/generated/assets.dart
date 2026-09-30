@@ -462,6 +462,10 @@ class Assets {
   /// assets/svgs/notification.svg
   static const String svgsNotification = "assets/svgs/notification.svg";
 
+  /// Assets for svgsPendingBg
+  /// assets/svgs/pending-bg.svg
+  static const String svgsPendingBg = "assets/svgs/pending-bg.svg";
+
   /// Assets for svgsPerson
   /// assets/svgs/person.svg
   static const String svgsPerson = "assets/svgs/person.svg";
@@ -533,6 +537,10 @@ class Assets {
   /// Assets for svgsTopTriangle
   /// assets/svgs/top-triangle.svg
   static const String svgsTopTriangle = "assets/svgs/top-triangle.svg";
+
+  /// Assets for svgsUpperArrowBg
+  /// assets/svgs/upper-arrow-bg.svg
+  static const String svgsUpperArrowBg = "assets/svgs/upper-arrow-bg.svg";
 
   /// Assets for svgsWallet
   /// assets/svgs/wallet.svg

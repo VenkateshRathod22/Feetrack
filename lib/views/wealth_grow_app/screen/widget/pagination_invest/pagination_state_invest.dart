@@ -7,7 +7,7 @@ class PaginationStateInvest<T> {
   bool isInitialLoading;
   bool isMoreLoading;
 
-  final List<T> items;
+  List<T> items = [];
 
   final Set<dynamic> dedupeIds;
 

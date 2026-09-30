@@ -332,7 +332,9 @@ class AppConstants {
   static const String withdrawRequestInvest = '/withdrawRequest.php';
 
   //* Wallet
-static const String fundRequestInvest = '/fundRequest.php';
+  static const String fundRequestInvest = '/fundRequest.php';
+  static const String getFundHistoryInvest =
+      '/fundHistory.php';
   //
   static double horizontalPadding = 16.w;
   static double verticalPadding = 20.h;

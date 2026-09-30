@@ -9,12 +9,14 @@ class InvestButtonSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final list = investButtonModelList(context: context);
     return Padding(
-      padding:  EdgeInsets.symmetric(horizontal: 12.w),
+      padding: EdgeInsets.symmetric(horizontal: 12.w),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, // This handles the dynamic spacing
+        mainAxisAlignment:
+            MainAxisAlignment.spaceBetween, // This handles the dynamic spacing
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: investButtonModelList.map((investButtonModel) {
+        children: list.map((investButtonModel) {
           return InvestButtonWidget(investButtonModel: investButtonModel);
         }).toList(),
       ),

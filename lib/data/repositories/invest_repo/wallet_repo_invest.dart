@@ -33,4 +33,18 @@ class WalletRepoInvest {
       headers: investApiClient.getSponsorHeaders(),
     );
   }
+
+  Future<Response> fetchFundHistoryInvest({
+    required int page,
+    required int result,
+    required int typeApprovedAndPending,
+  }) async {
+    return await investApiClient.getData(
+      "${AppConstants.getFundHistoryInvest}?type=$typeApprovedAndPending&page=$page&result=$result",
+      "fetchFundHistory",
+      contentType: "application/json",
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
 }

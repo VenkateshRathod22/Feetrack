@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:vlr/controllers/invest_controller/wallet_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/custom_image.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/wallet/wallet_portfolio_section/recent_transaction_section/recent_transaction_section.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/wallet/wallet_portfolio_section/wallet_portfolio_section.dart';
 
-class WalletInvest extends StatelessWidget {
+class WalletInvest extends StatefulWidget {
   const WalletInvest({super.key});
+
+  @override
+  State<WalletInvest> createState() => _WalletInvestState();
+}class _WalletInvestState extends State<WalletInvest> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<WalletControllerInvest>().loadFundHistory();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +35,31 @@ class WalletInvest extends StatelessWidget {
               ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: AppConstants.screenPadding,
-        child: Column(
-          children: [
-            
-            const WalletPortfolioSection(),
-            sizedBoxHeight(height: 12),
-            CustomImage(
-              path: Assets.imagesBanner1,
-              height: 100.h,
-              width: double.infinity,
-              radius: 16.r,
-              fit: BoxFit.cover,
+      body: Column(
+        children: [
+          Padding(
+            padding: AppConstants.screenPadding,
+            child: Column(
+              children: [
+                const WalletPortfolioSection(),
+                sizedBoxHeight(height: 12),
+                CustomImage(
+                  path: Assets.imagesBanner1,
+                  height: 100.h,
+                  width: double.infinity,
+                  radius: 16.r,
+                  fit: BoxFit.cover,
+                ),
+                sizedBoxHeight(height: 14),
+              ],
             ),
-            sizedBoxHeight(height: 14),
-            const RecentTransactionsSection()
-          ],
-        ),
+          ),
+
+          // Only this area scrolls
+          Expanded(
+            child: const RecentTransactionsSection(),
+          ),
+        ],
       ),
     );
   }
