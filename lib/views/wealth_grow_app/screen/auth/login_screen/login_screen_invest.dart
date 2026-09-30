@@ -133,6 +133,7 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
                   ),
                   sizedBoxHeight(height: 8.h),
                   CustomButton(
+                    isLoading: authControllerInvest.isLoading,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         authControllerInvest.loginInvest().then((value) {
