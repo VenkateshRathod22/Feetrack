@@ -28,7 +28,7 @@ class ProfileTopSectionInvest extends StatelessWidget {
                   shape: BoxShape.circle,
                   border: Border.all(width: 2, color: primaryColor)),
               child: CustomImage(
-                path: authControllerInvest.userModelInvest?.image ?? "",
+                path: authControllerInvest.userModelInvest?.profileImage ?? "",
                 height: 52.h,
                 width: 52.w,
                 fit: BoxFit.cover,

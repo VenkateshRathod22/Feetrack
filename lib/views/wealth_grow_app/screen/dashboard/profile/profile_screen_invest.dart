@@ -22,11 +22,11 @@ class ProfileScreenInvest extends StatelessWidget {
               ),
         ),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          const ProfileTopSectionInvest(),
+          ProfileTopSectionInvest(),
           Expanded(
-            child: const ProfileOptionSectionInvest(),
+            child: ProfileOptionSectionInvest(),
           ),
         ],
       ),
