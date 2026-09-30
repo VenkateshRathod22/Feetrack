@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:vlr/controllers/invest_controller/investment_controller_invest.dart';
 import 'package:vlr/data/models/invest_model/activation_history_model_invest.dart';
 import 'package:vlr/services/constants.dart';
+import 'package:vlr/views/base/shimmer.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/widget/my_investments_list_section/investments_card_widget.dart';
 
 class MyInvestmentsListSection extends StatelessWidget {
@@ -35,50 +36,39 @@ class MyInvestmentsListSection extends StatelessWidget {
   Widget _buildActiveList(
     InvestmentControllerInvest controller,
   ) {
-    final pagination = controller.activationHistoryPagination;
+    List<ActivationHistoryModelInvest> items = controller
+        .historyInvestmentModelInvestList
+        .where((e) => !e.withdrawStatusFormat)
+        .toList();
 
-    if (pagination.isInitialLoading && pagination.items.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
-    if (!pagination.isInitialLoading && pagination.items.isEmpty) {
+    if (!controller.isLoading && items.isEmpty) {
       return ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        children: const [
-          SizedBox(height: 150),
-          Center(
+        children: [
+          sizedBoxHeight(height: 150),
+          const Center(
             child: Text(
-              "No active investments found",
+              "No Active investments found",
             ),
           ),
         ],
       );
     }
 
-    final int itemCount =
-        pagination.items.length + (pagination.isMoreLoading ? 1 : 0);
-
     return ListView.separated(
       controller: scrollController,
       physics: const AlwaysScrollableScrollPhysics(),
-      itemCount: itemCount,
+      itemCount: controller.isLoading ? 4 : items.length,
       separatorBuilder: (_, __) => sizedBoxHeight(height: 14.h),
       itemBuilder: (context, index) {
-        // Bottom loading indicator
-        if (index >= pagination.items.length) {
-          return const Padding(
-            padding: EdgeInsets.all(16),
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
+        final ActivationHistoryModelInvest item = controller.isLoading
+            ? ActivationHistoryModelInvest()
+            : items[index];
 
-        final ActivationHistoryModelInvest item = pagination.items[index];
-
-        return InvestmentsCardWidget(activationHistoryModelInvest: item);
+        return CustomShimmer(
+            isDarkMode: true,
+            isLoading: controller.isLoading,
+            child: InvestmentsCardWidget(activationHistoryModelInvest: item));
       },
     );
   }
@@ -86,22 +76,18 @@ class MyInvestmentsListSection extends StatelessWidget {
   Widget _buildCompletedList(
     InvestmentControllerInvest controller,
   ) {
-    final items = controller.historyInvestmentModelInvestList;
-
-    if (controller.isLoading && items.isEmpty) {
-      return const Center(
-        child: CircularProgressIndicator(),
-      );
-    }
-
+    List<ActivationHistoryModelInvest> items = controller
+        .historyInvestmentModelInvestList
+        .where((e) => e.withdrawStatusFormat)
+        .toList();
     if (!controller.isLoading && items.isEmpty) {
       return ListView(
         physics: const AlwaysScrollableScrollPhysics(),
-        children: const [
-          SizedBox(height: 150),
-          Center(
+        children: [
+          sizedBoxHeight(height: 150),
+          const Center(
             child: Text(
-              "No completed investments found",
+              "No Withdraws investments found",
             ),
           ),
         ],
@@ -111,12 +97,17 @@ class MyInvestmentsListSection extends StatelessWidget {
     return ListView.separated(
       controller: scrollController,
       physics: const AlwaysScrollableScrollPhysics(),
-      itemCount: items.length,
+      itemCount: controller.isLoading ? 4 : items.length,
       separatorBuilder: (_, __) => sizedBoxHeight(height: 14.h),
       itemBuilder: (context, index) {
-        final item = items[index];
+        final ActivationHistoryModelInvest item = controller.isLoading
+            ? ActivationHistoryModelInvest()
+            : items[index];
 
-        return InvestmentsCardWidget(activationHistoryModelInvest: item);
+        return CustomShimmer(
+            isDarkMode: true,
+            isLoading: controller.isLoading,
+            child: InvestmentsCardWidget(activationHistoryModelInvest: item));
       },
     );
   }

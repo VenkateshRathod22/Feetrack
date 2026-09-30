@@ -14,8 +14,8 @@ class FilterSelectionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const List<String> filterOptions = [
-      "Active",
-      "Completed",
+      "Actives",
+      "Withdraws",
     ];
 
     return Row(

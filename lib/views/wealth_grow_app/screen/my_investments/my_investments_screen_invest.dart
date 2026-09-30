@@ -48,15 +48,13 @@ class _MyInvestmentsScreenInvestState extends State<MyInvestmentsScreenInvest> {
     final position = scrollController.position;
 
     if (position.pixels >= position.maxScrollExtent - 200) {
-      investmentController.fetchActivationHistory(
-        loadMore: true,
-      );
+      investmentController.fetchHistoryInvestmentInvest();
     }
   }
 
   Future<void> _loadSelectedList() async {
     if (selectedIndex == 0) {
-      await investmentController.fetchActivationHistory();
+      await investmentController.fetchHistoryInvestmentInvest();
     } else {
       await investmentController.fetchHistoryInvestmentInvest();
     }
@@ -110,7 +108,6 @@ class _MyInvestmentsScreenInvestState extends State<MyInvestmentsScreenInvest> {
               onSelected: _onFilterChanged,
             ),
             sizedBoxHeight(height: 16.h),
-            
             Expanded(
               child: MyInvestmentsListSection(
                 isActive: selectedIndex == 0,
