@@ -103,5 +103,11 @@ List<InvestButtonModel> investButtonModelList(
             );
           }),
       InvestButtonModel(
-          icon: Assets.svgsStatement, title: "Statement", onTap: () {}),
+          icon: Assets.svgsStatement,
+          title: "Statement",
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              InvestmentApp.fundTransactionListScreen,
+            );
+          }),
     ];
