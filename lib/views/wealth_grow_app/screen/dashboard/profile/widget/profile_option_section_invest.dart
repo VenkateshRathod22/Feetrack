@@ -80,7 +80,6 @@ class ProfileOptionSectionInvest extends StatelessWidget {
                       "Logout",
                       style: Helper(context).textTheme.bodyLarge?.copyWith(
                             fontSize: 14.sp,
-                            fontWeight: FontWeight.w600,
                             color: red,
                           ),
                     ),
