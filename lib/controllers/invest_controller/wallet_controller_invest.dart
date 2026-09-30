@@ -556,6 +556,14 @@ class WalletControllerInvest extends GetxController implements GetxService {
     update();
   }
 
+  FundHistoryModelInvest? selectFundHistoryModelInvest;
+
+  void updateFundHistoryModelInvest(
+      {required FundHistoryModelInvest fundHistoryModelInvest}) {
+    selectFundHistoryModelInvest = fundHistoryModelInvest;
+    update();
+  }
+
   void clearFundRequestForm() {
     fundAmountController.clear();
     transactionIdController.clear();

@@ -6,6 +6,8 @@ import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/add_bank_account/add_bank_account_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/bank_list_screen_invest/bank_list_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/fund_transaction/fund_transaction_detail_screen/fund_transaction_detail_screen.dart';
+import 'package:vlr/views/wealth_grow_app/screen/fund_transaction/fund_transaction_screen/fund_transaction_list_screen.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_successful_screen_invest/investment_successful_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
@@ -39,6 +41,12 @@ class InvestmentApp extends StatefulWidget {
 
   static const String investmentSuccessfulScreenInvest =
       '/investment_successful_screen_invest';
+
+  static const String fundTransactionListScreen =
+      '/fund_transaction_list_screen';
+
+  static const String fundTransactionDetailScreen =
+      '/fund_transaction_detail_screen';
 
   @override
   State<InvestmentApp> createState() => _InvestmentAppState();
@@ -128,6 +136,16 @@ class _InvestmentAppState extends State<InvestmentApp> {
                   builder: (_) => const InvestmentSuccessfulScreenInvest(),
                   settings: settings,
                 );
+              case InvestmentApp.fundTransactionListScreen:
+                return MaterialPageRoute(
+                  builder: (_) => const FundTransactionListScreen(),
+                  settings: settings,
+                );
+              case InvestmentApp.fundTransactionDetailScreen:
+                return MaterialPageRoute(
+                  builder: (_) =>const  FundTransactionDetailScreen(),
+                  settings: settings,
+                );
 
               default:
                 return MaterialPageRoute(
@@ -143,6 +161,3 @@ class _InvestmentAppState extends State<InvestmentApp> {
 }
 
 
-                  // Navigator.of(context).pushNamed(
-                  //   InvestmentApp.investmentPlanDetailScreenInvest,
-                  // );

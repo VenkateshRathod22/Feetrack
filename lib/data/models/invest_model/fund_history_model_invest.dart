@@ -1,5 +1,5 @@
-import 'package:intl/intl.dart';
 import 'package:vlr/services/constants.dart';
+import 'package:vlr/services/date_formatters_and_converters.dart';
 
 class FundHistoryModelInvest {
   final String id;
@@ -56,44 +56,101 @@ class FundHistoryModelInvest {
       incomeTypeId: json['income_type_id']?.toString() ?? '',
       platform: json['platform']?.toString() ?? '',
       userId: json['user_id']?.toString() ?? '',
-
-      // Nullable fields
       image: json['image']?.toString(),
+      amount: json['amount']?.toString() ?? '0',
+      transactionId: json['transaction_id']?.toString() ?? '',
       mode: json['mode']?.toString(),
       remark: json['remark']?.toString(),
       adminRemark: json['adminremark']?.toString(),
+      date: json['date']?.toString() ?? '',
+      approveStatus: json['approve_status']?.toString() ?? '',
       approveDate: json['approve_date']?.toString(),
       approveTime: json['approve_time']?.toString(),
       time: json['time']?.toString(),
-      accessKey: json['accesskey']?.toString(),
-      paymentId: json['paymentid']?.toString(),
-
-      // Non-null fields with safe fallback
-      amount: json['amount']?.toString() ?? '0',
-      transactionId: json['transaction_id']?.toString() ?? '',
-      date: json['date']?.toString() ?? '',
-      approveStatus: json['approve_status']?.toString() ?? '',
       type: json['type']?.toString() ?? '',
       status: json['status']?.toString() ?? '',
+      accessKey: json['accesskey']?.toString(),
+      paymentId: json['paymentid']?.toString(),
       createdAt: json['created_at']?.toString() ?? '',
       updatedAt: json['updated_at']?.toString() ?? '',
     );
   }
 
   String get amountFormat =>
-      PriceConverter.convertToNumberFormat(double.tryParse(amount) ?? 0.0);
-  bool get isApproveStatus => approveStatus == "1" ? true : false;
-  String get data => formattedCreatedAt;
+      PriceConverter.convertToNumberFormat(
+        double.tryParse(amount) ?? 0.0,
+      );
+
+  bool get isApproveStatus => approveStatus == "1";
+
+  String get uniqueId => id;
 
   String get formattedCreatedAt {
-    final DateTime? dateTime = isApproveStatus
-        ? DateTime.tryParse(createdAt)
-        : DateTime.tryParse(updatedAt);
+    final String dateValue =
+        isApproveStatus ? createdAt : updatedAt;
 
-    if (dateTime == null) {
-      return createdAt;
+    if (dateValue.trim().isEmpty) {
+      return '--';
     }
 
-    return DateFormat('dd MMM yyyy, hh:mm a').format(dateTime);
+    final DateTime? dateTime =
+        DateTime.tryParse(dateValue);
+
+    if (dateTime == null) {
+      return dateValue;
+    }
+
+    return DateFormatters().dateTime.format(dateTime);
+  }
+
+  String get formattedApproveDate {
+    if (approveDate == null ||
+        approveDate!.trim().isEmpty) {
+      return '--';
+    }
+
+    if (approveTime == null ||
+        approveTime!.trim().isEmpty) {
+      final DateTime? dateTime =
+          DateTime.tryParse(approveDate!);
+
+      if (dateTime == null) {
+        return approveDate!;
+      }
+
+      return DateFormatters().dateTime.format(dateTime);
+    }
+
+    final String value =
+        '$approveDate $approveTime';
+
+    DateTime? dateTime;
+
+    try {
+      dateTime = DateTime.tryParse(value);
+    } catch (_) {
+      dateTime = null;
+    }
+
+    if (dateTime != null) {
+      return DateFormatters().dateTime.format(dateTime);
+    }
+
+    return value;
+  }
+
+  String get formattedUpdatedAt {
+    if (updatedAt.trim().isEmpty) {
+      return '--';
+    }
+
+    final DateTime? dateTime =
+        DateTime.tryParse(updatedAt);
+
+    if (dateTime == null) {
+      return updatedAt;
+    }
+
+    return DateFormatters().dateTime.format(dateTime);
   }
 }

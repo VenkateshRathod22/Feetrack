@@ -13,7 +13,9 @@ class WalletInvest extends StatefulWidget {
 
   @override
   State<WalletInvest> createState() => _WalletInvestState();
-}class _WalletInvestState extends State<WalletInvest> {
+}
+
+class _WalletInvestState extends State<WalletInvest> {
   @override
   void initState() {
     super.initState();
@@ -56,8 +58,8 @@ class WalletInvest extends StatefulWidget {
           ),
 
           // Only this area scrolls
-          Expanded(
-            child: const RecentTransactionsSection(),
+          const Expanded(
+            child:  RecentTransactionsSection(),
           ),
         ],
       ),

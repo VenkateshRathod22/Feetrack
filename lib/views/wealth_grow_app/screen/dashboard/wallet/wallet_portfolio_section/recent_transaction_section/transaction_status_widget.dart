@@ -24,6 +24,7 @@ class TransactionStatusWidget extends StatelessWidget {
                 : red1.withValues(alpha: 0.20),
           )),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CircleAvatar(
             radius: 3.r,

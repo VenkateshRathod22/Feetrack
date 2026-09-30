@@ -5,7 +5,9 @@ import 'package:vlr/controllers/invest_controller/wallet_controller_invest.dart'
 import 'package:vlr/data/models/invest_model/fund_history_model_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
+import 'package:vlr/views/base/common_button.dart';
 import 'package:vlr/views/base/shimmer.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/wallet/wallet_portfolio_section/recent_transaction_section/fund_transaction_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
@@ -40,13 +42,21 @@ class RecentTransactionsSection extends StatelessWidget {
                         ),
                   ),
                   if (recentList.isNotEmpty)
-                    CustomText(
-                      "View All",
-                      style: Helper(context).textTheme.bodyLarge?.copyWith(
-                            fontSize: 12.sp,
-                            color: blue,
-                          ),
-                    ),
+                    CustomButton(
+                      type: ButtonType.tertiary,
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          InvestmentApp.fundTransactionListScreen,
+                        );
+                      },
+                      child: CustomText(
+                        "View All",
+                        style: Helper(context).textTheme.bodyLarge?.copyWith(
+                              fontSize: 12.sp,
+                              color: blue,
+                            ),
+                      ),
+                    )
                 ],
               ),
             ),
@@ -88,18 +98,30 @@ class RecentTransactionsSection extends StatelessWidget {
                               ? const FundHistoryModelInvest()
                               : recentList[index];
 
-                      return CustomShimmer(
-                        isLoading: walletControllerInvest.isLoading,
-                        child: FundingHistoryWidget(
-                          fundHistoryModelInvest: item,
+                      return GestureDetector(
+                        onTap: () {
+                          if (walletControllerInvest.isLoading) {
+                            return;
+                          }
+                          walletControllerInvest.updateFundHistoryModelInvest(
+                            fundHistoryModelInvest: item,
+                          );
+
+                          Navigator.of(context).pushNamed(
+                            InvestmentApp.fundTransactionDetailScreen,
+                          );
+                        },
+                        child: CustomShimmer(
+                          isLoading: walletControllerInvest.isLoading,
+                          child: FundingHistoryWidget(
+                            fundHistoryModelInvest: item,
+                          ),
                         ),
                       );
                     },
 
                     separatorBuilder: (_, __) {
-                      return const Divider(
-                        color: whiteDivider,
-                      );
+                      return sizedBoxHeight(height: 4.h);
                     },
                   ),
                 ),
