@@ -55,7 +55,7 @@ class ProfileOptionSectionInvest extends StatelessWidget {
             borderRadius: BorderRadius.circular(12.r),
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical: 14.h,
+                vertical: 16.h,
               ),
               child: Row(
                 children: [
