@@ -9,6 +9,7 @@ import 'package:vlr/data/models/response/response_model.dart';
 import 'package:vlr/data/repositories/invest_repo/auth_repo_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:path/path.dart' as path;
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 
 class AuthControllerInvest extends GetxController implements GetxService {
   final AuthRepoInvest authRepoInvest;
@@ -505,6 +506,13 @@ class AuthControllerInvest extends GetxController implements GetxService {
   void updateUserIdFormat({required String pre}) {
     userIdFormat = "$pre${userModelInvest?.sponsorCode ?? ""}";
     update();
+  }
+
+  void logout({required BuildContext context}) {
+    clearSharedData();
+    Navigator.of(context).pushReplacementNamed(
+      InvestmentApp.login,
+    );
   }
 
   void toggleTerms() {
