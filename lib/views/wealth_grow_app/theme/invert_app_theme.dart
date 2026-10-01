@@ -48,6 +48,7 @@ const Color cardDartBorderColor = Color(0xFF22304E);
 // ============================================================
 
 const Color textPrimary = Color(0xFFF8FAFC);
+const Color textPrimary1 = Color(0xFFD4C4AF);
 const Color textSecondary = Color(0xFF94A3B8);
 const Color textMuted = Color(0xFF64748B);
 const Color textSecondaryLight = Color(0xFFCBD5E1);
@@ -264,9 +265,7 @@ class InvestmentTheme {
         fontSize: 20.sp,
         fontWeight: FontWeight.w700,
       ),
-      headlineSmall: GoogleFonts.plusJakartaSans(
-
-      ),
+      headlineSmall: GoogleFonts.plusJakartaSans(),
 
       //* main
       titleLarge: GoogleFonts.plusJakartaSans(

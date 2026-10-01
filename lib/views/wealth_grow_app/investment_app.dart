@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vlr/views/screens/dashboard/profile/profile_screen/widget/profile_personal_detail_section/profile_personal_detail_section.dart';
 import 'package:vlr/views/wealth_grow_app/screen/add_money_wallet/add_funds_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password/forget_password_screen.dart';
 
 import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/auth/user_profile_invest/user_profile_screen_invest/user_profile_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/add_bank_account/add_bank_account_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/bank_list_screen_invest/bank_list_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
@@ -47,6 +49,8 @@ class InvestmentApp extends StatefulWidget {
 
   static const String fundTransactionDetailScreen =
       '/fund_transaction_detail_screen';
+
+  static const String userProfileScreenInvest = '/user_profile_screen_invest';
 
   @override
   State<InvestmentApp> createState() => _InvestmentAppState();
@@ -143,7 +147,12 @@ class _InvestmentAppState extends State<InvestmentApp> {
                 );
               case InvestmentApp.fundTransactionDetailScreen:
                 return MaterialPageRoute(
-                  builder: (_) =>const  FundTransactionDetailScreen(),
+                  builder: (_) => const FundTransactionDetailScreen(),
+                  settings: settings,
+                );
+              case InvestmentApp.userProfileScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const UserProfileScreenInvest(),
                   settings: settings,
                 );
 
