@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:vlr/generated/assets.dart';
 import 'package:vlr/services/constants.dart';
 
 AppSettingInvestModel appSettingInvestModelFromJson(String str) =>
@@ -106,6 +107,17 @@ class FundSetting {
         "qr": qr,
         "update_date": updateDate,
       };
+  String get qrImageFormat {
+    if (qr == null || qr!.trim().isEmpty) {
+      return Assets.imagesNoProfile;
+    }
+
+    final cleanImagePath = qr!
+        .replaceFirst(RegExp(r'^(\.\./)+'), '')
+        .replaceFirst(RegExp(r'^/+'), '');
+
+    return '${AppConstants.baseImageUrlInvestApp}$cleanImagePath';
+  }
 }
 
 class IncomeFrequency {

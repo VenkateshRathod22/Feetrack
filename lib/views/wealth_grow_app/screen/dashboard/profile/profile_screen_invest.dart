@@ -26,6 +26,7 @@ class ProfileScreenInvest extends StatelessWidget {
         children: [
           ProfileTopSectionInvest(),
           Expanded(
+            
             child: ProfileOptionSectionInvest(),
           ),
         ],

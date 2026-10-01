@@ -16,6 +16,7 @@ import 'package:vlr/views/wealth_grow_app/screen/investment_successful_screen_in
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/select_payment_method_screen_invest/select_payment_method_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
+import 'package:vlr/views/wealth_grow_app/screen/welth_grow_deposit_funds/welth_grow_deposit_funds.dart';
 import 'package:vlr/views/wealth_grow_app/screen/withdraw_funds_screen_invest/withdraw_funds_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
@@ -58,6 +59,8 @@ class InvestmentApp extends StatefulWidget {
 
   static const String resetPasswordScreenInvest =
       '/reset_password_screen_invest';
+
+  static const String welthGrowDepositFunds = '/welth_grow_deposit_funds';
 
   @override
   State<InvestmentApp> createState() => _InvestmentAppState();
@@ -170,6 +173,11 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.resetPasswordScreenInvest:
                 return MaterialPageRoute(
                   builder: (_) => const ResetPasswordScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.welthGrowDepositFunds:
+                return MaterialPageRoute(
+                  builder: (_) => const WelthGrowDepositFunds(),
                   settings: settings,
                 );
 

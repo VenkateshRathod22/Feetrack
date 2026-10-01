@@ -63,6 +63,14 @@ List<ProfileOptionModel> profileOptionModelList(
             );
           }),
       ProfileOptionModel(
+          title: "WelthGrow Deposit Funds",
+          icon: Icons.info_outline_rounded,
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              InvestmentApp.welthGrowDepositFunds,
+            );
+          }),
+      ProfileOptionModel(
           title: "Help & Support",
           icon: Icons.help_outline_rounded,
           onTap: () {}),
