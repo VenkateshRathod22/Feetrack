@@ -3,6 +3,7 @@ import 'package:vlr/views/wealth_grow_app/screen/add_money_wallet/add_funds_scre
 import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password/forget_password_screen.dart';
 
 import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/auth/reset_password/reset_password_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/user_profile_invest/user_profile_edit/user_profile_edit_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/user_profile_invest/user_profile_screen_invest/user_profile_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/add_bank_account/add_bank_account_screen_invest.dart';
@@ -54,6 +55,9 @@ class InvestmentApp extends StatefulWidget {
   static const String userProfileScreenInvest = '/user_profile_screen_invest';
   static const String userProfileEditScreenInvest =
       '/user_profile_edit_screen_invest';
+
+  static const String resetPasswordScreenInvest =
+      '/reset_password_screen_invest';
 
   @override
   State<InvestmentApp> createState() => _InvestmentAppState();
@@ -161,6 +165,11 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.userProfileEditScreenInvest:
                 return MaterialPageRoute(
                   builder: (_) => const UserProfileEditScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.resetPasswordScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const ResetPasswordScreenInvest(),
                   settings: settings,
                 );
 

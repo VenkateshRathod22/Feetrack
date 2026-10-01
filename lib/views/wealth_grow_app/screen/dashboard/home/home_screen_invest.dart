@@ -44,6 +44,8 @@ class _HomeScreenInvestState extends State<HomeScreenInvest> {
             ) ??
             0.0,
       );
+      authControllerInvest.updateUserIdFormat(
+          pre: basicControllerInvest.appSettingInvestModel?.setting?.pre ?? "");
     });
   }
 

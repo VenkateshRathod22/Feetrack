@@ -10,7 +10,6 @@ import 'package:vlr/data/repositories/invest_repo/auth_repo_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:path/path.dart' as path;
 
-
 class AuthControllerInvest extends GetxController implements GetxService {
   final AuthRepoInvest authRepoInvest;
 
@@ -224,137 +223,289 @@ class AuthControllerInvest extends GetxController implements GetxService {
     }
   }
 
+  File? selectedProfileImage;
 
-File? selectedProfileImage;
+  final TextEditingController nameController = TextEditingController();
 
-final TextEditingController nameController =
-    TextEditingController();
+  Future<void> selectProfileImage() async {
+    try {
+      final ImagePicker picker = ImagePicker();
 
-Future<void> selectProfileImage() async {
-  try {
-    final ImagePicker picker = ImagePicker();
+      final XFile? pickedFile = await picker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 80,
+      );
 
-    final XFile? pickedFile = await picker.pickImage(
-      source: ImageSource.gallery,
-      imageQuality: 80,
-    );
+      if (pickedFile == null) {
+        return;
+      }
 
-    if (pickedFile == null) {
-      return;
+      selectedProfileImage = File(pickedFile.path);
+
+      update();
+    } catch (e, stackTrace) {
+      log(
+        "ERROR AT selectProfileImage(): $e",
+        stackTrace: stackTrace,
+      );
     }
+  }
 
-    selectedProfileImage = File(pickedFile.path);
-
-    update();
-  } catch (e, stackTrace) {
+  Future<ResponseModel> updateProfileInvest() async {
     log(
-      "ERROR AT selectProfileImage(): $e",
-      stackTrace: stackTrace,
+      '----------- updateProfileInvest Called ----------',
     );
-  }
-}
 
-Future<ResponseModel> updateProfileInvest() async {
-  log(
-    '----------- updateProfileInvest Called ----------',
-  );
-
-  if (isLoading) {
-    return ResponseModel(
-      false,
-      "Profile update already in progress",
-    );
-  }
-
-  isLoading = true;
-  update();
-
-  try {
-    final Map<String, dynamic> data = {
-      "name": nameController.text.trim(),
-    };
-
-    // Add profile image only if user selected a new image
-    if (selectedProfileImage != null) {
-      final File file = selectedProfileImage!;
-
-      final List<int> bytes = await file.readAsBytes();
-
-      data["profile"] = MultipartFile(
-        bytes,
-        filename: path.basename(file.path),
+    if (isLoading) {
+      return ResponseModel(
+        false,
+        "Profile update already in progress",
       );
     }
 
-    final FormData formData = FormData(data);
+    isLoading = true;
+    update();
 
+    try {
+      final Map<String, dynamic> data = {
+        "name": nameController.text.trim(),
+      };
+
+      // Add profile image only if user selected a new image
+      if (selectedProfileImage != null) {
+        final File file = selectedProfileImage!;
+
+        final List<int> bytes = await file.readAsBytes();
+
+        data["profile"] = MultipartFile(
+          bytes,
+          filename: path.basename(file.path),
+        );
+      }
+
+      final FormData formData = FormData(data);
+
+      log(
+        "Update Profile Data: "
+        "name=${nameController.text.trim()}, "
+        "profile=${selectedProfileImage?.path}",
+      );
+
+      final Response response = await authRepoInvest.updateProfileInvest(
+        formData: formData,
+      );
+
+      log(
+        "Status Code: ${response.statusCode}",
+      );
+
+      log(
+        "Response Body: ${response.body}",
+      );
+
+      if (response.statusCode != 200) {
+        String errorMessage = "Unable to update profile";
+
+        if (response.body is Map && response.body['message'] != null) {
+          errorMessage = response.body['message'].toString();
+        }
+
+        return ResponseModel(
+          false,
+          errorMessage,
+        );
+      }
+
+      String successMessage = "Profile updated successfully";
+
+      if (response.body is Map && response.body['message'] != null) {
+        successMessage = response.body['message'].toString();
+      }
+
+      // Clear selected image after successful update
+      selectedProfileImage = null;
+
+      return ResponseModel(
+        true,
+        successMessage,
+        userModelInvest,
+      );
+    } catch (e, stackTrace) {
+      log(
+        'ERROR AT updateProfileInvest(): $e',
+        stackTrace: stackTrace,
+      );
+
+      return ResponseModel(
+        false,
+        'Error while updating profile',
+      );
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
+//* ---- send opt ----
+
+  Future<ResponseModel> sendOtpInvest() async {
     log(
-      "Update Profile Data: "
-      "name=${nameController.text.trim()}, "
-      "profile=${selectedProfileImage?.path}",
+      '----------- sendOtpInvest Called ----------',
     );
 
-    final Response response =
-        await authRepoInvest.updateProfileInvest(
-      formData: formData,
-    );
+    isLoading = true;
+    update();
 
+    try {
+      final Map<String, dynamic> data = {
+        "username": userIdFormat,
+      };
+
+      final Response response = await authRepoInvest.sendOtpInvest(
+        data: data,
+      );
+
+      log(
+        "sendOtpInvest Status Code: ${response.statusCode}",
+      );
+
+      log(
+        "sendOtpInvest Response Body: ${response.body}",
+      );
+
+      if (response.statusCode != 200) {
+        String errorMessage = "Unable to send OTP";
+
+        if (response.body is Map && response.body['message'] != null) {
+          errorMessage = response.body['message'].toString();
+        }
+
+        return ResponseModel(
+          false,
+          errorMessage,
+        );
+      }
+
+      String successMessage = "OTP sent successfully";
+
+      if (response.body is Map && response.body['message'] != null) {
+        successMessage = response.body['message'].toString();
+      }
+
+      return ResponseModel(
+        true,
+        successMessage,
+        response.body,
+      );
+    } catch (e, stackTrace) {
+      log(
+        'ERROR AT sendOtpInvest(): $e',
+        stackTrace: stackTrace,
+      );
+
+      return ResponseModel(
+        false,
+        "Error while sending OTP",
+      );
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
+  final TextEditingController otpController = TextEditingController();
+
+//* -------- resetPasswordInvest---------
+  Future<ResponseModel> resetPasswordInvest() async {
     log(
-      "Status Code: ${response.statusCode}",
+      '----------- resetPasswordInvest Called ----------',
     );
 
-    log(
-      "Response Body: ${response.body}",
-    );
+    isLoading = true;
+    update();
+    try {
+      final Response response = await authRepoInvest.resetPasswordInvest(
+        username: userIdFormat ?? "",
+        otp: otpController.text.trim(),
+        password: passwordController.text.trim(),
+      );
 
-    if (response.statusCode != 200) {
-      String errorMessage =
-          "Unable to update profile";
+      log(
+        "Reset Password Status Code: "
+        "${response.statusCode}",
+      );
 
-      if (response.body is Map &&
-          response.body['message'] != null) {
-        errorMessage =
-            response.body['message'].toString();
+      log(
+        "Reset Password Response Body: "
+        "${response.body}",
+      );
+
+      if (response.statusCode != 200) {
+        String errorMessage = "Unable to Reset password";
+
+        if (response.body is Map && response.body['message'] != null) {
+          errorMessage = response.body['message'].toString();
+        }
+
+        return ResponseModel(
+          false,
+          errorMessage,
+        );
+      }
+
+      // Check API's own status field
+      if (response.body is Map) {
+        final Map<String, dynamic> body =
+            Map<String, dynamic>.from(response.body);
+
+        final bool apiStatus = body['status'] == true;
+
+        final String message = body['message']?.toString() ??
+            (apiStatus
+                ? "Password updated successfully"
+                : "Unable to reset password");
+
+        if (!apiStatus) {
+          return ResponseModel(
+            false,
+            message,
+            body,
+          );
+        }
+
+        return ResponseModel(
+          true,
+          message,
+          body,
+        );
       }
 
       return ResponseModel(
         false,
-        errorMessage,
+        "Invalid Reset password response",
       );
+    } catch (e, stackTrace) {
+      log(
+        'ERROR AT resetPasswordInvest(): $e',
+        stackTrace: stackTrace,
+      );
+
+      return ResponseModel(
+        false,
+        "Error while resetting password",
+      );
+    } finally {
+      isLoading = false;
+      update();
     }
+  }
 
-    String successMessage =
-        "Profile updated successfully";
+  String? userIdFormat;
 
-    if (response.body is Map &&
-        response.body['message'] != null) {
-      successMessage =
-          response.body['message'].toString();
-    }
-
-    // Clear selected image after successful update
-    selectedProfileImage = null;
-
-    return ResponseModel(
-      true,
-      successMessage,
-      userModelInvest,
-    );
-  } catch (e, stackTrace) {
-    log(
-      'ERROR AT updateProfileInvest(): $e',
-      stackTrace: stackTrace,
-    );
-
-    return ResponseModel(
-      false,
-      'Error while updating profile',
-    );
-  } finally {
-    isLoading = false;
+  void updateUserIdFormat({required String pre}) {
+    userIdFormat = "$pre${userModelInvest?.sponsorCode ?? ""}";
     update();
   }
-}
 
   void toggleTerms() {
     _acceptTerms = !_acceptTerms;
@@ -378,6 +529,7 @@ Future<ResponseModel> updateProfileInvest() async {
     userIdController.dispose();
     passwordController.dispose();
     nameController.dispose();
+    otpController.dispose();
     super.onClose();
   }
 }

@@ -62,6 +62,40 @@ class AuthRepoInvest {
     investApiClient.updateHeader(token);
   }
 
+  Future<Response> sendOtpInvest({
+    required Map<String, dynamic> data,
+  }) async {
+    return await investApiClient.postData(
+      AppConstants.sendOtpInvest,
+      "sendOtpInvest",
+      data,
+      contentType: "application/json",
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
+
+  Future<Response> resetPasswordInvest({
+    required String username,
+    required String otp,
+    required String password,
+  }) async {
+    final Map<String, dynamic> data = {
+      "username": username.trim(),
+      "otp": otp.trim(),
+      "password": password.trim(),
+    };
+
+    return await investApiClient.postData(
+      AppConstants.resetPasswordInvest,
+      "resetPasswordInvest",
+      data,
+      contentType: "application/json",
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
+
   String getUserId() {
     return sharedPreferences.getString(
           AppConstants.userId,
