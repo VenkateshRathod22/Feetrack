@@ -30,7 +30,7 @@ class UserProfileScreenInvest extends StatelessWidget {
               sizedBoxHeight(height: 48.h),
               const UserProfileAccountIdentitySection(),
               sizedBoxHeight(height: 26.h),
-              UserProfileAccountResetPasswordSection()
+              const UserProfileAccountResetPasswordSection()
 
             ],
           ),

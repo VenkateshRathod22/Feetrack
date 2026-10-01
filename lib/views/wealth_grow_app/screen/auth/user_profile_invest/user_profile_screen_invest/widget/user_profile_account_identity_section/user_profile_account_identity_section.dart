@@ -5,6 +5,7 @@ import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/user_profile_invest/user_profile_screen_invest/widget/user_profile_account_identity_section/user_profile_account_identity_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
@@ -40,7 +41,11 @@ class UserProfileAccountIdentitySection extends StatelessWidget {
                   ),
                 ),
                 CustomButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.userProfileEditScreenInvest,
+                    );
+                  },
                   type: ButtonType.tertiary,
                   child: CustomText(
                     "Edit Details",

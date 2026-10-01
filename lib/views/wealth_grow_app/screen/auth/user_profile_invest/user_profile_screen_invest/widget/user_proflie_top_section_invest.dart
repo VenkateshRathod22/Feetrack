@@ -40,7 +40,7 @@ class UserProfileTopSectionInvest extends StatelessWidget {
                     height: 92.w,
                     width: 92.w,
                     fit: BoxFit.cover,
-                    radius: 9999.r,
+                    isProfile: true,
                   ),
                 ),
               ),
@@ -58,8 +58,8 @@ class UserProfileTopSectionInvest extends StatelessWidget {
                     vertical: 4.h,
                     horizontal: 12.w,
                   ),
-                  decoration:
-                      const BoxDecoration(shape: BoxShape.circle, color: surfaceLow),
+                  decoration: const BoxDecoration(
+                      shape: BoxShape.circle, color: surfaceLow),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

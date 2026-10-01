@@ -1,3 +1,4 @@
+import 'package:get/get_connect.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vlr/data/api/invest_api_client.dart';
@@ -28,6 +29,17 @@ class AuthRepoInvest {
     return await investApiClient.getData(
       AppConstants.getUserProfileInvest,
       "fetchProfileInvest",
+      contentType: 'application/json',
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
+
+  Future<Response> updateProfileInvest({required FormData formData}) async {
+    return await investApiClient.postData(
+      AppConstants.postUpdateProfileInvest,
+      "updateProfileInvest",
+      formData,
       contentType: 'application/json',
       requiresAuth: false,
       headers: investApiClient.getSponsorHeaders(),

@@ -310,8 +310,10 @@ class AppConstants {
 
   //! Investment app Api
 
+//* auth
   static const String loginInvest = '/login.php';
   static const String getUserProfileInvest = '/getUser.php';
+  static const String postUpdateProfileInvest = '/updateProfile.php';
   static const String appSettingInvest = '/Setting.php';
   static const String homeInvest = '/Home.php';
 
@@ -333,8 +335,7 @@ class AppConstants {
 
   //* Wallet
   static const String fundRequestInvest = '/fundRequest.php';
-  static const String getFundHistoryInvest =
-      '/fundHistory.php';
+  static const String getFundHistoryInvest = '/fundHistory.php';
   //
   static double horizontalPadding = 16.w;
   static double verticalPadding = 20.h;

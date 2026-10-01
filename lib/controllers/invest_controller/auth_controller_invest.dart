@@ -1,11 +1,15 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:vlr/data/models/invest_model/user_model_invest.dart';
 import 'package:vlr/data/models/response/response_model.dart';
 import 'package:vlr/data/repositories/invest_repo/auth_repo_invest.dart';
 import 'package:vlr/services/constants.dart';
+import 'package:path/path.dart' as path;
+
 
 class AuthControllerInvest extends GetxController implements GetxService {
   final AuthRepoInvest authRepoInvest;
@@ -220,6 +224,138 @@ class AuthControllerInvest extends GetxController implements GetxService {
     }
   }
 
+
+File? selectedProfileImage;
+
+final TextEditingController nameController =
+    TextEditingController();
+
+Future<void> selectProfileImage() async {
+  try {
+    final ImagePicker picker = ImagePicker();
+
+    final XFile? pickedFile = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 80,
+    );
+
+    if (pickedFile == null) {
+      return;
+    }
+
+    selectedProfileImage = File(pickedFile.path);
+
+    update();
+  } catch (e, stackTrace) {
+    log(
+      "ERROR AT selectProfileImage(): $e",
+      stackTrace: stackTrace,
+    );
+  }
+}
+
+Future<ResponseModel> updateProfileInvest() async {
+  log(
+    '----------- updateProfileInvest Called ----------',
+  );
+
+  if (isLoading) {
+    return ResponseModel(
+      false,
+      "Profile update already in progress",
+    );
+  }
+
+  isLoading = true;
+  update();
+
+  try {
+    final Map<String, dynamic> data = {
+      "name": nameController.text.trim(),
+    };
+
+    // Add profile image only if user selected a new image
+    if (selectedProfileImage != null) {
+      final File file = selectedProfileImage!;
+
+      final List<int> bytes = await file.readAsBytes();
+
+      data["profile"] = MultipartFile(
+        bytes,
+        filename: path.basename(file.path),
+      );
+    }
+
+    final FormData formData = FormData(data);
+
+    log(
+      "Update Profile Data: "
+      "name=${nameController.text.trim()}, "
+      "profile=${selectedProfileImage?.path}",
+    );
+
+    final Response response =
+        await authRepoInvest.updateProfileInvest(
+      formData: formData,
+    );
+
+    log(
+      "Status Code: ${response.statusCode}",
+    );
+
+    log(
+      "Response Body: ${response.body}",
+    );
+
+    if (response.statusCode != 200) {
+      String errorMessage =
+          "Unable to update profile";
+
+      if (response.body is Map &&
+          response.body['message'] != null) {
+        errorMessage =
+            response.body['message'].toString();
+      }
+
+      return ResponseModel(
+        false,
+        errorMessage,
+      );
+    }
+
+    String successMessage =
+        "Profile updated successfully";
+
+    if (response.body is Map &&
+        response.body['message'] != null) {
+      successMessage =
+          response.body['message'].toString();
+    }
+
+    // Clear selected image after successful update
+    selectedProfileImage = null;
+
+    return ResponseModel(
+      true,
+      successMessage,
+      userModelInvest,
+    );
+  } catch (e, stackTrace) {
+    log(
+      'ERROR AT updateProfileInvest(): $e',
+      stackTrace: stackTrace,
+    );
+
+    return ResponseModel(
+      false,
+      'Error while updating profile',
+    );
+  } finally {
+    isLoading = false;
+    update();
+  }
+}
+
   void toggleTerms() {
     _acceptTerms = !_acceptTerms;
     update();
@@ -241,6 +377,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
   void onClose() {
     userIdController.dispose();
     passwordController.dispose();
+    nameController.dispose();
     super.onClose();
   }
 }
