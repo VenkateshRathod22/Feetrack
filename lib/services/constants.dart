@@ -314,8 +314,8 @@ class AppConstants {
   static const String loginInvest = '/login.php';
   static const String getUserProfileInvest = '/getUser.php';
   static const String postUpdateProfileInvest = '/updateProfile.php';
-  static const String sendOtpInvest = "sendOtp.php";
-  static const String resetPasswordInvest = "forgotPassword.php";
+  static const String sendOtpInvest = "/sendOtp.php";
+  static const String resetPasswordInvest = "/forgotPassword.php";
 
   //* App
   static const String appSettingInvest = '/Setting.php';

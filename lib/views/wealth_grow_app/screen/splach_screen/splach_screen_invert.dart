@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
@@ -45,41 +46,41 @@ class _SplashScreenInvertState extends State<SplashScreenInvert> {
   }
 
   Future<void> checkAuth() async {
-    // final authController = Get.find<AuthController>();
+    final authControllerInvest = Get.find<AuthControllerInvest>();
 
-    // final String token = authController.getUserToken();
+    final String token = authControllerInvest.getUserToken();
 
-    // if (token.isEmpty) {
-    //   if (!mounted) return;
+    if (token.isEmpty) {
+      if (!mounted) return;
 
-    Navigator.of(context).pushReplacementNamed(
-      InvestmentApp.login,
-    );
+      Navigator.of(context).pushReplacementNamed(
+        InvestmentApp.login,
+      );
 
-    //   return;
-    // }
+      return;
+    }
 
-    // try {
-    //   final response = await authController.fetchProfile();
+    try {
+      final response = await authControllerInvest.fetchProfileInvest();
 
-    //   if (!mounted) return;
+      if (!mounted) return;
 
-    //   if (response.isSuccess) {
-    //     Navigator.of(context).pushReplacementNamed(
-    //       InvestmentApp.dashboard,
-    //     );
-    //   } else {
-    //     Navigator.of(context).pushReplacementNamed(
-    //       InvestmentApp.login,
-    //     );
-    //   }
-    // } catch (e) {
-    //   if (!mounted) return;
+      if (response.isSuccess) {
+        Navigator.of(context).pushReplacementNamed(
+          InvestmentApp.dashboard,
+        );
+      } else {
+        Navigator.of(context).pushReplacementNamed(
+          InvestmentApp.login,
+        );
+      }
+    } catch (e) {
+      if (!mounted) return;
 
-    //   Navigator.of(context).pushReplacementNamed(
-    //     InvestmentApp.login,
-    //   );
-    // }
+      Navigator.of(context).pushReplacementNamed(
+        InvestmentApp.login,
+      );
+    }
   }
 
   @override
