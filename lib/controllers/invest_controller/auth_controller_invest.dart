@@ -19,6 +19,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
   });
 
   bool isLoading = false;
+  bool isUserLogin = false;
   bool _acceptTerms = true;
 
   bool get acceptTerms => _acceptTerms;
@@ -74,7 +75,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
             // Save token
             if (sponsorCode != null && sponsorCode.isNotEmpty) {
               await authRepoInvest.setUserToken(sponsorCode);
-
+              isUserLogin = true;
               log("Saved token: $sponsorCode");
             }
 
@@ -359,7 +360,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
 
     try {
       final Map<String, dynamic> data = {
-        "username": userIdFormat,
+        "username": !isUserLogin ? userIdController.text.trim() : userIdFormat,
       };
 
       final Response response = await authRepoInvest.sendOtpInvest(
@@ -426,7 +427,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
     update();
     try {
       final Response response = await authRepoInvest.resetPasswordInvest(
-        username: userIdFormat ?? "",
+        username: isUserLogin ? (userIdFormat ?? "") : userIdController.text.trim(),
         otp: otpController.text.trim(),
         password: passwordController.text.trim(),
       );
@@ -515,7 +516,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
       final Map<String, dynamic> body = {
         "old_password": oldPassword.text.trim(),
         "new_password": passwordController.text.trim(),
-        "confirm_password":  confirmPassword.text.trim()
+        "confirm_password": confirmPassword.text.trim()
       };
 
       final Response response = await authRepoInvest.changePasswordInvest(
@@ -600,6 +601,8 @@ class AuthControllerInvest extends GetxController implements GetxService {
   }
 
   void logout({required BuildContext context}) {
+    isUserLogin = false;
+
     clearSharedData();
     Navigator.of(context).pushReplacementNamed(
       InvestmentApp.login,

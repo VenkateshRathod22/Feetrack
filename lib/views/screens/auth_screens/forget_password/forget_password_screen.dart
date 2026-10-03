@@ -13,16 +13,16 @@ import 'package:vlr/views/screens/auth_screens/login/login_screen.dart';
 import 'package:vlr/views/screens/auth_screens/otp_verification_screen.dart';
 import 'package:vlr/views/widget/text_box/app_text_box.dart';
 
-class ForgetPasswordScreen extends StatefulWidget {
+class ForgetPasswordSendOtpScreen extends StatefulWidget {
   final bool isEnterMobileNoForVerification;
-  const ForgetPasswordScreen(
+  const ForgetPasswordSendOtpScreen(
       {super.key, this.isEnterMobileNoForVerification = false});
 
   @override
-  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+  State<ForgetPasswordSendOtpScreen> createState() => _ForgetPasswordSendOtpScreenState();
 }
 
-class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+class _ForgetPasswordSendOtpScreenState extends State<ForgetPasswordSendOtpScreen> {
   @override
   void initState() {
     super.initState();

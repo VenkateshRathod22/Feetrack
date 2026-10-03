@@ -293,7 +293,7 @@ class _OTPVerificationPrepaidCardState extends State<OTPVerificationPrepaidCard>
                       onTap: () {
                         navigate(
                             context: context,
-                            page: const ForgetPasswordScreen());
+                            page: const ForgetPasswordSendOtpScreen());
                       },
                       child: Text(
                         'Back to Phone Number',

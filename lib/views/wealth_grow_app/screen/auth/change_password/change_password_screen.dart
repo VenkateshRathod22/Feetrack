@@ -25,6 +25,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
       authController.oldPassword.clear();
       authController.passwordController.clear();
       authController.confirmPassword.clear();
+      authController.update();
     });
   }
 

@@ -5,6 +5,7 @@ import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/common_button.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 import 'package:vlr/views/widget/text_box/app_text_box.dart';
 
@@ -19,6 +20,17 @@ class ResetPasswordScreenInvest extends StatefulWidget {
 }
 
 class _ResetPasswordScreenInvestState extends State<ResetPasswordScreenInvest> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final auth = Get.find<AuthControllerInvest>();
+      auth.otpController.clear();
+      auth.passwordController.clear();
+      auth.update();
+    });
+  }
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   AuthControllerInvest get authController => Get.find<AuthControllerInvest>();
@@ -180,7 +192,13 @@ class _ResetPasswordScreenInvestState extends State<ResetPasswordScreenInvest> {
                                     .resetPasswordInvest()
                                     .then((value) {
                                   if (value.isSuccess) {
-                                    Navigator.pop(context);
+                                    authControllerInvest.isUserLogin
+                                        ? Navigator.pop(context)
+                                        : Navigator.of(context).pushNamed(
+                                            InvestmentApp.login,
+                                          );
+
+                                    ;
                                     showToast(
                                         message: value.message,
                                         typeCheck: value.isSuccess);

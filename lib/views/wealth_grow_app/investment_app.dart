@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vlr/views/wealth_grow_app/screen/add_money_wallet/add_funds_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/change_password/change_password_screen.dart';
-import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password/forget_password_screen.dart';
+import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password_send_opt/forget_password_send_opt.dart';
 
 import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/reset_password/reset_password_screen_invest.dart';
@@ -99,7 +99,7 @@ class _InvestmentAppState extends State<InvestmentApp> {
 
               case InvestmentApp.forgetPassword:
                 return MaterialPageRoute(
-                  builder: (_) => const ForgetPasswordScreen(),
+                  builder: (_) => const ForgetPasswordSendOtpScreen(),
                   settings: settings,
                 );
 

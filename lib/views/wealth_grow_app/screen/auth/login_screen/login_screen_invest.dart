@@ -117,7 +117,7 @@ class _LoginScreenInvestState extends State<LoginScreenInvest> {
                       CustomButton(
                         type: ButtonType.tertiary,
                         onTap: () {
-                          Navigator.of(context).pushReplacementNamed(
+                          Navigator.of(context).pushNamed(
                             InvestmentApp.forgetPassword,
                           );
                         },
