@@ -13,6 +13,7 @@ import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/referral/referral_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/fund_transaction/fund_transaction_detail_screen/fund_transaction_detail_screen.dart';
 import 'package:vlr/views/wealth_grow_app/screen/fund_transaction/fund_transaction_screen/fund_transaction_list_screen.dart';
+import 'package:vlr/views/wealth_grow_app/screen/help_and_suppory_screen/help_and_suppory_screen.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_successful_screen_invest/investment_successful_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
@@ -55,9 +56,12 @@ class InvestmentApp extends StatefulWidget {
       '/fund_transaction_detail_screen';
   static const String changePasswordScreen =
       '/change_password_screen';
-  static const String referScreen =
+ static const String referScreen =
       '/refer_screen';
-
+ 
+ static const String helpAndSuppScreen =
+      '/help_and_support_screen';
+ 
 //* profile
   static const String userProfileScreenInvest = '/user_profile_screen_invest';
   static const String userProfileEditScreenInvest =
@@ -194,6 +198,11 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.referScreen:
                 return MaterialPageRoute(
                   builder: (_) => const ReferralScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.helpAndSuppScreen:
+                return MaterialPageRoute(
+                  builder: (_) => const HelpSupportScreenInvest(),
                   settings: settings,
                 );
 

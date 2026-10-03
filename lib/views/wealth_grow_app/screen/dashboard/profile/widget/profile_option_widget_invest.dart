@@ -82,7 +82,11 @@ List<ProfileOptionModel> profileOptionModelList(
       ProfileOptionModel(
           title: "Help & Support",
           icon: Icons.help_outline_rounded,
-          onTap: () {}),
+          onTap: () {
+             Navigator.of(context).pushNamed(
+              InvestmentApp.helpAndSuppScreen,
+            );
+          }),
       ProfileOptionModel(
           title: "Privacy Policy",
           icon: Icons.privacy_tip_outlined,
