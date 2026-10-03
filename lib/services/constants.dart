@@ -316,6 +316,7 @@ class AppConstants {
   static const String postUpdateProfileInvest = '/updateProfile.php';
   static const String sendOtpInvest = "/sendOtp.php";
   static const String resetPasswordInvest = "/forgotPassword.php";
+  static const String changePasswordInvest = "/changePassword.php";
 
   //* App
   static const String appSettingInvest = '/Setting.php';

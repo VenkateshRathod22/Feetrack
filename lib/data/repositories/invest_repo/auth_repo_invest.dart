@@ -96,6 +96,20 @@ class AuthRepoInvest {
     );
   }
 
+  Future<Response> changePasswordInvest({
+    required  Map<String, dynamic> body,
+  }) async {
+    
+    return await investApiClient.postData(
+      AppConstants.changePasswordInvest,
+      "changePasswordInvest",
+      body,
+      contentType: "application/json",
+      requiresAuth: false,
+      headers: investApiClient.getSponsorHeaders(),
+    );
+  }
+
   String getUserId() {
     return sharedPreferences.getString(
           AppConstants.userId,

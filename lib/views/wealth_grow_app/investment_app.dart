@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vlr/views/wealth_grow_app/screen/add_money_wallet/add_funds_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/auth/change_password/change_password_screen.dart';
 import 'package:vlr/views/wealth_grow_app/screen/auth/forget_password/forget_password_screen.dart';
 
 import 'package:vlr/views/wealth_grow_app/screen/auth/login_screen/login_screen_invest.dart';
@@ -51,6 +52,8 @@ class InvestmentApp extends StatefulWidget {
 
   static const String fundTransactionDetailScreen =
       '/fund_transaction_detail_screen';
+  static const String changePasswordScreen =
+      '/change_password_screen';
 
 //* profile
   static const String userProfileScreenInvest = '/user_profile_screen_invest';
@@ -178,6 +181,11 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.welthGrowDepositFunds:
                 return MaterialPageRoute(
                   builder: (_) => const WelthGrowDepositFunds(),
+                  settings: settings,
+                );
+              case InvestmentApp.changePasswordScreen:
+                return MaterialPageRoute(
+                  builder: (_) => const ChangePasswordScreen(),
                   settings: settings,
                 );
 

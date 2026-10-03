@@ -48,78 +48,146 @@ class _UserProfileAccountResetPasswordSectionState
           ),
           sizedBoxHeight(height: 24.h),
           GetBuilder<AuthControllerInvest>(builder: (authControllerInvest) {
-            return GestureDetector(
-              onTap: authControllerInvest.isLoading
-                  ? null
-                  : () {
-                      authControllerInvest.sendOtpInvest().then((value) {
-                        if (value.isSuccess) {
-                          showToast(
-                              message: value.message,
-                              typeCheck: value.isSuccess);
-                          Navigator.of(context).pushNamed(
-                            InvestmentApp.resetPasswordScreenInvest,
-                          );
-                        } else {
-                          showToast(
-                              message: value.message,
-                              typeCheck: value.isSuccess);
-                        }
-                      });
-                    },
-              child: Row(
-                children: [
-                  Container(
-                    height: 46.h,
-                    width: 46.w,
-                    padding: EdgeInsets.all(8.r),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: primaryColorLight.withValues(
-                        alpha: 0.1,
-                      ),
-                    ),
-                    child: const Icon(
-                      Icons.lock_reset_sharp,
-                      color: primaryColor,
-                    ),
-                  ),
-                  sizedBoxWidth(width: 14.w),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CustomText(
-                          "Reset Password",
-                          style: Helper(context).textTheme.bodyLarge?.copyWith(
-                                fontSize: 14.sp,
-                              ),
-                        ),
-                        sizedBoxHeight(height: 4),
-                        CustomText(
-                          "Update your account security password",
-                          overflow: TextOverflow.ellipsis,
-                          style: Helper(context)
-                              .textTheme
-                              .bodyLarge
-                              ?.copyWith(fontSize: 12.sp, color: textPrimary1),
-                        ),
-                      ],
-                    ),
-                  ),
-                  authControllerInvest.isLoading
-                      ? Center(
-                          child: CircularProgressIndicator(
-                            color: primaryColorLight2,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GestureDetector(
+                  onTap: authControllerInvest.isLoading
+                      ? null
+                      : () {
+                          authControllerInvest.sendOtpInvest().then((value) {
+                            if (value.isSuccess) {
+                              showToast(
+                                  message: value.message,
+                                  typeCheck: value.isSuccess);
+                              Navigator.of(context).pushNamed(
+                                InvestmentApp.resetPasswordScreenInvest,
+                              );
+                            } else {
+                              showToast(
+                                  message: value.message,
+                                  typeCheck: value.isSuccess);
+                            }
+                          });
+                        },
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 46.h,
+                        width: 46.w,
+                        padding: EdgeInsets.all(8.r),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: primaryColorLight.withValues(
+                            alpha: 0.1,
                           ),
-                        )
-                      : Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          color: primaryColorLight2,
-                          size: 20.sp,
-                        )
-                ],
-              ),
+                        ),
+                        child: const Icon(
+                          Icons.lock_reset_sharp,
+                          color: primaryColor,
+                        ),
+                      ),
+                      sizedBoxWidth(width: 14.w),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              "Reset Password",
+                              style:
+                                  Helper(context).textTheme.bodyLarge?.copyWith(
+                                        fontSize: 14.sp,
+                                      ),
+                            ),
+                            sizedBoxHeight(height: 4),
+                            CustomText(
+                              "Update your account security password",
+                              overflow: TextOverflow.ellipsis,
+                              style: Helper(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                      fontSize: 12.sp, color: textPrimary1),
+                            ),
+                          ],
+                        ),
+                      ),
+                      authControllerInvest.isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: primaryColorLight2,
+                              ),
+                            )
+                          : Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: primaryColorLight2,
+                              size: 20.sp,
+                            )
+                    ],
+                  ),
+                ),
+                sizedBoxHeight(
+                  height: 24.h,
+                ),
+                GestureDetector(
+                  onTap:  () {
+                         
+                              Navigator.of(context).pushNamed(
+                                InvestmentApp.changePasswordScreen,
+                              );
+                        
+                        },
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 46.h,
+                        width: 46.w,
+                        padding: EdgeInsets.all(8.r),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: primaryColorLight.withValues(
+                            alpha: 0.1,
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.manage_accounts_outlined,
+                          color: primaryColor,
+                        ),
+                      ),
+                      sizedBoxWidth(width: 14.w),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              "Change Password",
+                              style:
+                                  Helper(context).textTheme.bodyLarge?.copyWith(
+                                        fontSize: 14.sp,
+                                      ),
+                            ),
+                            sizedBoxHeight(height: 4),
+                            CustomText(
+                              "Change your account security password",
+                              overflow: TextOverflow.ellipsis,
+                              style: Helper(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                      fontSize: 12.sp, color: textPrimary1),
+                            ),
+                          ],
+                        ),
+                      ),
+                    Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: primaryColorLight2,
+                              size: 20.sp,
+                            )
+                    ],
+                  ),
+                ),
+              ],
             );
           })
         ],

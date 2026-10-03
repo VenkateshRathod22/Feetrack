@@ -26,7 +26,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
   final TextEditingController userIdController =
       TextEditingController(text: "WG1290");
   final TextEditingController passwordController =
-      TextEditingController(text: "123");
+      TextEditingController(text: "123456");
 
   Future<ResponseModel> loginInvest() async {
     log('----------- loginInvest Called ----------');
@@ -501,6 +501,97 @@ class AuthControllerInvest extends GetxController implements GetxService {
     }
   }
 
+  final TextEditingController confirmPassword = TextEditingController();
+  final TextEditingController oldPassword = TextEditingController();
+//* -------- changePasswordInvest---------
+  Future<ResponseModel> changePasswordInvest() async {
+    log(
+      '----------- changePasswordInvest Called ----------',
+    );
+
+    isLoading = true;
+    update();
+    try {
+      final Map<String, dynamic> body = {
+        "old_password": oldPassword.text.trim(),
+        "new_password": passwordController.text.trim(),
+        "confirm_password":  confirmPassword.text.trim()
+      };
+
+      final Response response = await authRepoInvest.changePasswordInvest(
+        body: body,
+      );
+
+      log(
+        "change Password Status Code: "
+        "${response.statusCode}",
+      );
+
+      log(
+        "change Password Response Body: "
+        "${response.body}",
+      );
+
+      if (response.statusCode != 200) {
+        String errorMessage = "Unable to change password";
+
+        if (response.body is Map && response.body['message'] != null) {
+          errorMessage = response.body['message'].toString();
+        }
+
+        return ResponseModel(
+          false,
+          errorMessage,
+        );
+      }
+
+      // Check API's own status field
+      if (response.body is Map) {
+        final Map<String, dynamic> body =
+            Map<String, dynamic>.from(response.body);
+
+        final bool apiStatus = body['status'] == true;
+
+        final String message = body['message']?.toString() ??
+            (apiStatus
+                ? "Password change successfully"
+                : "Unable to change password");
+
+        if (!apiStatus) {
+          return ResponseModel(
+            false,
+            message,
+            body,
+          );
+        }
+
+        return ResponseModel(
+          true,
+          message,
+          body,
+        );
+      }
+
+      return ResponseModel(
+        false,
+        "Invalid change password response",
+      );
+    } catch (e, stackTrace) {
+      log(
+        'ERROR AT changePasswordInvest(): $e',
+        stackTrace: stackTrace,
+      );
+
+      return ResponseModel(
+        false,
+        "Error while changePasswordInvest password",
+      );
+    } finally {
+      isLoading = false;
+      update();
+    }
+  }
+
   String? userIdFormat;
 
   void updateUserIdFormat({required String pre}) {
@@ -536,7 +627,9 @@ class AuthControllerInvest extends GetxController implements GetxService {
   void onClose() {
     userIdController.dispose();
     passwordController.dispose();
+    oldPassword.dispose();
     nameController.dispose();
+    confirmPassword.dispose();
     otpController.dispose();
     super.onClose();
   }
