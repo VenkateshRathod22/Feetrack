@@ -34,7 +34,7 @@ class _DashboardScreenInvertState
       HomeScreenInvest(),
       InvestmentScreenInvest(),
       WalletInvest(),
-      ReferralScreenInvest(),
+      // ReferralScreenInvest(),
       ProfileScreenInvest(),
     ];
   }
@@ -106,23 +106,23 @@ class _DashboardScreenInvertState
                     },
                   ),
 
-                  BottomNavigationItemWidget(
-                    title: 'Referral',
-                    icon: Assets.svgsReferral,
-                    isActive:
-                        controller.dashPageInvest == 3,
-                    onTap: () {
-                      controller.dashPageInvest = 3;
-                    },
-                  ),
+                  // BottomNavigationItemWidget(
+                  //   title: 'Referral',
+                  //   icon: Assets.svgsReferral,
+                  //   isActive:
+                  //       controller.dashPageInvest == 3,
+                  //   onTap: () {
+                  //     controller.dashPageInvest = 3;
+                  //   },
+                  // ),
 
                   BottomNavigationItemWidget(
                     title: 'Profile',
                     icon: Assets.svgsProfile,
                     isActive:
-                        controller.dashPageInvest == 4,
+                        controller.dashPageInvest == 3,
                     onTap: () {
-                      controller.dashPageInvest = 4;
+                      controller.dashPageInvest = 3;
                     },
                   ),
                 ],

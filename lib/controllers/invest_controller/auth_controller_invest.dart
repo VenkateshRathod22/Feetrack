@@ -14,7 +14,7 @@ import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 class AuthControllerInvest extends GetxController implements GetxService {
   final AuthRepoInvest authRepoInvest;
 
-  AuthControllerInvest({
+AuthControllerInvest({
     required this.authRepoInvest,
   });
 

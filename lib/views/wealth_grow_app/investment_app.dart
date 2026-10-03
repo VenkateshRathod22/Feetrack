@@ -10,6 +10,7 @@ import 'package:vlr/views/wealth_grow_app/screen/auth/user_profile_invest/user_p
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/add_bank_account/add_bank_account_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/bank_screen_invest/bank_list_screen_invest/bank_list_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/dashboard_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/dashboard/referral/referral_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/fund_transaction/fund_transaction_detail_screen/fund_transaction_detail_screen.dart';
 import 'package:vlr/views/wealth_grow_app/screen/fund_transaction/fund_transaction_screen/fund_transaction_list_screen.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
@@ -54,6 +55,8 @@ class InvestmentApp extends StatefulWidget {
       '/fund_transaction_detail_screen';
   static const String changePasswordScreen =
       '/change_password_screen';
+  static const String referScreen =
+      '/refer_screen';
 
 //* profile
   static const String userProfileScreenInvest = '/user_profile_screen_invest';
@@ -186,6 +189,11 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.changePasswordScreen:
                 return MaterialPageRoute(
                   builder: (_) => const ChangePasswordScreen(),
+                  settings: settings,
+                );
+              case InvestmentApp.referScreen:
+                return MaterialPageRoute(
+                  builder: (_) => const ReferralScreenInvest(),
                   settings: settings,
                 );
 

@@ -71,6 +71,14 @@ List<ProfileOptionModel> profileOptionModelList(
             );
           }),
       ProfileOptionModel(
+          title: "Refer & Earn",
+          icon: Icons.person_add_alt,
+          onTap: () {
+            Navigator.of(context).pushNamed(
+              InvestmentApp.referScreen,
+            );
+          }),
+      ProfileOptionModel(
           title: "Help & Support",
           icon: Icons.help_outline_rounded,
           onTap: () {}),
