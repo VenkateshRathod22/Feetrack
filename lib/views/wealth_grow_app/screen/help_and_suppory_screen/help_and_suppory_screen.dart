@@ -6,6 +6,7 @@ import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/services/lanch_helper.dart';
+import 'package:vlr/views/wealth_grow_app/screen/widget/web_views/web_views_widget.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class HelpSupportScreenInvest extends StatelessWidget {
@@ -199,6 +200,27 @@ class HelpSupportScreenInvest extends StatelessWidget {
                     email: basicControllerInvest
                             .appSettingInvestModel?.setting?.email ??
                         "",
+                  );
+                },
+              ),
+
+              sizedBoxHeight(height: 24),
+              _buildContactCard(
+                context: context,
+                icon: Icons.web_rounded,
+                title: 'Website',
+                value: "Feetrack website",
+                subtitle: 'Tap to visit a website',
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => WebViewScreenInvest(
+                        title: 'Feetrack website',
+                        url: basicControllerInvest
+                                .appSettingInvestModel?.setting?.url ??
+                            "",
+                      ),
+                    ),
                   );
                 },
               ),
