@@ -30,7 +30,7 @@ class AuthControllerInvest extends GetxController implements GetxService {
       TextEditingController(text: "123456");
 
   Future<ResponseModel> loginInvest() async {
-    log('----------- loginInvest Called ----------');
+    log('----------- loginInvest Called ------\----');
 
     isLoading = true;
     update();
