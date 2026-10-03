@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/wealth_grow_app/investment_app.dart';
+import 'package:vlr/views/wealth_grow_app/screen/widget/web_views/web_views_widget.dart';
 
 class ProfileOptionWidgetInvest extends StatelessWidget {
   final ProfileOptionModel profileOptionModel;
@@ -85,9 +86,27 @@ List<ProfileOptionModel> profileOptionModelList(
       ProfileOptionModel(
           title: "Privacy Policy",
           icon: Icons.privacy_tip_outlined,
-          onTap: () {}),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const WebViewScreenInvest(
+                  title: 'Privacy Policy',
+                  url: AppConstants.privacyPolicyLinkInvest,
+                ),
+              ),
+            );
+          }),
       ProfileOptionModel(
           title: "Terms & Conditions",
           icon: Icons.policy_outlined,
-          onTap: () {}),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (_) => const WebViewScreenInvest(
+                  title: 'Terms & Conditions',
+                  url: AppConstants.termLinkInvest,
+                ),
+              ),
+            );
+          }),
     ];

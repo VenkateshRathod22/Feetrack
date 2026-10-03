@@ -341,6 +341,12 @@ class AppConstants {
   //* Wallet
   static const String fundRequestInvest = '/fundRequest.php';
   static const String getFundHistoryInvest = '/fundHistory.php';
+
+  //* privacy policy
+    static const String termLinkInvest = 'https://investor.feetrack.in/terms.php';
+    static const String privacyPolicyLinkInvest = 'https://investor.feetrack.in/policy.php';
+
+
   //
   static double horizontalPadding = 16.w;
   static double verticalPadding = 20.h;
