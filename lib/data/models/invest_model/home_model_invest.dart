@@ -152,6 +152,8 @@ class News {
         "newimage": newimage,
         "status": status,
       };
+  
+  String get imageFormat => "${AppConstants.baseImageUrlInvestApp}$newimage";
 }
 
 class Notification {

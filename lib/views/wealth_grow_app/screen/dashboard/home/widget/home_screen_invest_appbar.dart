@@ -74,15 +74,72 @@ class HomeScreenInvestAppbar extends StatelessWidget
         actions: [
           GetBuilder<BasicControllerInvest>(builder: (basicControllerInvest) {
             final length = basicControllerInvest.homeInvestModel?.notification;
-            return GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed(
-                  InvestmentApp.notificationScreenInvest,
-                );
-              },
-              child: Stack(
-                children: [
-                  Container(
+            final newList = basicControllerInvest.homeInvestModel?.news;
+            return Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.notificationScreenInvest,
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 14.w, vertical: 14.w),
+                        decoration: BoxDecoration(
+                          color: white.withValues(alpha: 0.2),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            width: 1,
+                            color: const Color(0xFF33415580),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                                offset: const Offset(0, 2),
+                                blurRadius: 4,
+                                spreadRadius: -2,
+                                color: black.withValues(alpha: 0.10)),
+                            BoxShadow(
+                                offset: const Offset(0, 4),
+                                blurRadius: 6,
+                                spreadRadius: -1,
+                                color: black.withValues(alpha: 0.10))
+                          ],
+                        ),
+                        child: SvgPicture.asset(
+                          Assets.svgsNotification,
+                          width: 18.w,
+                          height: 18.h,
+                        ),
+                      ),
+                      Positioned(
+                          right: 0,
+                          child: length != null || (length?.isNotEmpty ?? false)
+                              ? CircleAvatar(
+                                  radius: 9.r,
+                                  backgroundColor: white,
+                                  child: CustomText(
+                                      length?.length.toString() ?? "",
+                                      style: Helper(context)
+                                          .textTheme
+                                          .bodyMedium
+                                          ?.copyWith(
+                                              fontSize: 10.sp, color: black)),
+                                )
+                              : const SizedBox())
+                    ],
+                  ),
+                ),
+                sizedBoxWidth(width: 4),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      InvestmentApp.newsScreenInvest,
+                    );
+                  },
+                  child: Container(
                     padding:
                         EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.w),
                     decoration: BoxDecoration(
@@ -105,28 +162,14 @@ class HomeScreenInvestAppbar extends StatelessWidget
                             color: black.withValues(alpha: 0.10))
                       ],
                     ),
-                    child: SvgPicture.asset(
-                      Assets.svgsNotification,
-                      width: 18.w,
-                      height: 18.h,
+                    child: const Icon(
+                      Icons.newspaper,
+                      size: 18,
+                      color: primaryColor,
                     ),
                   ),
-                  Positioned(
-                      right: 0,
-                      child: length != null || (length?.isNotEmpty ?? false)
-                          ? CircleAvatar(
-                              radius: 9.r,
-                              backgroundColor: white,
-                              child: CustomText(length?.length.toString() ?? "",
-                                  style: Helper(context)
-                                      .textTheme
-                                      .bodyMedium
-                                      ?.copyWith(
-                                          fontSize: 10.sp, color: black)),
-                            )
-                          : const SizedBox())
-                ],
-              ),
+                ),
+              ],
             );
           }),
           sizedBoxWidth(width: 20)

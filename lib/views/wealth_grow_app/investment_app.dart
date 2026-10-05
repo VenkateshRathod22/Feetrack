@@ -17,6 +17,8 @@ import 'package:vlr/views/wealth_grow_app/screen/help_and_suppory_screen/help_an
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_successful_screen_invest/investment_successful_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/news_screen/screen/news_details_screen/news_details_screen.dart';
+import 'package:vlr/views/wealth_grow_app/screen/news_screen/screen/news_screen/news_screen.dart';
 import 'package:vlr/views/wealth_grow_app/screen/notification_screen_invest/notification_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/select_payment_method_screen_invest/select_payment_method_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
@@ -71,6 +73,11 @@ class InvestmentApp extends StatefulWidget {
  
  static const String notificationScreenInvest =
       '/notification_screen_invest';
+ 
+ static const String newsScreenInvest =
+      '/news_screen_invest';
+ static const String newsDetailsScreenInvest =
+      '/news_details_screen_invest';
  
 //* profile
   static const String userProfileScreenInvest = '/user_profile_screen_invest';
@@ -228,6 +235,16 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.notificationScreenInvest:
                 return MaterialPageRoute(
                   builder: (_) => const NotificationScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.newsScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const NewsScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.newsDetailsScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const NewsDetailsScreenInvest(),
                   settings: settings,
                 );
 

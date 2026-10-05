@@ -137,7 +137,14 @@ class BasicControllerInvest extends GetxController implements GetxService {
     update();
 
     return responseModel;
+
   }
+
+   News? selectNews;
+   void updateNews({required News news}){
+     selectNews = news;
+     update();
+   }
 
   String totalPortFolioValue = "0.0";
 
