@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
 import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
-import 'package:vlr/generated/assets.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/shimmer.dart';
@@ -66,29 +64,29 @@ class TotalPortfolioValueSection extends StatelessWidget {
                 ),
               ),
               sizedBoxHeight(height: 7.5),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    Assets.svgsTopTriangle,
-                  ),
-                  sizedBoxWidth(width: 3),
-                  CustomText(
-                    "+12.5%",
-                    style: Helper(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(fontSize: 11.sp, color: green),
-                  ),
-                  sizedBoxWidth(width: 7),
-                  CustomText(
-                    "this month",
-                    style: Helper(context)
-                        .textTheme
-                        .bodySmall
-                        ?.copyWith(fontSize: 11.sp, color: textSecondary),
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     SvgPicture.asset(
+              //       Assets.svgsTopTriangle,
+              //     ),
+              //     sizedBoxWidth(width: 3),
+              //     CustomText(
+              //       "+12.5%",
+              //       style: Helper(context)
+              //           .textTheme
+              //           .bodyLarge
+              //           ?.copyWith(fontSize: 11.sp, color: green),
+              //     ),
+              //     sizedBoxWidth(width: 7),
+              //     CustomText(
+              //       "this month",
+              //       style: Helper(context)
+              //           .textTheme
+              //           .bodySmall
+              //           ?.copyWith(fontSize: 11.sp, color: textSecondary),
+              //     ),
+              //   ],
+              // ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 14.h),
                 child: Divider(

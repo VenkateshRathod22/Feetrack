@@ -59,7 +59,7 @@ class _InvestmentScreenInvestState extends State<InvestmentScreenInvest> {
             sizedBoxHeight(height: 20.h),
             const Expanded(child: InvestmentReturnPlanSection()),
             sizedBoxHeight(height: 14.h),
-            const CalculateYourReturnWidget()
+            // const CalculateYourReturnWidget()
           ],
         ),
       ),

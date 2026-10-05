@@ -9,7 +9,6 @@ import 'package:vlr/generated/assets.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/home/home_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/investment/investment_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/profile/profile_screen_invest.dart';
-import 'package:vlr/views/wealth_grow_app/screen/dashboard/referral/referral_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/dashboard/wallet/wallet_invest.dart';
 
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';

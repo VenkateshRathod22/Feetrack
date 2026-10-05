@@ -136,7 +136,7 @@ class HomeScreenInvestAppbar extends StatelessWidget
                                       length?.length.toString() ?? "",
                                       style: Helper(context)
                                           .textTheme
-                                          .bodyMedium
+                                          .titleMedium
                                           ?.copyWith(
                                               fontSize: 10.sp, color: black)),
                                 )
