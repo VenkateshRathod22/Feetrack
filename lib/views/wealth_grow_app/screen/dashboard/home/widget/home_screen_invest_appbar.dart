@@ -74,7 +74,7 @@ class HomeScreenInvestAppbar extends StatelessWidget
         actions: [
           GetBuilder<BasicControllerInvest>(builder: (basicControllerInvest) {
             final length = basicControllerInvest.homeInvestModel?.notification;
-            final newList = basicControllerInvest.homeInvestModel?.news;
+            final isNewsLive = basicControllerInvest.homeInvestModel?.news?.status == "1" ? true : false;
             return Row(
               children: [
                 GestureDetector(
@@ -133,7 +133,7 @@ class HomeScreenInvestAppbar extends StatelessWidget
                   ),
                 ),
                 sizedBoxWidth(width: 4),
-                GestureDetector(
+               isNewsLive ? GestureDetector(
                   onTap: () {
                     Navigator.of(context).pushNamed(
                       InvestmentApp.newsScreenInvest,
@@ -168,7 +168,7 @@ class HomeScreenInvestAppbar extends StatelessWidget
                       color: primaryColor,
                     ),
                   ),
-                ),
+                ) : const SizedBox(),
               ],
             );
           }),

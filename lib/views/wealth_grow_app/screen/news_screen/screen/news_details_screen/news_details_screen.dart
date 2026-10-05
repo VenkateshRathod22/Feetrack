@@ -56,55 +56,7 @@ class NewsDetailsScreenInvest extends StatelessWidget {
           
                   sizedBoxHeight(height: 20),
           
-                  // ==================================================
-                  // STATUS
-                  // ==================================================
-          
-                  Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 10.w,
-                          vertical: 6.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: green.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(20.r),
-                          border: Border.all(
-                            color: green.withValues(alpha: 0.30),
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Container(
-                              width: 6.w,
-                              height: 6.w,
-                              decoration: const BoxDecoration(
-                                color: green,
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            sizedBoxWidth(width: 6),
-                            CustomText(
-                              basicControllerInvest.selectNews?.status == '1'
-                                  ? 'ACTIVE'
-                                  : 'INACTIVE',
-                              style: Helper(context)
-                                  .textTheme
-                                  .labelSmall
-                                  ?.copyWith(
-                                    color: green,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-          
-                  sizedBoxHeight(height: 16),
+                  
           
                   // ==================================================
                   // NEWS TITLE
