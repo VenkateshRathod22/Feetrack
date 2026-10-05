@@ -79,9 +79,17 @@ List<ProfileOptionModel> profileOptionModelList(
               InvestmentApp.referScreen,
             );
           }),
+      // ProfileOptionModel(
+      //     title: "Ticket", 
+      //     icon: Icons.help_center_outlined,
+      //     onTap: () {
+      //       Navigator.of(context).pushNamed(
+      //         InvestmentApp.ticketScreenInvest,
+      //       );
+      //     }),
       ProfileOptionModel(
           title: "Help & Support",
-          icon: Icons.help_outline_rounded,
+          icon: Icons.support_agent,
           onTap: () {
              Navigator.of(context).pushNamed(
               InvestmentApp.helpAndSuppScreen,

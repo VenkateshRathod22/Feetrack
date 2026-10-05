@@ -19,6 +19,8 @@ import 'package:vlr/views/wealth_grow_app/screen/investment_successful_screen_in
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/select_payment_method_screen_invest/select_payment_method_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
+import 'package:vlr/views/wealth_grow_app/screen/ticket/add_ticket_screen_invest/add_ticket_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/ticket/ticket_screen/ticket_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/welth_grow_deposit_funds/welth_grow_deposit_funds.dart';
 import 'package:vlr/views/wealth_grow_app/screen/withdraw_funds_screen_invest/withdraw_funds_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
@@ -61,6 +63,10 @@ class InvestmentApp extends StatefulWidget {
  
  static const String helpAndSuppScreen =
       '/help_and_support_screen';
+ static const String addTicketScreenInvest =
+      '/add_ticket_screen_invest';
+ static const String ticketScreenInvest =
+      '/ticket_screen_invest';
  
 //* profile
   static const String userProfileScreenInvest = '/user_profile_screen_invest';
@@ -203,6 +209,16 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.helpAndSuppScreen:
                 return MaterialPageRoute(
                   builder: (_) => const HelpSupportScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.addTicketScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const AddTicketScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.ticketScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const TicketScreenInvest(),
                   settings: settings,
                 );
 
