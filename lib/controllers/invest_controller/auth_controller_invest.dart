@@ -25,9 +25,9 @@ AuthControllerInvest({
   bool get acceptTerms => _acceptTerms;
 
   final TextEditingController userIdController =
-      TextEditingController(text: "WG1290");
+      TextEditingController();
   final TextEditingController passwordController =
-      TextEditingController(text: "123456");
+      TextEditingController();
 
   Future<ResponseModel> loginInvest() async {
     log('----------- loginInvest Called ------\----');
