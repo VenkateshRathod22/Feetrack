@@ -47,19 +47,26 @@ class HomeScreenInvestAppbar extends StatelessWidget
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                CustomShimmer(
-                  isLoading: authControllerInvest.isLoading,
-                  child: CustomText(
-                    "Hello, ${authControllerInvest.userModelInvest?.name}",
-                    style: Helper(context)
-                        .textTheme
-                        .titleMedium
-                        ?.copyWith(fontSize: 16.sp),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  InvestmentApp.userProfileScreenInvest,
+                );
+              },
+              child: Row(
+                children: [
+                  CustomShimmer(
+                    isLoading: authControllerInvest.isLoading,
+                    child: CustomText(
+                      "Hello, ${authControllerInvest.userModelInvest?.name}",
+                      style: Helper(context)
+                          .textTheme
+                          .titleMedium
+                          ?.copyWith(fontSize: 16.sp),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             sizedBoxHeight(height: 2),
             CustomText(
@@ -74,7 +81,12 @@ class HomeScreenInvestAppbar extends StatelessWidget
         actions: [
           GetBuilder<BasicControllerInvest>(builder: (basicControllerInvest) {
             final length = basicControllerInvest.homeInvestModel?.notification;
-            final isNewsLive = basicControllerInvest.homeInvestModel?.news?.status == "1" ? true : false;
+            final isNewsLive = basicControllerInvest.homeInvestModel?.news !=
+                    null
+                ? true
+                : (basicControllerInvest.homeInvestModel?.news?.status == "1"
+                    ? true
+                    : false);
             return Row(
               children: [
                 GestureDetector(
@@ -133,42 +145,44 @@ class HomeScreenInvestAppbar extends StatelessWidget
                   ),
                 ),
                 sizedBoxWidth(width: 4),
-               isNewsLive ? GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed(
-                      InvestmentApp.newsScreenInvest,
-                    );
-                  },
-                  child: Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.w),
-                    decoration: BoxDecoration(
-                      color: white.withValues(alpha: 0.2),
-                      shape: BoxShape.circle,
-                      border: Border.all(
-                        width: 1,
-                        color: const Color(0xFF33415580),
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(0, 2),
-                            blurRadius: 4,
-                            spreadRadius: -2,
-                            color: black.withValues(alpha: 0.10)),
-                        BoxShadow(
-                            offset: const Offset(0, 4),
-                            blurRadius: 6,
-                            spreadRadius: -1,
-                            color: black.withValues(alpha: 0.10))
-                      ],
-                    ),
-                    child: const Icon(
-                      Icons.newspaper,
-                      size: 18,
-                      color: primaryColor,
-                    ),
-                  ),
-                ) : const SizedBox(),
+                isNewsLive
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            InvestmentApp.newsScreenInvest,
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 14.w, vertical: 14.w),
+                          decoration: BoxDecoration(
+                            color: white.withValues(alpha: 0.2),
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              width: 1,
+                              color: const Color(0xFF33415580),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: const Offset(0, 2),
+                                  blurRadius: 4,
+                                  spreadRadius: -2,
+                                  color: black.withValues(alpha: 0.10)),
+                              BoxShadow(
+                                  offset: const Offset(0, 4),
+                                  blurRadius: 6,
+                                  spreadRadius: -1,
+                                  color: black.withValues(alpha: 0.10))
+                            ],
+                          ),
+                          child: const Icon(
+                            Icons.newspaper,
+                            size: 18,
+                            color: primaryColor,
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
               ],
             );
           }),
