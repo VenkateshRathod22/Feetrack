@@ -3,10 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/state_manager.dart';
 import 'package:vlr/controllers/invest_controller/auth_controller_invest.dart';
+import 'package:vlr/controllers/invest_controller/basic_controller_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
 import 'package:vlr/views/base/custom_image.dart';
 import 'package:vlr/views/base/shimmer.dart';
+import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class HomeScreenInvestAppbar extends StatelessWidget
@@ -70,34 +72,63 @@ class HomeScreenInvestAppbar extends StatelessWidget
           ],
         ),
         actions: [
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.w),
-            decoration: BoxDecoration(
-              color: white.withValues(alpha: 0.2),
-              shape: BoxShape.circle,
-              border: Border.all(
-                width: 1,
-                color: const Color(0xFF33415580),
+          GetBuilder<BasicControllerInvest>(builder: (basicControllerInvest) {
+            final length = basicControllerInvest.homeInvestModel?.notification;
+            return GestureDetector(
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                  InvestmentApp.notificationScreenInvest,
+                );
+              },
+              child: Stack(
+                children: [
+                  Container(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 14.w, vertical: 14.w),
+                    decoration: BoxDecoration(
+                      color: white.withValues(alpha: 0.2),
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        width: 1,
+                        color: const Color(0xFF33415580),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: const Offset(0, 2),
+                            blurRadius: 4,
+                            spreadRadius: -2,
+                            color: black.withValues(alpha: 0.10)),
+                        BoxShadow(
+                            offset: const Offset(0, 4),
+                            blurRadius: 6,
+                            spreadRadius: -1,
+                            color: black.withValues(alpha: 0.10))
+                      ],
+                    ),
+                    child: SvgPicture.asset(
+                      Assets.svgsNotification,
+                      width: 18.w,
+                      height: 18.h,
+                    ),
+                  ),
+                  Positioned(
+                      right: 0,
+                      child: length != null || (length?.isNotEmpty ?? false)
+                          ? CircleAvatar(
+                              radius: 9.r,
+                              backgroundColor: white,
+                              child: CustomText(length?.length.toString() ?? "",
+                                  style: Helper(context)
+                                      .textTheme
+                                      .bodyMedium
+                                      ?.copyWith(
+                                          fontSize: 10.sp, color: black)),
+                            )
+                          : const SizedBox())
+                ],
               ),
-              boxShadow: [
-                BoxShadow(
-                    offset: const Offset(0, 2),
-                    blurRadius: 4,
-                    spreadRadius: -2,
-                    color: black.withValues(alpha: 0.10)),
-                BoxShadow(
-                    offset: const Offset(0, 4),
-                    blurRadius: 6,
-                    spreadRadius: -1,
-                    color: black.withValues(alpha: 0.10))
-              ],
-            ),
-            child: SvgPicture.asset(
-              Assets.svgsNotification,
-              width: 18.w,
-              height: 18.h,
-            ),
-          ),
+            );
+          }),
           sizedBoxWidth(width: 20)
         ],
       );

@@ -17,6 +17,7 @@ import 'package:vlr/views/wealth_grow_app/screen/help_and_suppory_screen/help_an
 import 'package:vlr/views/wealth_grow_app/screen/investment_plan_detail_screen_invest/investment_plan_detail_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/investment_successful_screen_invest/investment_successful_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/my_investments/my_investments_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/notification_screen_invest/notification_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/select_payment_method_screen_invest/select_payment_method_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
 import 'package:vlr/views/wealth_grow_app/screen/ticket/add_ticket_screen_invest/add_ticket_screen_invest.dart';
@@ -67,6 +68,9 @@ class InvestmentApp extends StatefulWidget {
       '/add_ticket_screen_invest';
  static const String ticketScreenInvest =
       '/ticket_screen_invest';
+ 
+ static const String notificationScreenInvest =
+      '/notification_screen_invest';
  
 //* profile
   static const String userProfileScreenInvest = '/user_profile_screen_invest';
@@ -219,6 +223,11 @@ class _InvestmentAppState extends State<InvestmentApp> {
               case InvestmentApp.ticketScreenInvest:
                 return MaterialPageRoute(
                   builder: (_) => const TicketScreenInvest(),
+                  settings: settings,
+                );
+              case InvestmentApp.notificationScreenInvest:
+                return MaterialPageRoute(
+                  builder: (_) => const NotificationScreenInvest(),
                   settings: settings,
                 );
 

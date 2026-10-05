@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:vlr/generated/assets.dart';
 import 'package:vlr/services/constants.dart';
 
 HomeInvestModel homeInvestModelFromJson(String str) =>
@@ -175,4 +176,15 @@ class Notification {
         "message": message,
         "image": image,
       };
-}
+      
+ String get imageFormat {
+    if (image == null || image!.trim().isEmpty) {
+      return Assets.imagesNoProfile;
+    }
+
+    final cleanImagePath = image!
+        .replaceFirst(RegExp(r'^(\.\./)+'), '')
+        .replaceFirst(RegExp(r'^/+'), '');
+
+    return '${AppConstants.baseImageUrlInvestApp}$cleanImagePath';
+  }}
