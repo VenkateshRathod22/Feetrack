@@ -22,7 +22,7 @@ import 'package:vlr/views/wealth_grow_app/screen/news_screen/screen/news_screen/
 import 'package:vlr/views/wealth_grow_app/screen/notification_screen_invest/notification_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/select_payment_method_screen_invest/select_payment_method_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/splach_screen/splach_screen_invert.dart';
-import 'package:vlr/views/wealth_grow_app/screen/ticket/add_ticket_screen_invest/add_ticket_screen_invest.dart';
+import 'package:vlr/views/wealth_grow_app/screen/ticket/add_ticket_invest/add_ticket_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/ticket/ticket_screen/ticket_screen_invest.dart';
 import 'package:vlr/views/wealth_grow_app/screen/welth_grow_deposit_funds/welth_grow_deposit_funds.dart';
 import 'package:vlr/views/wealth_grow_app/screen/withdraw_funds_screen_invest/withdraw_funds_screen_invest.dart';

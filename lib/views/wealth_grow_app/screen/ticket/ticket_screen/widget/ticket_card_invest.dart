@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:intl/intl.dart' show DateFormat;
+import 'package:intl/intl.dart';
+
 import 'package:vlr/data/models/invest_model/ticket_model_invest.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/custom_text.dart';
-import 'package:vlr/views/wealth_grow_app/screen/ticket/ticket_screen/widget/ticket_status_badge.dart';
 import 'package:vlr/views/wealth_grow_app/theme/invert_app_theme.dart';
 
 class TicketCardInvest extends StatelessWidget {
@@ -16,44 +15,82 @@ class TicketCardInvest extends StatelessWidget {
     required this.ticket,
   });
 
-  Color get statusColor {
-    switch (ticket.status?.toLowerCase()) {
-      case 'resolved':
-      case 'closed':
-        return green;
+  // =========================================================
+  // STATUS COLOR
+  // =========================================================
 
-      case 'rejected':
-      case 'cancelled':
-        return red;
+  Color _getStatusColor() {
+    final String status =
+        ticket.status?.toLowerCase().trim() ?? '';
 
-      case 'in progress':
-      case 'processing':
-        return blue;
-
-      case 'pending':
-        return yellow;
-
-      default:
-        return yellow;
+    if (status.contains('open')) {
+      return green;
     }
+
+    if (status.contains('pending')) {
+      return yellow;
+    }
+
+    if (status.contains('closed') ||
+        status.contains('resolved')) {
+      return red;
+    }
+
+    return textSecondary;
   }
 
-  String get formattedDate {
-    if (ticket.createdAt == null) {
+  // =========================================================
+  // STATUS LABEL
+  // =========================================================
+
+  String _getStatusLabel() {
+    final String status =
+        ticket.status?.trim() ?? '';
+
+    if (status.isEmpty) {
+      return 'Unknown';
+    }
+
+    return _capitalize(status);
+  }
+
+  // =========================================================
+  // CAPITALIZE
+  // =========================================================
+
+  String _capitalize(String value) {
+    if (value.isEmpty) {
+      return value;
+    }
+
+    return value[0].toUpperCase() +
+        value.substring(1).toLowerCase();
+  }
+
+  // =========================================================
+  // DATE
+  // =========================================================
+
+  String _getCreatedDate() {
+    final DateTime? date = ticket.createdAt;
+
+    if (date == null) {
       return '--';
     }
 
     return DateFormat(
       'dd MMM yyyy, hh:mm a',
-    ).format(ticket.createdAt!);
+    ).format(date);
   }
 
-  bool get hasAdminReply {
-    return ticket.adminMsg?.trim().isNotEmpty == true;
-  }
+  // =========================================================
+  // BUILD
+  // =========================================================
 
   @override
   Widget build(BuildContext context) {
+    final Color statusColor = _getStatusColor();
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.all(16.w),
@@ -68,163 +105,245 @@ class TicketCardInvest extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ==================================================
-          // TICKET ID + STATUS
-          // ==================================================
+          // =====================================================
+          // HEADER
+          // =====================================================
 
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 child: CustomText(
-                  'Ticket #${ticket.id ?? '--'}',
-                  style: Helper(context).textTheme.bodySmall?.copyWith(
-                    
-                        color: textMuted,
-                        fontWeight: FontWeight.w600,
+                  ticket.subject?.isNotEmpty == true
+                      ? ticket.subject!
+                      : 'No Subject',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Helper(context)
+                      .textTheme
+                      .titleMedium
+                      ?.copyWith(
+                        color: textPrimary,
+                        fontWeight: FontWeight.w700,
                       ),
                 ),
               ),
 
-              TicketStatusBadge(
-                status: ticket.status ?? 'Pending',
-                color: statusColor,
+              sizedBoxWidth(width: 10),
+
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 10.w,
+                  vertical: 6.h,
+                ),
+                decoration: BoxDecoration(
+                  color: statusColor.withOpacity(0.10),
+                  borderRadius: BorderRadius.circular(20.r),
+                  border: Border.all(
+                    color: statusColor.withOpacity(0.25),
+                    width: 1.w,
+                  ),
+                ),
+                child: CustomText(
+                  _getStatusLabel(),
+                  style: Helper(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(
+                        color: statusColor,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
               ),
             ],
           ),
 
           sizedBoxHeight(height: 14),
 
-          // ==================================================
-          // SUBJECT
-          // ==================================================
-
-          CustomText(
-            ticket.subject ?? 'No Subject',
-            style: Helper(context).textTheme.titleMedium?.copyWith(
-                  color: textPrimary,
-                  fontWeight: FontWeight.w700,
-                ),
-          ),
-
-          sizedBoxHeight(height: 10),
-
-          // ==================================================
-          // USER MESSAGE TITLE
-          // ==================================================
-
-          CustomText(
-            'Your Message',
-            style: Helper(context).textTheme.bodySmall?.copyWith(
-                  color: textSecondary,
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
-
-          sizedBoxHeight(height: 5),
-
-          // ==================================================
+          // =====================================================
           // USER MESSAGE
-          // ==================================================
+          // =====================================================
 
           CustomText(
-            ticket.userMsg ?? '',
-            style: Helper(context).textTheme.bodyMedium?.copyWith(
-                  color: textPrimary,
+            ticket.userMsg?.isNotEmpty == true
+                ? ticket.userMsg!
+                : 'No message available',
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: Helper(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(
+                  color: textSecondary,
                   height: 1.5,
                 ),
           ),
 
-          sizedBoxHeight(height: 14),
+          sizedBoxHeight(height: 16),
 
-          // ==================================================
-          // ADMIN REPLY
-          // ==================================================
+          // =====================================================
+          // COMPANY REPLY
+          // =====================================================
 
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.all(12.w),
-            decoration: BoxDecoration(
-              color: surfaceNavy,
-              borderRadius: BorderRadius.circular(12.r),
-              border: Border.all(
-                color: borderDark,
+          if (ticket.adminMsg?.isNotEmpty == true) ...[
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.all(14.w),
+              decoration: BoxDecoration(
+                color: primaryColor.withOpacity(0.06),
+                borderRadius: BorderRadius.circular(14.r),
+                border: Border.all(
+                  color: primaryColor.withOpacity(0.20),
+                  width: 1.w,
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        width: 32.w,
+                        height: 32.h,
+                        decoration: BoxDecoration(
+                          color: primaryColor.withOpacity(0.12),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          Icons.support_agent_rounded,
+                          color: primaryColor,
+                          size: 18.sp,
+                        ),
+                      ),
+
+                      sizedBoxWidth(width: 10),
+
+                      Expanded(
+                        child: CustomText(
+                          'Company Support',
+                          style: Helper(context)
+                              .textTheme
+                              .labelLarge
+                              ?.copyWith(
+                                color: primaryColor,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                      ),
+
+                      Icon(
+                        Icons.verified_rounded,
+                        color: primaryColor,
+                        size: 17.sp,
+                      ),
+                    ],
+                  ),
+
+                  sizedBoxHeight(height: 10),
+
+                  CustomText(
+                    ticket.adminMsg!,
+                    style: Helper(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(
+                          color: textPrimary,
+                          height: 1.5,
+                        ),
+                  ),
+                ],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.support_agent_rounded,
-                      color: primaryColor,
-                      size: 18.w,
-                    ),
 
-                    sizedBoxWidth(width: 7),
+            sizedBoxHeight(height: 14),
+          ],
 
-                    CustomText(
-                      'Admin Reply',
-                      style: Helper(context).textTheme.bodySmall?.copyWith(
-                            color: primaryColor,
-                            fontWeight: FontWeight.w700,
+          // =====================================================
+          // WAITING FOR COMPANY REPLY
+          // =====================================================
+
+          if (ticket.adminMsg?.isEmpty ?? true) ...[
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(
+                horizontal: 12.w,
+                vertical: 10.h,
+              ),
+              decoration: BoxDecoration(
+                color: surfaceNavy,
+                borderRadius: BorderRadius.circular(12.r),
+                border: Border.all(
+                  color: borderDark,
+                  width: 1.w,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.hourglass_empty_rounded,
+                    color: textMuted,
+                    size: 18.sp,
+                  ),
+
+                  sizedBoxWidth(width: 8),
+
+                  Expanded(
+                    child: CustomText(
+                      'Waiting for company response',
+                      style: Helper(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(
+                            color: textMuted,
                           ),
                     ),
-                  ],
-                ),
-
-                sizedBoxHeight(height: 8),
-
-                CustomText(
-                  hasAdminReply
-                      ? ticket.adminMsg!
-                      : 'Waiting for support team response...',
-                  style: Helper(context).textTheme.bodyMedium?.copyWith(
-                        color: hasAdminReply
-                            ? textPrimary
-                            : textMuted,
-                        height: 1.5,
-                      ),
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          sizedBoxHeight(height: 14),
+            sizedBoxHeight(height: 14),
+          ],
 
-          // ==================================================
-          // DIVIDER
-          // ==================================================
-
-          Divider(
-            color: borderDark,
-            height: 1,
-          ),
-
-          sizedBoxHeight(height: 12),
-
-          // ==================================================
-          // CREATED DATE
-          // ==================================================
+          // =====================================================
+          // FOOTER
+          // =====================================================
 
           Row(
             children: [
               Icon(
-                Icons.calendar_today_outlined,
+                Icons.access_time_rounded,
+                size: 16.sp,
                 color: textMuted,
-                size: 14.w,
               ),
 
-              sizedBoxWidth(width: 7),
+              sizedBoxWidth(width: 6),
 
               Expanded(
                 child: CustomText(
-                  'Created: $formattedDate',
-                  style: Helper(context).textTheme.bodySmall?.copyWith(
-                        color: textSecondary,
+                  _getCreatedDate(),
+                  style: Helper(context)
+                      .textTheme
+                      .bodySmall
+                      ?.copyWith(
+                        color: textMuted,
                       ),
                 ),
               ),
+
+              if (ticket.id != null &&
+                  ticket.id!.isNotEmpty)
+                CustomText(
+                  '#${ticket.id}',
+                  style: Helper(context)
+                      .textTheme
+                      .labelSmall
+                      ?.copyWith(
+                        color: textMuted,
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
             ],
           ),
         ],
