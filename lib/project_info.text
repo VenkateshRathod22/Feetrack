@@ -1,5 +1,17 @@
 1. Main branch : package id com.app.tracks : com.myfoozzybusiness
  Main brach of code is for tpipay merchant
 
+ update
+   package id :  com.myfoozzybusiness
+   version: 2.6.8+35
+   firebase email : developer@tpipay.ai
+   firebase project : feetrack
+
+
  new_feetrack_play_store  :
    This same code but different package id and firebase push a new app in play store with package id com.app.tracks
+   update
+   package id :  com.app.tracks
+   version: 1.0.0+1
+   firebase email : developer@tpipay.ai
+   firebase project : feetrack
