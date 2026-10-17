@@ -8,7 +8,7 @@
    firebase project : feetrack
 
 
- new_feetrack_play_store  :
+ 2. new_feetrack_play_store branch :
    This same code but different package id and firebase push a new app in play store with package id com.app.tracks
    update
    package id :  com.app.tracks
