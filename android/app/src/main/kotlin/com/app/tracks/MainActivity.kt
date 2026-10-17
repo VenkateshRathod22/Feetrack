@@ -1,4 +1,4 @@
-package com.myfoozzybusiness
+package com.app.tracks
 
 import io.flutter.embedding.android.FlutterActivity
 

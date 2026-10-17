@@ -29,8 +29,8 @@ val keystoreProperties = Properties().apply {
     }
 }
 android {
-//    namespace = "com.myfoozzybusiness"
-    namespace = "com.myfoozzybusiness"
+//    namespace = "com.app.tracks"
+    namespace = "com.app.tracks"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -54,7 +54,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.myfoozzybusiness"
+        applicationId = "com.app.tracks"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
