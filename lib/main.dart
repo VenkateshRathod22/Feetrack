@@ -9,7 +9,6 @@ import 'package:vlr/firebase/primary_firebase_options.dart';
 import 'package:vlr/services/constants.dart';
 import 'package:vlr/services/theme.dart';
 import 'package:vlr/views/screens/splash_screen/splash_screen.dart';
-import 'package:vlr/views/wealth_grow_app/investment_app.dart';
 import 'firebase/get_fcm_token.dart';
 import 'services/init.dart';
 

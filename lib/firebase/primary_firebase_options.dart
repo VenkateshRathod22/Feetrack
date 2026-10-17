@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAMjhpB-JaqlSuC8qckmm2PPAi1hg3Mtkg',
-    appId: '1:304281412537:android:1d84e37f86eeeb27fc0c68',
+    appId: '1:304281412537:android:a32db56a7ea3046cfc0c68',
     messagingSenderId: '304281412537',
     projectId: 'feetrack-d7036',
     storageBucket: 'feetrack-d7036.firebasestorage.app',
